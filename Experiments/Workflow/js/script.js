@@ -13,7 +13,7 @@
 */
 function preload() {
     createCanvas(480, 480);
-    background(255, 0, 0);
+    background(255, 100, 10);
 }
 
 
