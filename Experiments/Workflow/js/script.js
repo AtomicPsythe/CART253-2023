@@ -12,7 +12,8 @@
  * Description of preload
 */
 function preload() {
-
+    createCanvas(480, 480);
+    background(255, 0, 0);
 }
 
 
