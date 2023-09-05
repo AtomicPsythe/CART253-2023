@@ -1,9 +1,10 @@
 /**
- * Title of Project
- * Author Name
+ * Drawing Experiments
+ * Foti Aivaliklis
  * 
- * This is a template. You must fill in the title, author, 
- * and this description to match your project!
+ * Experimenting with p5's drawing and color functions.
+ * 
+ * Currently draws a face.
  */
 
 "use strict";
@@ -17,15 +18,29 @@ function preload() {
 
 
 /**
- * Description of setup
+ * Draws a face on the canvas.
 */
 function setup() {
 
     createCanvas(500, 500);
-    
+
+    // set the background to mint
     background(191, 255, 199);
 
-    /**stroke(255, 255, 0); */
+    // draw a flesh colored head
+    fill(250, 200, 200); // the flesh color
+    ellipse(250, 250, 200, 200); // the head
+
+    // draw the eyes (black as the void of space)
+    fill(0, 0, 255);
+    ellipse(200, 250, 30, 30);
+    ellipse(300, 250, 30, 30);
+
+    // draw the mouth
+    strokeWeight(10); // line thickness
+    line(200, 300, 300, 300); // line itself
+
+    /**stroke(255, 255, 0); 
 
     noStroke();
 
@@ -43,7 +58,7 @@ function setup() {
     ellipse(250, 250, 40, 40);
 
     fill(167, 0, 200, 100);
-    ellipse(250, 250, 20, 20);
+    ellipse(250, 250, 20, 20); */
 
 
     /**rectMode(CENTER);
@@ -65,7 +80,7 @@ function setup() {
 
 
 /**
- * Description of draw()
+ * Does nothing.
 */
 function draw() {
 
