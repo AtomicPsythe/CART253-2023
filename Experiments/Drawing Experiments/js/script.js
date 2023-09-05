@@ -23,14 +23,28 @@ function setup() {
 
     createCanvas(500, 500);
     
-    background(200, 200, 200);
+    background(191, 255, 199);
+
+    /**stroke(255, 255, 0); */
+
+    noStroke();
 
     ellipseMode(CORNER);
+    fill(127, 0, 200, 100);
     ellipse(250, 250, 100, 100);
+
+    fill(137, 0, 200, 100);
     ellipse(250, 250, 80, 80);
+
+    fill(147, 0, 200, 100);
     ellipse(250, 250, 60, 60);
+
+    fill(157, 0, 200, 100);
     ellipse(250, 250, 40, 40);
+
+    fill(167, 0, 200, 100);
     ellipse(250, 250, 20, 20);
+
 
     /**rectMode(CENTER);
     rect(250, 250, 100, 100);
