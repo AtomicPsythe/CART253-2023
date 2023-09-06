@@ -1,5 +1,5 @@
 /**
- * Drawing an Alien
+ * Activity 2: Drawing an Alien
  * Foti Aivaliklis
  * 
  * This is a template. You must fill in the title, author, 
@@ -17,7 +17,7 @@ function preload() {
 
 
 /**
- * Description of setup
+ * Draws an alien face
 */
 function setup() {
 
