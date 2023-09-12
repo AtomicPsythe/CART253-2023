@@ -9,9 +9,11 @@
 "use strict";
 
 let backgroundShade = 0;
-let circleX = 250;
+let circleX = 0;
 let circleY = 250;
 let circleSize = 100;
+let circleSpeed = 2; //having a negative number here makes it move from right to left
+let circleAcceleration = 0.25;
 // "let" declares a variable
 
 /**
@@ -40,5 +42,8 @@ function draw() {
     //rect(mouseX, mouseY, 100, 100); // mouseX and mouseY changes every time as you move your mouse
     
     background(backgroundShade);
+    //circleSize = circleSize * 1.01;
+    circleX += circleSpeed; //+= means adds to, whatever is before the symbol, can also just use +
+    circleSpeed += circleAcceleration;
     ellipse(circleX, circleY, circleSize);
 }
