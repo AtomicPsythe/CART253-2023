@@ -9,12 +9,19 @@
 "use strict";
 
 let backgroundShade = 0;
-let circleX = 0;
-let circleY = 250;
-let circleSize = 100;
-let circleSpeed = 2; //having a negative number here makes it move from right to left
-let circleAcceleration = 0.25;
+//let circleX = 0;
+//let circleY = 250;
+//let circleSize = 100;
+//let circleSpeed = 2; //having a negative number here makes it move from right to left
+//let circleAcceleration = 0.25;
 // "let" declares a variable
+
+let circle = {
+    x: 0,
+    y: 250,
+    size: 200,
+    speed: 2
+};
 
 /**
  * Description of preload
@@ -43,7 +50,9 @@ function draw() {
     
     background(backgroundShade);
     //circleSize = circleSize * 1.01;
-    circleX += circleSpeed; //+= means adds to, whatever is before the symbol, can also just use +
-    circleSpeed += circleAcceleration;
-    ellipse(circleX, circleY, circleSize);
+    circle.x += circle.speed; //+= means adds to, whatever is before the symbol, can also just use +
+    //circleSpeed += circleAcceleration;
+    ellipse(circle.x, circle.y, circle.size);
+
+    console.log(`circleX: ${circleX}, circleY: ${circleY}, circleSize: ${circleSize}, circleSpeed: ${circleSpeed}`);
 }
