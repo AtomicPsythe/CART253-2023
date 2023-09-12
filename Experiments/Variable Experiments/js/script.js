@@ -20,7 +20,8 @@ let circle = {
     x: 0,
     y: 250,
     size: 200,
-    speed: 2
+    speed: 1,
+    fill: 255
 };
 
 /**
@@ -50,9 +51,20 @@ function draw() {
     
     background(backgroundShade);
     //circleSize = circleSize * 1.01;
-    circle.x += circle.speed; //+= means adds to, whatever is before the symbol, can also just use +
+    //circle.speed = random(-5, 5);
+    circle.x = circle.x + circle.speed; //+= means adds to, whatever is before the symbol, can also just use +
+    circle.x = constrain(circle.x, 0, width);
+    //circle.y = random(0, height);
+    //circle.size = random(10, 100);
     //circleSpeed += circleAcceleration;
+    //circle.fill = random(0, 255);
+    circle.size = map(mouseY, 0, height, 50, 500);
+    circle.fill = map(circle.x, 0, width, 0, 255);
+    fill(circle.fill);
     ellipse(circle.x, circle.y, circle.size);
 
-    console.log(`circleX: ${circleX}, circleY: ${circleY}, circleSize: ${circleSize}, circleSpeed: ${circleSpeed}`);
+    //let randomNumber = random();
+    //console.log(randomNumber);
+
+    //console.log(`circle.x: ${circle.x}, circle.y: ${circle.y}, circle.size: ${circle.size}, circle.speed: ${circle.speed}`);
 }
