@@ -1,5 +1,5 @@
 /**
- * Activity 3: I like to move it!
+ * Exercise 3: I like to move it!
  * Foti Aivaliklis
  * 
  * This is a template. You must fill in the title, author, 
@@ -102,8 +102,6 @@ function draw() {
     // Circle 4 (the frontmost circle)
     circle4.x = circle4.x + -1;
     circle4.x = constrain(circle4.x, width/2, width);
-    //circle4.size = circle4.size + 0.75;
-    //circle4.size = constrain(circle4.size, 0, width);
     fill(circle4.fill);
     ellipse(circle4.x, circle4.y, circle4.size);
 
