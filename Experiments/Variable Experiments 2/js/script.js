@@ -39,6 +39,8 @@ function setup() {
  * Description of draw()
 */
 function draw() {
+    setBackgroundToRainbowGradient();
+
     // rainbow gradient (its gay btw)
     //let hue = map(me.x, 0, width, 255, 0);
     //stroke(hue, 50, 50);
@@ -67,7 +69,7 @@ function draw() {
 }
 // makes a full screen rainbow
 function setBackgroundToRainbowGradient() {
-    let gradient = drawingContext.createLineartGradient(0, 0, width, height);
+    let gradient = drawingContext.createLinearGradient(0, 0, width, height);
     gradient.addColorStop(0, "red");
     gradient.addColorStop(1/6, "orange");
     gradient.addColorStop(2/6, "yellow");
@@ -75,6 +77,6 @@ function setBackgroundToRainbowGradient() {
     gradient.addColorStop(4/6, "blue");
     gradient.addColorStop(5/6, "indigo");
     gradient.addColorStop(1, "violet");
-    drawingContext.fillstyle = gradient
+    drawingContext.fillStyle = gradient
     drawingContext.fillRect(0, 0, width, height);
 };
