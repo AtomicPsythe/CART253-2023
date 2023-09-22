@@ -27,8 +27,7 @@ let user = {
     size: 100, 
     fill: 255,
     vx: 0,
-    vy: 0,
-    speed: 1
+    vy: 0
 }
 
 let numStatic = 5000;
@@ -81,19 +80,24 @@ function draw() {
     user.x = mouseX;
     user.y = mouseY;
 
-    if (mouseX < user.x) {
-        user.vx = -user.speed;
+    if (mouseX > user.x) {
+        user.vx = 1;
     }
-    else {
-        user.vx = user.speed;
+    else if (mouseX < user.x) {
+        user.vx = -1;
     }
 
-    if (mouseY < user.y) {
-        user.vy = -user.speed;
+    if (mouseY > user.y) {
+        user.vy = 1;
     }
-    else {
-        user.vy = -user.speed;
+    else if (mouseY < user.y) {
+        user.vy = -1;
     }
+
+    user.x = user.x + user.vx;
+    user.y = user.y + user.vy;
+
+    ellipse(user.x, user.y, user.size);
 
     // Check for catching covid19
     let d = dist(user.x, user.y, covid19.x, covid19.y);
