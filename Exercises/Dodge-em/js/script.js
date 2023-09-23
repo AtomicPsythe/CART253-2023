@@ -10,14 +10,14 @@
 let covid19 = {
     x: 0, 
     y: 250, 
-    size: 100,
+    size: 150,
     vx: 0,
     vy: 0, 
-    speed: 5,
+    speed: 20,
     fill: {
-        r: 255,
-        g: 0, 
-        b: 0
+        r: 0,
+        g: 255, 
+        b: 25
     }
 };
 
@@ -31,12 +31,16 @@ let user = {
 }
 
 let numStatic = 5000;
+let textSizeNumber = 80;
+let virus;
+let font;
 
 /**
  * Description of preload
 */
 function preload() {
-
+    font = loadFont('assets/fonts/DeathMarkersDrip.otf');
+    virus = loadImage('assets/images/virus.png')
 }
 
 
@@ -46,10 +50,10 @@ function preload() {
 function setup() {
     createCanvas(windowWidth, windowHeight);
 
-    covid19.y = random(0, height)
+    covid19.y = random(0, height);
     covid19.vx = covid19.speed;
 
-    noCursor();
+    // noCursor();
 }
 
 
@@ -67,6 +71,9 @@ function draw() {
         point(x,y);
     }
 
+    // Displaying the virus image
+    image(virus, covid19.x - covid19.size/2, covid19.y - covid19.size/2, covid19.size, covid19.size)
+
     // Covid 19 movement
     covid19.x = covid19.x + covid19.vx;
     covid19.y = covid19.y + covid19.vy;
@@ -77,21 +84,18 @@ function draw() {
     }
 
     // User movement
-    user.x = mouseX;
-    user.y = mouseY;
-
     if (mouseX > user.x) {
-        user.vx = 1;
+        user.vx = 20;
     }
     else if (mouseX < user.x) {
-        user.vx = -1;
+        user.vx = -20;
     }
 
     if (mouseY > user.y) {
-        user.vy = 1;
+        user.vy = 20;
     }
     else if (mouseY < user.y) {
-        user.vy = -1;
+        user.vy = -20;
     }
 
     user.x = user.x + user.vx;
@@ -102,14 +106,26 @@ function draw() {
     // Check for catching covid19
     let d = dist(user.x, user.y, covid19.x, covid19.y);
     if (d < covid19.size / 2 + user.size / 2) {
+        fill(230, 88, 112);
+        noStroke();
+        textSize(80);
+        textFont(font);
+        //text("You caught COVID-19 :(", 600, windowWidth / 12.78, windowHeight / 2);
+        text("You caught COVID-19 :(", 550, 500);
         noLoop();
     }
 
     // Display Covid 19
-    fill(covid19.fill.r, covid19.fill.g, covid19.fill.b);
-    ellipse(covid19.x, covid19.y, covid19.size);
+    // fill(covid19.fill.r, covid19.fill.g, covid19.fill.b);
+    // ellipse(covid19.x, covid19.y, covid19.size);
 
     // Display user
-    fill(user.fill);
-    ellipse(user.x, user.y, user.size);
+    let x = user.x;
+    let numSegments = 3;
+
+    for (let segmentsDrawn = 0; segmentsDrawn < numSegments; segmentsDrawn++) {
+        ellipse(user.x, user.y, user.size);
+    }
+    // fill(user.fill);
+    // ellipse(user.x, user.y, user.size);
 }
