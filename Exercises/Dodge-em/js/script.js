@@ -10,10 +10,10 @@
 let covid19 = {
     x: 0, 
     y: 250, 
-    size: 150,
+    size: 200,
     vx: 0,
     vy: 0, 
-    speed: 20,
+    speed: 30,
     fill: {
         r: 0,
         g: 255, 
@@ -24,24 +24,31 @@ let covid19 = {
 let user = {
     x: 250,
     y: 250,
-    size: 100, 
-    fill: 255,
+    size: 150, 
     vx: 0,
-    vy: 0
+    vy: 0,
+    fill: {
+        r: 255,
+        g: 255,
+        b: 255
+    }
 }
 
 let numStatic = 5000;
-let textSizeNumber = 80;
+let textSizeNumber = 45;
 let virus;
 let font;
+let person;
+// let sickperson;
 
 /**
  * Description of preload
 */
 function preload() {
     font = loadFont('assets/fonts/DeathMarkersDrip.otf');
-    virus = loadImage('assets/images/virus.png')
-}
+    virus = loadImage('assets/images/virus.png');
+    person = loadImage('assets/images/person.png');
+};
 
 
 /**
@@ -52,10 +59,7 @@ function setup() {
 
     covid19.y = random(0, height);
     covid19.vx = covid19.speed;
-
-    // noCursor();
 }
-
 
 /**
  * Description of draw()
@@ -71,8 +75,21 @@ function draw() {
         point(x,y);
     }
 
+    // Dispay controls
+    textSize(textSizeNumber);
+    text("Rules: Move your mouse while left clicking to move the user circle to avoid COVID-19!", 5, 10, windowWidth, windowHeight);
+
+    // Display "User" name near the user circle
+    fill(255);
+    stroke(255);
+    textSize(40);
+    text("User", user.x + 55, user.y + 55, user.size);
+
     // Displaying the virus image
-    image(virus, covid19.x - covid19.size/2, covid19.y - covid19.size/2, covid19.size, covid19.size)
+    image(virus, covid19.x - covid19.size/2, covid19.y - covid19.size/2, covid19.size, covid19.size);
+
+    // Displaying the user image
+    image(person, user.x - user.size/2, user.y - user.size/2, user.size, user.size);
 
     // Covid 19 movement
     covid19.x = covid19.x + covid19.vx;
@@ -82,50 +99,75 @@ function draw() {
         covid19.x = 0;
         covid19.y = random(0, height);
     }
+    if (covid19.y > height) {
+        covid19.y = 0;
+        covid19.x = random(width, 0);
+    }
+    // else {
+    //     covid19.x = 0;
+    //     covid19.y = covid19.y - 1;
+    // };
 
     // User movement
     if (mouseX > user.x) {
-        user.vx = 20;
+        user.vx = 15;
     }
     else if (mouseX < user.x) {
-        user.vx = -20;
+        user.vx = -15;
     }
 
     if (mouseY > user.y) {
-        user.vy = 20;
+        user.vy = 15;
     }
     else if (mouseY < user.y) {
-        user.vy = -20;
+        user.vy = -15;
     }
-
+    if (mouseIsPressed === true) {
+        if (mouseX > user.x) {
+            user.vx = 15;
+        }
+        else if (mouseX < user.x) {
+            user.vx = -15;
+        }
+    
+        if (mouseY > user.y) {
+            user.vy = 15;
+        }
+        else if (mouseY < user.y) {
+            user.vy = -15;
+        }
+    }
+    else {
+        if (mouseX > user.x) {
+            user.vx = 0;
+        }
+        else if (mouseX < user.x) {
+            user.vx = 0;
+        }
+    
+        if (mouseY > user.y) {
+            user.vy = 0;
+        }
+        else if (mouseY < user.y) {
+            user.vy = 0;
+        }
+    };
     user.x = user.x + user.vx;
     user.y = user.y + user.vy;
-
-    ellipse(user.x, user.y, user.size);
 
     // Check for catching covid19
     let d = dist(user.x, user.y, covid19.x, covid19.y);
     if (d < covid19.size / 2 + user.size / 2) {
+        push();
+        //image(sickperson, user.x - user.size/2, user.y - user.size/2, user.size, user.size);
+        filter(INVERT);
         fill(230, 88, 112);
         noStroke();
-        textSize(80);
+        textSize(150);
         textFont(font);
-        //text("You caught COVID-19 :(", 600, windowWidth / 12.78, windowHeight / 2);
-        text("You caught COVID-19 :(", 550, 500);
+        textAlign(CENTER);
+        text("You caught COVID-19 :(", 50, 350, windowWidth, windowHeight);
         noLoop();
+        pop();
     }
-
-    // Display Covid 19
-    // fill(covid19.fill.r, covid19.fill.g, covid19.fill.b);
-    // ellipse(covid19.x, covid19.y, covid19.size);
-
-    // Display user
-    let x = user.x;
-    let numSegments = 3;
-
-    for (let segmentsDrawn = 0; segmentsDrawn < numSegments; segmentsDrawn++) {
-        ellipse(user.x, user.y, user.size);
-    }
-    // fill(user.fill);
-    // ellipse(user.x, user.y, user.size);
 }
