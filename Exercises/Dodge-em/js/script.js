@@ -41,7 +41,11 @@ let font;
 let person;
 
 /**
+<<<<<<< Updated upstream
  * Defining the variables and locations for the font, virus image, and user person image. 
+=======
+ * Defining the font, virus image, and person image for the simulation.
+>>>>>>> Stashed changes
 */
 function preload() {
     font = loadFont('assets/fonts/DeathMarkersDrip.otf');
@@ -64,7 +68,11 @@ function setup() {
 }
 
 /**
+<<<<<<< Updated upstream
  * Created the simulation by displaying and defining the user image and controls, the COVID-19 image and movement, and showing the consequences of catching/encountering the COVID-19 virus.
+=======
+ * The creation of the simulation displaying the background static, how the user controls themselves, and what happens when the user catches covid19
+>>>>>>> Stashed changes
 */
 function draw() {
     background(0);
@@ -104,7 +112,11 @@ function draw() {
     if (covid19.y > height) {
         covid19.y = 0;
         covid19.x = random(width, 0);
+<<<<<<< Updated upstream
     }
+=======
+    };
+>>>>>>> Stashed changes
 
     // User movement + user movement when the mouse is pressed
     if (mouseX > user.x) {
