@@ -1,55 +1,30 @@
 /**
  * Exercise 3: Love, Actually
-<<<<<<< Updated upstream
  * Foti Aivaliklis
-=======
- * Student Name
->>>>>>> Stashed changes
  * 
- * This is a template. You must fill in the title, author, 
- * and this description to match your project!
+ * A love simulation featuring the characters Sasaki and Miyano from the manga of the same name, where the user controls Sasaki and Miyano is controlled by the program, which shows if the two will fall for each other or not.
  */
 
 "use strict";
 
+// Sasaki circle
 let circle1 = {
     x: undefined, 
     y: 250,
-<<<<<<< Updated upstream
-    size: 100,
-=======
     size: 120,
->>>>>>> Stashed changes
     vx: 0, 
     vy: 0,
     speed: 3
 };
 
+// Miyano circle
 let circle2 = {
     x: undefined, 
     y: 250,
-<<<<<<< Updated upstream
-    size: 100,
-    vx: 0, 
-    vy: 0,
-    speed: 3
-};
-
-// let sasaki;
-// let miyano;
-
-let state = "title"; // Can be: title, simulation, love, sadness
-=======
     size: 120,
     vx: 0, 
     vy: 0,
     speed: 2
-};
-
-let dangerArea = {
-    x: 20,
-    y: 20,
-    size: 5
 };
 
 let state = "title"; // Can be: title, simulation, love, sadness or topLeftQuadrant
@@ -57,79 +32,59 @@ let state = "title"; // Can be: title, simulation, love, sadness or topLeftQuadr
 let sasaki;
 let miyano;
 let sakura;
-let sparkle;
 let button;
->>>>>>> Stashed changes
 
 /**
- * Description of preload
+ * Establishes the variables for the images used
 */
 function preload() {
-<<<<<<< Updated upstream
-    // sasaki = loadImage("assets/images/sasaki_cropped.png");
-    // miyano = loadImage("assets/images/miyano_cropped");
-=======
     sasaki = loadImage("assets/images/sasaki_cropped.png");
     miyano = loadImage("assets/images/miyano_cropped.png");
     sakura = loadImage("assets/images/sakura_cropped.png");
-    sparkle = loadImage("assets/images/shine.png");
->>>>>>> Stashed changes
 }
 
 
 /**
- * Description of setup
+ * Creates the canvas, the circles and the secret button
 */
 function setup() {
     createCanvas(500, 500);
     setupCircles();
-<<<<<<< Updated upstream
-=======
     secretButton();
 }
 
+// the secret button if checkTopLeftQuadrant is triggered
 function secretButton() {
     button = createButton("Click here!");
-    button.position(280, 290);
+    button.position(340, 370);
     button.mousePressed(reset);
     button.hide();
 }
 
+// hides the button upon being used
 function reset() {
     setupCircles();
     state = "simulation";
     button.hide();
->>>>>>> Stashed changes
 }
 
+// creates the circles
 function setupCircles() {
     // Position circles separated from one another
     circle1.x = width/3;
-<<<<<<< Updated upstream
-    circle2.x = 2*width/3;
-
-    // Start circles moving in a random direction
-    circle1.vx = random(-circle1.speed, circle1.speed);
-    circle1.vy = random(-circle1.speed, circle1.speed);
-=======
     circle1.y = height/3;
     circle2.x = 2*width/3;
 
     // Start circles moving in a random direction
->>>>>>> Stashed changes
     circle2.vx = random(-circle2.speed, circle2.speed);
     circle2.vy = random(-circle2.speed, circle2.speed);
 }
 
 /**
- * Description of draw()
+ * Plays the simulation
 */
 function draw() {
-<<<<<<< Updated upstream
-    background(0);
-=======
     background(sakura);
->>>>>>> Stashed changes
 
     if (state === "title") {
         title();
@@ -143,25 +98,15 @@ function draw() {
     else if (state === "sadness") {
         sadness();
     }
-<<<<<<< Updated upstream
-
-=======
     else if (state === "topLeftQuadrant") {
         checkTopLeftQuadrant();
     }
     handleInput();
->>>>>>> Stashed changes
 }
 
+// the title page of the simulation before it begins
 function title() {
     push();
-<<<<<<< Updated upstream
-    textSize(64);
-    fill(200, 100, 100);
-    textAlign(CENTER, CENTER);
-    text("Love?", width/2, height/2);
-    pop();
-=======
     textSize(18);
     fill(159, 51, 51);
     textAlign(CENTER, CENTER);
@@ -172,9 +117,9 @@ function title() {
     fill(159, 51, 51);
     textAlign(CENTER);
     text("Move Sasaki with the arrow keys to decide their fate!", 250, 300)
->>>>>>> Stashed changes
 }
 
+// the simulation itself
 function simulation() {
     move();
     checkOffScreen();
@@ -182,24 +127,10 @@ function simulation() {
     display();
 }
 
+// if the two circles overlap the two fall in love
 function love() {
     push();
     textSize(64);
-<<<<<<< Updated upstream
-    fill(255, 150, 150);
-    textAlign(CENTER, CENTER);
-    text("Love!", width/2, height/2);
-    pop();
-}
-
-function sadness() {
-    push();
-    textSize(64);
-    fill(150, 150, 255);
-    textAlign(CENTER, CENTER);
-    text(":(", width/2, height/2);
-    pop();
-=======
     fill(255, 93, 163);
     textAlign(CENTER, CENTER);
     text("Love!", width/2, height/2);
@@ -212,6 +143,7 @@ function sadness() {
     pop();
 }
 
+// if the two circles do not overlap or one exits the canvas then the two do not fall in love
 function sadness() {
     if (circle1.x < width/2 && circle1.y < height/2) {
         checkTopLeftQuadrant();
@@ -232,6 +164,7 @@ function sadness() {
     }
 }
 
+// the controls for the user controlled circle (Sasaki)
 function handleInput() {
     if (keyIsDown(LEFT_ARROW)) {
         circle1.vx = -circle1.speed;
@@ -251,26 +184,24 @@ function handleInput() {
     else {
         circle1.vy = 0;
     }
->>>>>>> Stashed changes
 }
 
+// what determines the circles' movement
 function move() {
     // Move the circles
     circle1.x = circle1.x + circle1.vx;
     circle1.y = circle1.y + circle1.vy;
 
-<<<<<<< Updated upstream
-=======
     let change = random();
     if (change < 0.1) {
         circle2.vx = random(-circle2.speed, circle2.speed);
         circle2.vy = random(-circle2.speed, circle2.speed);
     }
->>>>>>> Stashed changes
     circle2.x = circle2.x + circle2.vx;
     circle2.y = circle2.y + circle2.vy;
 }
 
+// checks if one of the circles or both of them have gone off of the canvas
 function checkOffScreen() {
     // Check if circles have gone offscreen
     if (isOffScreen(circle1) || isOffScreen(circle2)) {
@@ -278,6 +209,7 @@ function checkOffScreen() {
     }
 }
 
+// what happens when one of or both circles are off the screen
 function isOffScreen(circle) {
     if (circle.x < 0 || circle.x > width || circle.y < 0 || circle.y > height) {
         return true;
@@ -287,6 +219,7 @@ function isOffScreen(circle) {
     }
 }
 
+// checks if the circles have overlapped
 function checkOverlap() {
     // Check if the circles overlap
     let d = dist(circle1.x, circle1.y, circle2.x, circle2.y);
@@ -295,36 +228,27 @@ function checkOverlap() {
     }
 }
 
+// displays the images as the circles
 function display() {
     // Display the circles
-<<<<<<< Updated upstream
-    // image(sasaki, circle1.x - circle1.size/2, circle1.y - circle1.size/2, circle1.size, circle1.size);
-    // image(miyano, circle2.x - circle2.size/2, circle2.y - circle2.size/2, circle2.size, circle2.size);
-    ellipse(circle1.x, circle1.y, circle1.size);
-    ellipse(circle2.x, circle2.y, circle2.size);
-}
-
-function mousePressed() {
-    if (state === "title") {
-        state = "simulation";
-    }
-=======
     image(sasaki, circle1.x - circle1.size/2, circle1.y - circle1.size/2, circle1.size, circle1.size);
     image(miyano, circle2.x - circle2.size/2, circle2.y - circle2.size/2, circle2.size, circle2.size);
 }
 
+// checks if the user has passed through the top left quadrant
 function checkTopLeftQuadrant() {
     if (circle1.x < width/2 && circle1.y < height/2) {
         push();
         textSize(15);
         fill(0);
-        textAlign(CENTER);
+        textAlign(CENTER, CENTER);
         text("Looks like you have been given a second chance at love, try again!", 250, 300)
         pop();
         button.show();
     }
 }
 
+// allows the user to click to start the program and to continue if checkTopLeftQuadrant was triggered
 function mousePressed(){
     if (state === "title") {
         state = "simulation";
@@ -332,5 +256,4 @@ function mousePressed(){
     else if (state === "topLeftQuadrant") {
         state = "title";
     }
->>>>>>> Stashed changes
 }
