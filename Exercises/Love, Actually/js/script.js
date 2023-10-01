@@ -1,13 +1,13 @@
 /**
  * Exercise 3: Love, Actually
- * Student Name
+ * Foti Aivaliklis
  * 
- * This is a template. You must fill in the title, author, 
- * and this description to match your project!
+ * A love simulation featuring the characters Sasaki and Miyano from the manga of the same name, where the user controls Sasaki and Miyano is controlled by the program, which shows if the two will fall for each other or not.
  */
 
 "use strict";
 
+// Sasaki circle
 let circle1 = {
     x: undefined, 
     y: 250,
@@ -17,6 +17,7 @@ let circle1 = {
     speed: 3
 };
 
+// Miyano circle
 let circle2 = {
     x: undefined, 
     y: 250,
@@ -26,33 +27,25 @@ let circle2 = {
     speed: 2
 };
 
-let dangerArea = {
-    x: 20,
-    y: 20,
-    size: 5
-};
-
 let state = "title"; // Can be: title, simulation, love, sadness or topLeftQuadrant
 
 let sasaki;
 let miyano;
 let sakura;
-let sparkle;
 let button;
 
 /**
- * Description of preload
+ * Establishes the variables for the images used
 */
 function preload() {
     sasaki = loadImage("assets/images/sasaki_cropped.png");
     miyano = loadImage("assets/images/miyano_cropped.png");
     sakura = loadImage("assets/images/sakura_cropped.png");
-    sparkle = loadImage("assets/images/shine.png");
 }
 
 
 /**
- * Description of setup
+ * Creates the canvas, the circles and the secret button
 */
 function setup() {
     createCanvas(500, 500);
@@ -60,19 +53,22 @@ function setup() {
     secretButton();
 }
 
+// the secret button if checkTopLeftQuadrant is triggered
 function secretButton() {
     button = createButton("Click here!");
-    button.position(280, 290);
+    button.position(340, 370);
     button.mousePressed(reset);
     button.hide();
 }
 
+// hides the button upon being used
 function reset() {
     setupCircles();
     state = "simulation";
     button.hide();
 }
 
+// creates the circles
 function setupCircles() {
     // Position circles separated from one another
     circle1.x = width/3;
@@ -85,7 +81,7 @@ function setupCircles() {
 }
 
 /**
- * Description of draw()
+ * Plays the simulation
 */
 function draw() {
     background(sakura);
@@ -108,6 +104,7 @@ function draw() {
     handleInput();
 }
 
+// the title page of the simulation before it begins
 function title() {
     push();
     textSize(18);
@@ -122,6 +119,7 @@ function title() {
     text("Move Sasaki with the arrow keys to decide their fate!", 250, 300)
 }
 
+// the simulation itself
 function simulation() {
     move();
     checkOffScreen();
@@ -129,6 +127,7 @@ function simulation() {
     display();
 }
 
+// if the two circles overlap the two fall in love
 function love() {
     push();
     textSize(64);
@@ -144,6 +143,7 @@ function love() {
     pop();
 }
 
+// if the two circles do not overlap or one exits the canvas then the two do not fall in love
 function sadness() {
     if (circle1.x < width/2 && circle1.y < height/2) {
         checkTopLeftQuadrant();
@@ -164,6 +164,7 @@ function sadness() {
     }
 }
 
+// the controls for the user controlled circle (Sasaki)
 function handleInput() {
     if (keyIsDown(LEFT_ARROW)) {
         circle1.vx = -circle1.speed;
@@ -185,6 +186,7 @@ function handleInput() {
     }
 }
 
+// what determines the circles' movement
 function move() {
     // Move the circles
     circle1.x = circle1.x + circle1.vx;
@@ -199,6 +201,7 @@ function move() {
     circle2.y = circle2.y + circle2.vy;
 }
 
+// checks if one of the circles or both of them have gone off of the canvas
 function checkOffScreen() {
     // Check if circles have gone offscreen
     if (isOffScreen(circle1) || isOffScreen(circle2)) {
@@ -206,6 +209,7 @@ function checkOffScreen() {
     }
 }
 
+// what happens when one of or both circles are off the screen
 function isOffScreen(circle) {
     if (circle.x < 0 || circle.x > width || circle.y < 0 || circle.y > height) {
         return true;
@@ -215,6 +219,7 @@ function isOffScreen(circle) {
     }
 }
 
+// checks if the circles have overlapped
 function checkOverlap() {
     // Check if the circles overlap
     let d = dist(circle1.x, circle1.y, circle2.x, circle2.y);
@@ -223,24 +228,27 @@ function checkOverlap() {
     }
 }
 
+// displays the images as the circles
 function display() {
     // Display the circles
     image(sasaki, circle1.x - circle1.size/2, circle1.y - circle1.size/2, circle1.size, circle1.size);
     image(miyano, circle2.x - circle2.size/2, circle2.y - circle2.size/2, circle2.size, circle2.size);
 }
 
+// checks if the user has passed through the top left quadrant
 function checkTopLeftQuadrant() {
     if (circle1.x < width/2 && circle1.y < height/2) {
         push();
         textSize(15);
         fill(0);
-        textAlign(CENTER);
+        textAlign(CENTER, CENTER);
         text("Looks like you have been given a second chance at love, try again!", 250, 300)
         pop();
         button.show();
     }
 }
 
+// allows the user to click to start the program and to continue if checkTopLeftQuadrant was triggered
 function mousePressed(){
     if (state === "title") {
         state = "simulation";
