@@ -56,7 +56,7 @@ function setup() {
 // the secret button if checkTopLeftQuadrant is triggered
 function secretButton() {
     button = createButton("Click here!");
-    button.position(340, 370);
+    button.position(730, 380);
     button.mousePressed(reset);
     button.hide();
 }
@@ -113,10 +113,10 @@ function title() {
     text("Will Sasaki and Miyano find love in each other?", width/2, height/2);
     pop();
     push();
-    textSize(15);
+    textSize(13);
     fill(159, 51, 51);
     textAlign(CENTER);
-    text("Move Sasaki with the arrow keys to decide their fate!", 250, 300)
+    text("Click the screen to start and move Sasaki with the arrow keys to decide their fate!", 250, 300)
 }
 
 // the simulation itself
