@@ -1,6 +1,6 @@
 /**
  * Project 1
- * Foti Aivaliklis
+ * Student Name
  * 
  * This is a template. You must fill in the title, author, 
  * and this description to match your project!
@@ -10,8 +10,8 @@
 
 let shape = {
     x: undefined,
-    y: undefined,
-    size: 200,
+    y: 100,
+    size: 100,
     isBeingDragged: false,
     offSetX: 0,
     offSetY: 0,
@@ -22,9 +22,13 @@ let shape = {
 // image variables
 let knife;
 let kitchen;
+let cheese;
+let butter;
+let bread;
+let toast;
 
 // various states
-let state = "title";
+let state = "title"; // can be title, simulation, food
 let instructions = "Click and drag the knife to different ingredients to prep them and combine them with others to create a beautiful dish!";
 
 /**
@@ -33,6 +37,10 @@ let instructions = "Click and drag the knife to different ingredients to prep th
 function preload() {
     knife = loadImage("assets/images/knife_edited.png");
     kitchen = loadImage("assets/images/kitchen.jpg");
+    cheese = loadImage("assets/images/cheese.png");
+    butter = loadImage("assets/images/butter.png");
+    bread = loadImage("assets/images/bread_uncut.png");
+    toast = loadImage("assets/images/toast.png");
 }
 
 
@@ -43,6 +51,7 @@ function setup() {
     createCanvas(1000, 800);
     shape.x = width/2;
     shape.y = height/2;
+    displayImages();
 }
 
 
@@ -52,24 +61,30 @@ function setup() {
 function draw() {
     background(kitchen);
 
-    if (state === "title") {
+    if (state === `title`) {
         title();
     }
     else if (state === "simulation") {
         simulation();
     }
+    else if (state === "food") {
+        food();
+    }
 
     if (shape.active) {
         handleDragging();
-        drawShape();
     }
 }
 
 // the title page of the simulation before it begins
 function title() {
-    background(150)
+    gameTitle();
+    rulesAndInstructions();
+}
+
+function gameTitle() {
     push();
-    noFill();
+    fill(255);
     strokeWeight(3);
     rect(320, 170, 400, 60, 20);
     textSize(40);
@@ -77,27 +92,36 @@ function title() {
     textAlign(CENTER, CENTER);
     text("Cooking Simulator", 515, 200);
     pop();
+}
+
+function rulesAndInstructions() {
     push();
-    noFill();
-    rect(320, 300, 400, 200, 20);
+    fill(255);
+    rect(320, 300, 400, 120, 20);
     textSize(20);
     fill(159, 51, 51);
     textAlign(CENTER);
     textStyle(BOLD);
     text("Rules", 328, 305, 400, 200);
     pop();
+    push();
     textSize(20);
     fill(159, 51, 51);
     textAlign(CENTER);
     text(instructions, 320, 335, 400, 200);
+    pop();
 }
 
-function drawShape() {
-    push();
-    fill(255, 0, 0);
-    noStroke();
+// simulation itself
+function simulation() {
+    displayImages();
+    handleDragging();
+    mouseIsInsideShape();
+}
+
+function displayImages() {
     image(knife, shape.x, shape.y, shape.size);
-    pop();
+    image(cheese, shape.x + 10, shape.y, shape.size);
 }
 
 // Interacting with the objects functions
@@ -111,26 +135,15 @@ function handleDragging() {
     }
 }
 
-function mouseIsInsideShape() {
-    let d = dist(mouseX, mouseY, shape.x, shape.y);
-    if (d < shape.size) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
 // Mouse related functions
 function mousePressed() {
-    if (state === "title") {
-        state === "simulation";
-    }
-
     if (shape.active && mouseIsInsideShape()) {
         shape.isBeingDragged = true;
         shape.offSetX = shape.x - mouseX;
         shape.offSetY = shape.y - mouseY;
+    }
+    if (mousePressed === true && state === "title") {
+        state = "simulation";
     }
 }
 
@@ -139,5 +152,15 @@ function mouseReleased() {
         shape.size += shape.feedbackSizeChangeAmount;
         shape.offSetX = 0;
         shape.offSetY = 0;
+    }
+}
+
+function mouseIsInsideShape() {
+    let d = dist(mouseX, mouseY, shape.x, shape.y);
+    if (d < shape.size) {
+        return true;
+    }
+    else {
+        return false;
     }
 }
