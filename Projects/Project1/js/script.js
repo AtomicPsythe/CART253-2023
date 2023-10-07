@@ -121,7 +121,7 @@ function simulation() {
 
 function displayImages() {
     image(knife, shape.x, shape.y, shape.size);
-    image(cheese, shape.x + 10, shape.y, shape.size);
+    // image(cheese, shape.x + 10, shape.y, shape.size);
 }
 
 // Interacting with the objects functions
@@ -141,14 +141,16 @@ function mousePressed() {
         shape.isBeingDragged = true;
         shape.offSetX = shape.x - mouseX;
         shape.offSetY = shape.y - mouseY;
+        shape.size -= shape.feedbackSizeChangeAmount;
     }
-    if (mousePressed === true && state === "title") {
+    if (state === "title") {
         state = "simulation";
     }
 }
 
 function mouseReleased() {
-    if (shape.isBeingDragged = false) {
+    if (shape.isBeingDragged && shape.x > width/2) {
+        shape.isBeingDragged = false;
         shape.size += shape.feedbackSizeChangeAmount;
         shape.offSetX = 0;
         shape.offSetY = 0;
