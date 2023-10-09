@@ -112,8 +112,8 @@ function preload() {
     kitchen = loadImage("assets/images/kitchen.jpg");
     cheese = loadImage("assets/images/cheese_edited.png");
     butter = loadImage("assets/images/butter_edited.png");
-    bread = loadImage("assets/images/bread_edited.png");
-    toast = loadImage("assets/images/toast_edited.png");
+    bread = loadImage("assets/images/bread_drawn.png");
+    toast = loadImage("assets/images/toast_drawn.png");
     slicedCheese = loadImage("assets/images/slicedcheese.png");
     grilledCheese = loadImage("assets/images/grilledcheese.png");
 }
@@ -221,6 +221,7 @@ function displayImages() {
     image(toast, shape3.x, shape3.y, shape3.size);
     image(cheese, shape4.x, shape4.y, shape4.size);
     image(butter, shape6.x, shape6.y, shape6.size);
+    image(grilledCheese, shape7.x, shape7.y, shape7.size);
 }
 
 // Interacting with the objects functions
@@ -310,6 +311,17 @@ function ingredientsCheckOverlap() {
 //         shape5.y = height/4;
 //     }
 // }
+
+function grilledCheeseCheckOverlap() {
+    let d = dist(shape3.x, shape3.y, shape4.x, shape4.y, shape6.x, shape6.y);
+    if (d < shape3.size/2 + shape4.size/2 + shape6.size/2) {
+        shape3 = false;
+        shape4 = false;
+        shape6 = false;
+        shape7.x = width/2;
+        shape7.y = height/2;
+    }
+}
 
 // Mouse related functions
 function mousePressed() {
