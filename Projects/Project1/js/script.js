@@ -78,6 +78,18 @@ let shape6 = {
     active: true
 };
 
+// grilled cheese
+let shape7 = {
+    x: undefined,
+    y: undefined,
+    height: 60,
+    size: 130,
+    isBeingDragged: false,
+    offSetX: 0,
+    offSetY: 0,
+    active: true
+};
+
 // image variables
 let knife;
 let kitchen;
@@ -86,6 +98,7 @@ let butter;
 let bread;
 let toast;
 let slicedCheese;
+let grilledCheese
 
 // various states
 let state = "title"; // can be title, simulation, food
@@ -102,6 +115,7 @@ function preload() {
     bread = loadImage("assets/images/bread_edited.png");
     toast = loadImage("assets/images/toast_edited.png");
     slicedCheese = loadImage("assets/images/slicedcheese.png");
+    grilledCheese = loadImage("assets/images/grilledcheese.png");
 }
 
 
@@ -272,6 +286,15 @@ function isOffScreen() {
 
 function breadCheckOverlap() {
     let d = dist(shape.x, shape.y, shape2.x, shape2.y);
+    if (d < shape.size/2 + shape2.size/2) {
+        shape2 = false;
+        shape3.x = width/8;
+        shape3.y = height/2;
+    }
+}
+
+function ingredientsCheckOverlap() {
+    let d = dist(shape3.x, shape3.y, shape4.x, shape4.y, shape6.x, shape6.y);
     if (d < shape.size/2 + shape2.size/2) {
         shape2 = false;
         shape3.x = width/8;
