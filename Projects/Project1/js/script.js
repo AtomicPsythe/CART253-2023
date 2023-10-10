@@ -47,7 +47,7 @@ let shape4 = {
     x: undefined,
     y: undefined,
     height: 60,
-    size: 130,
+    size: 150,
     isBeingDragged: false,
     offSetX: 0,
     offSetY: 0,
@@ -58,7 +58,7 @@ let shape4 = {
 let shape5 = {
     x: undefined,
     y: undefined,
-    height: 60,
+    // height: 60,
     size: 130,
     isBeingDragged: false,
     offSetX: 0,
@@ -71,7 +71,7 @@ let shape6 = {
     x: undefined,
     y: undefined,
     height: 60,
-    size: 130,
+    size: 180,
     isBeingDragged: false,
     offSetX: 0,
     offSetY: 0,
@@ -90,6 +90,18 @@ let shape7 = {
     active: true
 };
 
+// bowl
+let shape8 = {
+    x: undefined,
+    y: undefined,
+    height: 60,
+    size: 130,
+    isBeingDragged: false,
+    offSetX: 0,
+    offSetY: 0,
+    active: true
+};
+
 // image variables
 let knife;
 let kitchen;
@@ -98,7 +110,8 @@ let butter;
 let bread;
 let toast;
 let slicedCheese;
-let grilledCheese
+let grilledCheese;
+let bowl;
 
 // various states
 let state = "title"; // can be title, simulation, food
@@ -110,12 +123,13 @@ let instructions = "Click and drag the knife to different ingredients to prep th
 function preload() {
     knife = loadImage("assets/images/knife_edited.png");
     kitchen = loadImage("assets/images/kitchen.jpg");
-    cheese = loadImage("assets/images/cheese_edited.png");
-    butter = loadImage("assets/images/butter_edited.png");
+    cheese = loadImage("assets/images/cheese_drawn.png");
+    butter = loadImage("assets/images/butter_drawn.png");
     bread = loadImage("assets/images/bread_drawn.png");
     toast = loadImage("assets/images/toast_drawn.png");
-    slicedCheese = loadImage("assets/images/slicedcheese.png");
-    grilledCheese = loadImage("assets/images/grilledcheese.png");
+    slicedCheese = loadImage("assets/images/slicedcheese_drawn.png");
+    grilledCheese = loadImage("assets/images/grilledcheese_drawn.png");
+    bowl = loadImage("assets/images/bowl.png");
 }
 
 
@@ -132,11 +146,12 @@ function setupImages() {
     shape.x = width/2.5;
     shape.y = height/10;
     shape2.x = width/8;
-    shape2.y = height/2;
-    shape4.x = height/2.5;
-    shape4.y = width/4;
-    shape6.x = height/1.5;
-    shape6.y = width/4;
+    shape2.y = height/1.7;
+    shape4.x = width/3;
+    shape4.y = height/1.9;
+    shape6.x = width/2;
+    shape6.y = height/1.8;
+    shape8.x = width/10;
 }
 
 
@@ -155,10 +170,6 @@ function draw() {
     else if (state === "food") {
         food();
     }
-
-    // if (shape.active) {
-    //     handleDragging();
-    // }
 }
 
 // the title page of the simulation before it begins
@@ -205,14 +216,17 @@ function simulation() {
     toastHandleDragging();
     cheeseHandleDragging();
     butterHandleDragging();
+    slicedCheeseHandleDragging();
     isOffScreen(shape);
     mouseIsInsideShape();
     mouseIsInsideShape2();
     mouseIsInsideShape3();
     mouseIsInsideShape4();
+    mouseIsInsideShape5();
     mouseIsInsideShape6();
     breadCheckOverlap();
-    // cheeseCheckOverlap();
+    cheeseCheckOverlap();
+    grilledCheeseCheckOverlap();
 }
 
 function displayImages() {
@@ -223,6 +237,7 @@ function displayImages() {
     image(slicedCheese, shape5.x, shape5.y, shape5.size);
     image(butter, shape6.x, shape6.y, shape6.size);
     image(grilledCheese, shape7.x, shape7.y, shape7.size);
+    image(bowl, shape8.x, shape8.y, shape8.size);
 }
 
 // Interacting with the objects functions
@@ -267,6 +282,16 @@ function cheeseHandleDragging() {
     }
 }
 
+function slicedCheeseHandleDragging() {
+    if (shape5.isBeingDragged) {
+        shape5.x = mouseX + shape5.offSetX;
+        shape5.y = mouseY + shape5.offSetY;
+
+        shape5.x = constrain(shape5.x, 0, width);
+        shape5.y = constrain(shape5.y, 0, height);
+    }
+}
+
 function butterHandleDragging() {
     if (shape6.isBeingDragged) {
         shape6.x = mouseX + shape6.offSetX;
@@ -274,6 +299,16 @@ function butterHandleDragging() {
 
         shape6.x = constrain(shape6.x, 0, width);
         shape6.y = constrain(shape6.y, 0, height);
+    }
+}
+
+function bowlHandleDragging() {
+    if (shape6.isBeingDragged) {
+        shape8.x = mouseX + shape8.offSetX;
+        shape8.y = mouseY + shape8.offSetY;
+
+        shape8.x = constrain(shape8.x, 0, width);
+        shape8.y = constrain(shape8.y, 0, height);
     }
 }
 
@@ -290,7 +325,7 @@ function breadCheckOverlap() {
     let d = dist(shape.x, shape.y, shape2.x, shape2.y);
     if (d < shape.size/2 + shape2.size/2) {
         shape2 = false;
-        shape3.x = width/8;
+        shape3.x = width/6;
         shape3.y = height/2;
     }
 }
@@ -308,19 +343,19 @@ function cheeseCheckOverlap() {
     let d = dist(shape.x, shape.y, shape4.x, shape4.y);
     if (d < shape.size/2 + shape4.size/2) {
         shape4 = false;
-        shape5.x = width/2.5;
-        shape5.y = height/4;
+        shape5.x = width/3;
+        shape5.y = height/1.8;
     }
 }
 
 function grilledCheeseCheckOverlap() {
-    let d = dist(shape3.x, shape3.y, shape4.x, shape4.y, shape6.x, shape6.y);
+    let d = dist(shape3.x, shape3.y, shape5.x, shape5.y, shape6.x, shape6.y);
     if (d < shape3.size/2 + shape4.size/2 + shape6.size/2) {
         shape3 = false;
-        shape4 = false;
+        shape5 = false;
         shape6 = false;
-        shape7.x = width/2;
-        shape7.y = height/2;
+        shape7.x = height/8;
+        shape7.y = width/8;
     }
 }
 
@@ -346,6 +381,11 @@ function mousePressed() {
         shape4.offSetX = shape4.x - mouseX;
         shape4.offSetY = shape4.y - mouseY;
     }
+    if (shape5.active && mouseIsInsideShape5()) {
+        shape5.isBeingDragged = true;
+        shape5.offSetX = shape5.x - mouseX;
+        shape5.offSetY = shape5.y - mouseY;
+    }
     if (shape6.active && mouseIsInsideShape6()) {
         shape6.isBeingDragged = true;
         shape6.offSetX = shape6.x - mouseX;
@@ -358,7 +398,7 @@ function mousePressed() {
 }
 
 function mouseReleased() {
-    if (shape.isBeingDragged && shape.x > width/2) {
+    if (shape.isBeingDragged && shape.x > width/2.5) {
         shape.isBeingDragged = false;
         shape.offSetX = 0;
         shape.offSetY = 0;
@@ -368,17 +408,22 @@ function mouseReleased() {
         shape2.offSetX = 0;
         shape2.offSetY = 0;
     }
-    if (shape3.isBeingDragged && shape3.x > width/8) {
+    if (shape3.isBeingDragged && shape3.x > width/6) {
         shape3.isBeingDragged = false;
         shape3.offSetX = 0;
         shape3.offSetY = 0;
     }
-    if (shape4.isBeingDragged && shape4.x > width/4) {
+    if (shape4.isBeingDragged && shape4.x > width/3) {
         shape4.isBeingDragged = false;
         shape4.offSetX = 0;
         shape4.offSetY = 0;
     }
-    if (shape6.isBeingDragged && shape6.x > width/4) {
+    if (shape5.isBeingDragged && shape5.x > width/2.5) {
+        shape5.isBeingDragged = false;
+        shape5.offSetX = 0;
+        shape5.offSetY = 0;
+    }
+    if (shape6.isBeingDragged && shape6.x > width/2) {
         shape6.isBeingDragged = false;
         shape6.offSetX = 0;
         shape6.offSetY = 0;
@@ -418,6 +463,16 @@ function mouseIsInsideShape3() {
 function mouseIsInsideShape4() {
     let d = dist(mouseX, mouseY, shape4.x, shape4.y);
     if (d < shape4.size) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function mouseIsInsideShape5() {
+    let d = dist(mouseX, mouseY, shape5.x, shape5.y);
+    if (d < shape5.size) {
         return true;
     }
     else {
