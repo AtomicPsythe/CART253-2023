@@ -220,6 +220,7 @@ function displayImages() {
     image(bread, shape2.x, shape2.y, shape2.size);
     image(toast, shape3.x, shape3.y, shape3.size);
     image(cheese, shape4.x, shape4.y, shape4.size);
+    image(slicedCheese, shape5.x, shape5.y, shape5.size);
     image(butter, shape6.x, shape6.y, shape6.size);
     image(grilledCheese, shape7.x, shape7.y, shape7.size);
 }
@@ -303,14 +304,14 @@ function ingredientsCheckOverlap() {
     }
 }
 
-// function cheeseCheckOverlap() {
-//     let d = dist(shape.x, shape.y, shape4.x, shape4.y);
-//     if (d < shape.size/2 + shape4.size/2) {
-//         shape4 = false;
-//         shape5.x = width/2.5;
-//         shape5.y = height/4;
-//     }
-// }
+function cheeseCheckOverlap() {
+    let d = dist(shape.x, shape.y, shape4.x, shape4.y);
+    if (d < shape.size/2 + shape4.size/2) {
+        shape4 = false;
+        shape5.x = width/2.5;
+        shape5.y = height/4;
+    }
+}
 
 function grilledCheeseCheckOverlap() {
     let d = dist(shape3.x, shape3.y, shape4.x, shape4.y, shape6.x, shape6.y);
