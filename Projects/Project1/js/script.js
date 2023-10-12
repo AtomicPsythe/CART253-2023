@@ -23,7 +23,7 @@ let shape = {
 let shape2 = {
     x: undefined,
     y: undefined,
-    size: 170,
+    size: 120,
     isBeingDragged: false,
     offSetX: 0,
     offSetY: 0,
@@ -34,7 +34,6 @@ let shape2 = {
 let shape3 = {
     x: undefined,
     y: undefined,
-    height: 60,
     size: 130,
     isBeingDragged: false,
     offSetX: 0,
@@ -46,8 +45,7 @@ let shape3 = {
 let shape4 = {
     x: undefined,
     y: undefined,
-    height: 60,
-    size: 150,
+    size: 100,
     isBeingDragged: false,
     offSetX: 0,
     offSetY: 0,
@@ -58,8 +56,7 @@ let shape4 = {
 let shape5 = {
     x: undefined,
     y: undefined,
-    // height: 60,
-    size: 130,
+    size: 100,
     isBeingDragged: false,
     offSetX: 0,
     offSetY: 0,
@@ -70,8 +67,7 @@ let shape5 = {
 let shape6 = {
     x: undefined,
     y: undefined,
-    height: 60,
-    size: 180,
+    size: 120,
     isBeingDragged: false,
     offSetX: 0,
     offSetY: 0,
@@ -82,7 +78,6 @@ let shape6 = {
 let shape7 = {
     x: undefined,
     y: undefined,
-    height: 60,
     size: 130,
     isBeingDragged: false,
     offSetX: 0,
@@ -90,17 +85,17 @@ let shape7 = {
     active: true
 };
 
-// bowl
-let shape8 = {
-    x: undefined,
-    y: undefined,
-    height: 60,
-    size: 130,
-    isBeingDragged: false,
-    offSetX: 0,
-    offSetY: 0,
-    active: true
-};
+// // bowl
+// let shape8 = {
+//     x: undefined,
+//     y: undefined,
+//     height: 60,
+//     size: 130,
+//     isBeingDragged: false,
+//     offSetX: 0,
+//     offSetY: 0,
+//     active: true
+// };
 
 // image variables
 let knife;
@@ -124,7 +119,7 @@ function preload() {
     knife = loadImage("assets/images/knife_edited.png");
     kitchen = loadImage("assets/images/kitchen.jpg");
     cheese = loadImage("assets/images/cheese_drawn.png");
-    butter = loadImage("assets/images/butter_drawn.png");
+    butter = loadImage("assets/images/butter_drawn2.png");
     bread = loadImage("assets/images/bread_drawn.png");
     toast = loadImage("assets/images/toast_drawn.png");
     slicedCheese = loadImage("assets/images/slicedcheese_drawn.png");
@@ -150,8 +145,8 @@ function setupImages() {
     shape4.x = width/3;
     shape4.y = height/1.9;
     shape6.x = width/2;
-    shape6.y = height/1.8;
-    shape8.x = width/10;
+    shape6.y = height/1.7;
+    // shape8.x = width/10;
 }
 
 
@@ -215,18 +210,18 @@ function simulation() {
     breadHandleDragging();
     toastHandleDragging();
     cheeseHandleDragging();
-    butterHandleDragging();
     slicedCheeseHandleDragging();
+    butterHandleDragging();
     isOffScreen(shape);
+    breadCheckOverlap();
+    cheeseCheckOverlap();
+    grilledCheeseCheckOverlap();
     mouseIsInsideShape();
     mouseIsInsideShape2();
     mouseIsInsideShape3();
     mouseIsInsideShape4();
     mouseIsInsideShape5();
     mouseIsInsideShape6();
-    breadCheckOverlap();
-    cheeseCheckOverlap();
-    grilledCheeseCheckOverlap();
 }
 
 function displayImages() {
@@ -237,7 +232,7 @@ function displayImages() {
     image(slicedCheese, shape5.x, shape5.y, shape5.size);
     image(butter, shape6.x, shape6.y, shape6.size);
     image(grilledCheese, shape7.x, shape7.y, shape7.size);
-    image(bowl, shape8.x, shape8.y, shape8.size);
+    // image(bowl, shape8.x, shape8.y, shape8.size);
 }
 
 // Interacting with the objects functions
@@ -302,15 +297,15 @@ function butterHandleDragging() {
     }
 }
 
-function bowlHandleDragging() {
-    if (shape6.isBeingDragged) {
-        shape8.x = mouseX + shape8.offSetX;
-        shape8.y = mouseY + shape8.offSetY;
+// function bowlHandleDragging() {
+//     if (shape6.isBeingDragged) {
+//         shape8.x = mouseX + shape8.offSetX;
+//         shape8.y = mouseY + shape8.offSetY;
 
-        shape8.x = constrain(shape8.x, 0, width);
-        shape8.y = constrain(shape8.y, 0, height);
-    }
-}
+//         shape8.x = constrain(shape8.x, 0, width);
+//         shape8.y = constrain(shape8.y, 0, height);
+//     }
+// }
 
 function isOffScreen() {
     if (shape.x < 0 || shape.x > width || shape.y < 0 || shape.y > height) {
@@ -349,13 +344,14 @@ function cheeseCheckOverlap() {
 }
 
 function grilledCheeseCheckOverlap() {
-    let d = dist(shape3.x, shape3.y, shape5.x, shape5.y, shape6.x, shape6.y);
+    let d = dist(shape3.x, shape3.y, shape4.x, shape4.y, shape6.x, shape6.y);
     if (d < shape3.size/2 + shape4.size/2 + shape6.size/2) {
         shape3 = false;
-        shape5 = false;
+        shape4 = false;
         shape6 = false;
-        shape7.x = height/8;
-        shape7.y = width/8;
+        image(grilledCheese, shape7.x, shape7.y, shape7.size);
+        shape7.x = width/8;
+        shape7.y = height/8;
     }
 }
 
