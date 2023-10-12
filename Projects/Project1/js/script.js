@@ -78,7 +78,7 @@ let shape6 = {
 let shape7 = {
     x: undefined,
     y: undefined,
-    size: 130,
+    size: 160,
     isBeingDragged: false,
     offSetX: 0,
     offSetY: 0,
@@ -86,16 +86,15 @@ let shape7 = {
 };
 
 // // bowl
-// let shape8 = {
-//     x: undefined,
-//     y: undefined,
-//     height: 60,
-//     size: 130,
-//     isBeingDragged: false,
-//     offSetX: 0,
-//     offSetY: 0,
-//     active: true
-// };
+let shape8 = {
+    x: undefined,
+    y: undefined,
+    size: 150,
+    isBeingDragged: false,
+    offSetX: 0,
+    offSetY: 0,
+    active: true
+};
 
 // image variables
 let knife;
@@ -124,7 +123,7 @@ function preload() {
     toast = loadImage("assets/images/toast_drawn.png");
     slicedCheese = loadImage("assets/images/slicedcheese_drawn.png");
     grilledCheese = loadImage("assets/images/grilledcheese_drawn.png");
-    bowl = loadImage("assets/images/bowl.png");
+    bowl = loadImage("assets/images/bowl_drawn.png");
 }
 
 
@@ -146,7 +145,6 @@ function setupImages() {
     shape4.y = height/1.9;
     shape6.x = width/2;
     shape6.y = height/1.7;
-    // shape8.x = width/10;
 }
 
 
@@ -222,6 +220,7 @@ function simulation() {
     mouseIsInsideShape4();
     mouseIsInsideShape5();
     mouseIsInsideShape6();
+    bowlAppear();
 }
 
 function displayImages() {
@@ -232,7 +231,7 @@ function displayImages() {
     image(slicedCheese, shape5.x, shape5.y, shape5.size);
     image(butter, shape6.x, shape6.y, shape6.size);
     image(grilledCheese, shape7.x, shape7.y, shape7.size);
-    // image(bowl, shape8.x, shape8.y, shape8.size);
+    image(bowl, shape8.x, shape8.y, shape8.size);
 }
 
 // Interacting with the objects functions
@@ -343,16 +342,61 @@ function cheeseCheckOverlap() {
     }
 }
 
-function grilledCheeseCheckOverlap() {
-    let d = dist(shape3.x, shape3.y, shape4.x, shape4.y, shape6.x, shape6.y);
-    if (d < shape3.size/2 + shape4.size/2 + shape6.size/2) {
-        shape3 = false;
-        shape4 = false;
-        shape6 = false;
-        image(grilledCheese, shape7.x, shape7.y, shape7.size);
-        shape7.x = width/8;
-        shape7.y = height/8;
+function bowlAppear() {
+    if (shape2 === false && shape4 === false) {
+        push();
+        fill(255);
+        strokeWeight(2);
+        rect(200, 170, 630, 60, 20);
+        textSize(22);
+        fill(159, 51, 51);
+        textAlign(CENTER, CENTER);
+        text("Drag all of the ingredients into the bowl to complete your dish!", 515, 200);
+        pop();
+        image(bowl, shape8.x, shape8.y, shape8.size);
+        shape8.x = width/1.5;
+        shape8.y = height/2;
     }
+}
+
+function grilledCheeseCheckOverlap() {
+    let d = dist(shape3.x, shape3.y, shape5.x, shape5.y, shape6.x, shape6.y, shape8.x, shape8.y);
+    if (d < shape3.size/2 + shape5.size/2 + shape6.size/2 + shape8.size) {
+        state = "food";
+    }
+    // if (shape3.x < width/1.5 && shape3.y < height/1.5 && shape5.x < width/1.5 && shape5.y < height/1.5 && shape6.x < width/1.5 && shape6.y < height/1.5) {
+    //     shape7.x = width/2.2;
+    //     shape7.y = height/2;
+    // }
+}
+
+function food() {
+    displayImages();
+    shape = false;
+    shape3 = false;
+    shape5 = false;
+    shape6 = false;
+    shape7.x = width/2.2;
+    shape7.y = height/2;
+    shape8 = false;
+    push();
+    fill(255);
+    strokeWeight(3);
+    rect(200, 170, 630, 60, 20);
+    textSize(40);
+    fill(159, 51, 51);
+    textAlign(CENTER, CENTER);
+    text("Congratulations, enjoy your meal!", 515, 200);
+    pop();
+    push();
+    fill(255);
+    strokeWeight(3);
+    rect(220, 270, 590, 60, 20);
+    textSize(40);
+    fill(159, 51, 51);
+    textAlign(CENTER, CENTER);
+    text("Refresh the page to play again!", 515, 300);
+    pop();
 }
 
 // Mouse related functions
