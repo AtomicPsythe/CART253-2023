@@ -330,14 +330,14 @@ function breadCheckOverlap() {
     }
 }
 
-function ingredientsCheckOverlap() {
-    let d = dist(shape3.x, shape3.y, shape4.x, shape4.y, shape6.x, shape6.y);
-    if (d < shape.size/2 + shape2.size/2) {
-        shape2 = false;
-        shape3.x = width/8;
-        shape3.y = height/2;
-    }
-}
+// function ingredientsCheckOverlap() {
+//     let d = dist(shape3.x, shape3.y, shape4.x, shape4.y, shape6.x, shape6.y);
+//     if (d < shape.size/2 + shape2.size/2) {
+//         shape2 = false;
+//         shape3.x = width/8;
+//         shape3.y = height/2;
+//     }
+// }
 
 function cheeseCheckOverlap() {
     let d = dist(shape.x, shape.y, shape4.x, shape4.y);
@@ -360,6 +360,66 @@ function grilledCheeseCheckOverlap() {
 }
 
 // Mouse related functions
+function mouseIsInsideShape() {
+    let d = dist(mouseX, mouseY, shape.x, shape.y);
+    if (d < shape.size) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function mouseIsInsideShape2() {
+    let d = dist(mouseX, mouseY, shape2.x, shape2.y);
+    if (d < shape2.size) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function mouseIsInsideShape3() {
+    let d = dist(mouseX, mouseY, shape3.x, shape3.y);
+    if (d < shape3.size) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function mouseIsInsideShape4() {
+    let d = dist(mouseX, mouseY, shape4.x, shape4.y);
+    if (d < shape4.size) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function mouseIsInsideShape5() {
+    let d = dist(mouseX, mouseY, shape5.x, shape5.y);
+    if (d < shape5.size) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function mouseIsInsideShape6() {
+    let d = dist(mouseX, mouseY, shape6.x, shape6.y);
+    if (d < shape6.size) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 function mousePressed() {
     if (shape.active && mouseIsInsideShape()) {
         shape.isBeingDragged = true;
@@ -427,65 +487,5 @@ function mouseReleased() {
         shape6.isBeingDragged = false;
         shape6.offSetX = 0;
         shape6.offSetY = 0;
-    }
-}
-
-function mouseIsInsideShape() {
-    let d = dist(mouseX, mouseY, shape.x, shape.y);
-    if (d < shape.size) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
-function mouseIsInsideShape2() {
-    let d = dist(mouseX, mouseY, shape2.x, shape2.y);
-    if (d < shape2.size) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
-function mouseIsInsideShape3() {
-    let d = dist(mouseX, mouseY, shape3.x, shape3.y);
-    if (d < shape3.size) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
-function mouseIsInsideShape4() {
-    let d = dist(mouseX, mouseY, shape4.x, shape4.y);
-    if (d < shape4.size) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
-function mouseIsInsideShape5() {
-    let d = dist(mouseX, mouseY, shape5.x, shape5.y);
-    if (d < shape5.size) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
-function mouseIsInsideShape6() {
-    let d = dist(mouseX, mouseY, shape6.x, shape6.y);
-    if (d < shape6.size) {
-        return true;
-    }
-    else {
-        return false;
     }
 }
