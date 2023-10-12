@@ -347,11 +347,11 @@ function bowlAppear() {
         push();
         fill(255);
         strokeWeight(2);
-        rect(200, 170, 630, 60, 20);
+        rect(100, 170, 830, 60, 20);
         textSize(22);
         fill(159, 51, 51);
         textAlign(CENTER, CENTER);
-        text("Drag all of the ingredients into the bowl to complete your dish!", 515, 200);
+        text("Drag all of the ingredients into the bowl in the correct order to complete your dish!", 515, 200);
         pop();
         image(bowl, shape8.x, shape8.y, shape8.size);
         shape8.x = width/1.5;
@@ -360,10 +360,16 @@ function bowlAppear() {
 }
 
 function grilledCheeseCheckOverlap() {
-    let d = dist(shape3.x, shape3.y, shape5.x, shape5.y, shape6.x, shape6.y, shape8.x, shape8.y);
-    if (d < shape3.size/2 + shape5.size/2 + shape6.size/2 + shape8.size) {
+    let shape3Dist = dist(shape3.x, shape3.y, shape8.x, shape8.y);
+    let shape5Dist = dist(shape5.x, shape5.y, shape8.x, shape8.y);
+    let shape6Dist = dist(shape6.x, shape6.y, shape8.x, shape8.y);
+    if (shape3Dist < shape3.size/4 && shape5Dist < shape5.size/4 && shape6Dist < shape6.size/4) {
         state = "food";
     }
+    // let d = dist(shape3.x, shape3.y, shape5.x, shape5.y, shape6.x, shape6.y, shape8.x, shape8.y);
+    // if (d < shape3.size/2 + shape5.size/2 + shape6.size/2 + shape8.size) {
+    //     state = "food";
+    // }
     // if (shape3.x < width/1.5 && shape3.y < height/1.5 && shape5.x < width/1.5 && shape5.y < height/1.5 && shape6.x < width/1.5 && shape6.y < height/1.5) {
     //     shape7.x = width/2.2;
     //     shape7.y = height/2;
