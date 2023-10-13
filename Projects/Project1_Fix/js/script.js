@@ -2,8 +2,7 @@
  * Project 1
  * Foti Aivaliklis
  * 
- * This is a template. You must fill in the title, author, 
- * and this description to match your project!
+ * The following cooking simulation takes the player through the process of making a grilled cheese via interacting with the ingredients and tools provided on the screen.
  */
 
 "use strict";
@@ -23,7 +22,7 @@ let knifeIngredient = {
 let breadIngredient = {
     x: undefined,
     y: undefined,
-    size: 100,
+    size: 120,
     isBeingDragged: false,
     offSetX: 0,
     offSetY: 0,
@@ -34,7 +33,7 @@ let breadIngredient = {
 let toastIngredient = {
     x: undefined,
     y: undefined,
-    size: 100,
+    size: 130,
     isBeingDragged: false,
     offSetX: 0,
     offSetY: 0,
@@ -67,7 +66,7 @@ let slicedCheeseIngredient = {
 let butterIngredient = {
     x: undefined,
     y: undefined,
-    size: 100,
+    size: 120,
     isBeingDragged: false,
     offSetX: 0,
     offSetY: 0,
@@ -112,7 +111,7 @@ let state = "title"; // can be title, simulation, food
 let instructions = "Click and drag the knife to different ingredients to prep them and combine them with others to make a grilled cheese!";
 
 /**
- * Description of preload
+ * Establishes the variables for the images used
 */
 function preload() {
     knife = loadImage("assets/images/knife_edited.png");
@@ -127,7 +126,7 @@ function preload() {
 }
 
 /**
- * Description of setup
+ * Creates the canvas and sets up and displays the images
 */
 function setup() {
     createCanvas(1000, 800);
@@ -135,6 +134,7 @@ function setup() {
     displayImages();
 }
 
+// Identifies the images' location on the canvas
 function setupImages() {
     knifeIngredient.x = width/2.5;
     knifeIngredient.y = height/10;
@@ -148,7 +148,7 @@ function setupImages() {
 
 
 /**
- * Description of draw()
+ * Creates the background and calls to each of the three states of the game depending on the player's progression
 */
 function draw() {
     background(kitchen);
@@ -170,6 +170,7 @@ function title() {
     rulesAndInstructions();
 }
 
+// the title itself
 function gameTitle() {
     push();
     fill(255);
@@ -182,6 +183,7 @@ function gameTitle() {
     pop();
 }
 
+// the instructions listed on the title page
 function rulesAndInstructions() {
     push();
     fill(255);
@@ -200,7 +202,7 @@ function rulesAndInstructions() {
     pop();
 }
 
-// simulation itself
+// simulation itself, calls to display the images, the image changes, and if the mouse interacts with them
 function simulation() {
     displayImages();
     handleDragging();
@@ -222,6 +224,7 @@ function simulation() {
     bowlAppear();
 }
 
+// displaying the images in relation to the variable locations establised above
 function displayImages() {
     image(knife, knifeIngredient.x, knifeIngredient.y, knifeIngredient.size);
     image(bread, breadIngredient.x, breadIngredient.y, breadIngredient.size);
@@ -235,7 +238,7 @@ function displayImages() {
 
 // Interacting with the objects functions
 function handleDragging() {
-    // for knife
+// for knife
     if (knifeIngredient.isBeingDragged) {
         knifeIngredient.x = mouseX + knifeIngredient.offSetX;
         knifeIngredient.y = mouseY + knifeIngredient.offSetY;
@@ -244,7 +247,7 @@ function handleDragging() {
         knifeIngredient.y = constrain(knifeIngredient.y, 0, height);
     }
 }
-
+// for bread
 function breadHandleDragging() {
     if (breadIngredient.isBeingDragged) {
         breadIngredient.x = mouseX + breadIngredient.offSetX;
@@ -254,7 +257,7 @@ function breadHandleDragging() {
         breadIngredient.y = constrain(breadIngredient.y, 0, height);
     }
 }
-
+// for toast
 function toastHandleDragging() {
     if (toastIngredient.isBeingDragged) {
         toastIngredient.x = mouseX + toastIngredient.offSetX;
@@ -264,7 +267,7 @@ function toastHandleDragging() {
         toastIngredient.y = constrain(toastIngredient.y, 0, height);
     }
 }
-
+// for cheese
 function cheeseHandleDragging() {
     if (cheeseIngredient.isBeingDragged) {
         cheeseIngredient.x = mouseX + cheeseIngredient.offSetX;
@@ -274,7 +277,7 @@ function cheeseHandleDragging() {
         cheeseIngredient.y = constrain(cheeseIngredient.y, 0, height);
     }
 }
-
+// for sliced cheese
 function slicedCheeseHandleDragging() {
     if (slicedCheeseIngredient.isBeingDragged) {
         slicedCheeseIngredient.x = mouseX + slicedCheeseIngredient.offSetX;
@@ -284,7 +287,7 @@ function slicedCheeseHandleDragging() {
         slicedCheeseIngredient.y = constrain(slicedCheeseIngredient.y, 0, height);
     }
 }
-
+// for butter
 function butterHandleDragging() {
     if (butterIngredient.isBeingDragged) {
         butterIngredient.x = mouseX + butterIngredient.offSetX;
@@ -294,7 +297,7 @@ function butterHandleDragging() {
         butterIngredient.y = constrain(butterIngredient.y, 0, height);
     }
 }
-
+// checks if the knife is going off screen
 function isOffScreen() {
     if (knifeIngredient.x < 0 || knifeIngredient.x > width || knifeIngredient.y < 0 || knifeIngredient.y > height) {
         return true;
@@ -303,7 +306,7 @@ function isOffScreen() {
         return false;
     }
 }
-
+// checks if the knife overlaps with the bread
 function breadCheckOverlap() {
     let d = dist(knifeIngredient.x, knifeIngredient.y, breadIngredient.x, breadIngredient.y);
     if (d < knifeIngredient.size/2 + breadIngredient.size/2) {
@@ -312,7 +315,7 @@ function breadCheckOverlap() {
         toastIngredient.y = height/2;
     }
 }
-
+// checks if the knife overlaps with the cheese
 function cheeseCheckOverlap() {
     let d = dist(knifeIngredient.x, knifeIngredient.y, cheeseIngredient.x, cheeseIngredient.y);
     if (d < knifeIngredient.size/2 + cheeseIngredient.size/2) {
@@ -321,33 +324,33 @@ function cheeseCheckOverlap() {
         slicedCheeseIngredient.y = height/1.8;
     }
 }
-
+// checks if the bowl can appear and what happens when the bowl appears
 function bowlAppear() {
     if (breadIngredient === false && cheeseIngredient === false) {
         push();
         fill(255);
         strokeWeight(2);
-        rect(100, 170, 830, 60, 20);
+        rect(200, 170, 630, 60, 20);
         textSize(22);
         fill(159, 51, 51);
         textAlign(CENTER, CENTER);
-        text("Drag all of the ingredients into the bowl in the correct order to complete your dish!", 515, 200);
+        text("Drag all of the ingredients into the bowl to complete your dish!", 515, 200);
         pop();
         image(bowl, bowlIngredient.x, bowlIngredient.y, bowlIngredient.size);
         bowlIngredient.x = width/1.5;
         bowlIngredient.y = height/2;
     }
 }
-
+// checks if all of the ingredients are placed inside of the bowl to create a grilled cheese
 function grilledCheeseCheckOverlap() {
     let toastIngredientDist = dist(toastIngredient.x, toastIngredient.y, bowlIngredient.x, bowlIngredient.y);
     let slicedCheeseIngredientDist = dist(slicedCheeseIngredient.x, slicedCheeseIngredient.y, bowlIngredient.x, bowlIngredient.y);
     let butterIngredientDist = dist(butterIngredient.x, butterIngredient.y, bowlIngredient.x, bowlIngredient.y);
-    if (toastIngredientDist < toastIngredient.size/4 && slicedCheeseIngredientDist < slicedCheeseIngredient.size/4 && butterIngredientDist < butterIngredient.size/4) {
+    if (toastIngredientDist < toastIngredient.size/2 && slicedCheeseIngredientDist < slicedCheeseIngredient.size/2 && butterIngredientDist < butterIngredient.size/2) {
         state = "food";
     }
 }
-
+// ending state, presenting the player with their meal and a sign off
 function food() {
     displayImages();
     knifeIngredient = false;
@@ -378,6 +381,8 @@ function food() {
 }
 
 // Mouse related functions
+
+// checks if the mouse overlaps witht the knife
 function mouseIsInsideknifeIngredient() {
     let d = dist(mouseX, mouseY, knifeIngredient.x, knifeIngredient.y);
     if (d < knifeIngredient.size) {
@@ -387,7 +392,7 @@ function mouseIsInsideknifeIngredient() {
         return false;
     }
 }
-
+// checks if the mouse overlaps witht the bread
 function mouseIsInsidebreadIngredient() {
     let d = dist(mouseX, mouseY, breadIngredient.x, breadIngredient.y);
     if (d < breadIngredient.size) {
@@ -397,7 +402,7 @@ function mouseIsInsidebreadIngredient() {
         return false;
     }
 }
-
+// checks if the mouse overlaps witht the toast
 function mouseIsInsidetoastIngredient() {
     let d = dist(mouseX, mouseY, toastIngredient.x, toastIngredient.y);
     if (d < toastIngredient.size) {
@@ -407,7 +412,7 @@ function mouseIsInsidetoastIngredient() {
         return false;
     }
 }
-
+// checks if the mouse overlaps witht the cheese
 function mouseIsInsidecheeseIngredient() {
     let d = dist(mouseX, mouseY, cheeseIngredient.x, cheeseIngredient.y);
     if (d < cheeseIngredient.size) {
@@ -417,7 +422,7 @@ function mouseIsInsidecheeseIngredient() {
         return false;
     }
 }
-
+// checks if the mouse overlaps witht the sliced cheese
 function mouseIsInsideslicedCheeseIngredient() {
     let d = dist(mouseX, mouseY, slicedCheeseIngredient.x, slicedCheeseIngredient.y);
     if (d < slicedCheeseIngredient.size) {
@@ -427,7 +432,7 @@ function mouseIsInsideslicedCheeseIngredient() {
         return false;
     }
 }
-
+// checks if the mouse overlaps witht the butter
 function mouseIsInsidebutterIngredient() {
     let d = dist(mouseX, mouseY, butterIngredient.x, butterIngredient.y);
     if (d < butterIngredient.size) {
@@ -437,7 +442,7 @@ function mouseIsInsidebutterIngredient() {
         return false;
     }
 }
-
+// checks if the mouse overlaps with each ingredient and if the mouse is pressed while doing so
 function mousePressed() {
     if (knifeIngredient.active && mouseIsInsideknifeIngredient()) {
         knifeIngredient.isBeingDragged = true;
@@ -470,11 +475,12 @@ function mousePressed() {
         butterIngredient.offSetY = butterIngredient.y - mouseY;
     }
 
+    // checks if the state is title then it will transition to simulation upon clicking the screen
     if (state === "title") {
         state = "simulation";
     }
 }
-
+// checks if the mouse is released upon interacting with each ingredient
 function mouseReleased() {
     if (knifeIngredient.isBeingDragged && knifeIngredient.x > width/2.5) {
         knifeIngredient.isBeingDragged = false;
