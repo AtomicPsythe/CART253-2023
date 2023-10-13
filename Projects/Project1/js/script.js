@@ -1,6 +1,6 @@
 /**
  * Project 1
- * Student Name
+ * Foti Aivaliklis
  * 
  * This is a template. You must fill in the title, author, 
  * and this description to match your project!
@@ -9,7 +9,7 @@
 "use strict";
 
 // knife
-let shape = {
+let knifeIngredient = {
     x: undefined,
     y: undefined,
     size: 150,
@@ -20,10 +20,10 @@ let shape = {
 };
 
 // bread
-let shape2 = {
+let breadIngredient = {
     x: undefined,
     y: undefined,
-    size: 120,
+    size: 100,
     isBeingDragged: false,
     offSetX: 0,
     offSetY: 0,
@@ -31,10 +31,10 @@ let shape2 = {
 };
 
 // toast
-let shape3 = {
+let toastIngredient = {
     x: undefined,
     y: undefined,
-    size: 130,
+    size: 100,
     isBeingDragged: false,
     offSetX: 0,
     offSetY: 0,
@@ -42,7 +42,7 @@ let shape3 = {
 };
 
 // cheese
-let shape4 = {
+let cheeseIngredient = {
     x: undefined,
     y: undefined,
     size: 100,
@@ -53,7 +53,7 @@ let shape4 = {
 };
 
 // sliced cheese
-let shape5 = {
+let slicedCheeseIngredient = {
     x: undefined,
     y: undefined,
     size: 100,
@@ -64,10 +64,10 @@ let shape5 = {
 };
 
 // butter
-let shape6 = {
+let butterIngredient = {
     x: undefined,
     y: undefined,
-    size: 120,
+    size: 100,
     isBeingDragged: false,
     offSetX: 0,
     offSetY: 0,
@@ -75,7 +75,7 @@ let shape6 = {
 };
 
 // grilled cheese
-let shape7 = {
+let grilledCheeseIngredient = {
     x: undefined,
     y: undefined,
     size: 160,
@@ -85,8 +85,8 @@ let shape7 = {
     active: true
 };
 
-// // bowl
-let shape8 = {
+// bowl
+let bowlIngredient = {
     x: undefined,
     y: undefined,
     size: 150,
@@ -126,7 +126,6 @@ function preload() {
     bowl = loadImage("assets/images/bowl_drawn.png");
 }
 
-
 /**
  * Description of setup
 */
@@ -137,14 +136,14 @@ function setup() {
 }
 
 function setupImages() {
-    shape.x = width/2.5;
-    shape.y = height/10;
-    shape2.x = width/8;
-    shape2.y = height/1.7;
-    shape4.x = width/3;
-    shape4.y = height/1.9;
-    shape6.x = width/2;
-    shape6.y = height/1.7;
+    knifeIngredient.x = width/2.5;
+    knifeIngredient.y = height/10;
+    breadIngredient.x = width/8;
+    breadIngredient.y = height/1.7;
+    cheeseIngredient.x = width/3;
+    cheeseIngredient.y = height/1.9;
+    butterIngredient.x = width/2;
+    butterIngredient.y = height/1.7;
 }
 
 
@@ -210,104 +209,94 @@ function simulation() {
     cheeseHandleDragging();
     slicedCheeseHandleDragging();
     butterHandleDragging();
-    isOffScreen(shape);
+    isOffScreen(knifeIngredient);
     breadCheckOverlap();
     cheeseCheckOverlap();
     grilledCheeseCheckOverlap();
-    mouseIsInsideShape();
-    mouseIsInsideShape2();
-    mouseIsInsideShape3();
-    mouseIsInsideShape4();
-    mouseIsInsideShape5();
-    mouseIsInsideShape6();
+    mouseIsInsideknifeIngredient();
+    mouseIsInsidebreadIngredient();
+    mouseIsInsidetoastIngredient();
+    mouseIsInsidecheeseIngredient();
+    mouseIsInsideslicedCheeseIngredient();
+    mouseIsInsidebutterIngredient();
     bowlAppear();
 }
 
 function displayImages() {
-    image(knife, shape.x, shape.y, shape.size);
-    image(bread, shape2.x, shape2.y, shape2.size);
-    image(toast, shape3.x, shape3.y, shape3.size);
-    image(cheese, shape4.x, shape4.y, shape4.size);
-    image(slicedCheese, shape5.x, shape5.y, shape5.size);
-    image(butter, shape6.x, shape6.y, shape6.size);
-    image(grilledCheese, shape7.x, shape7.y, shape7.size);
-    image(bowl, shape8.x, shape8.y, shape8.size);
+    image(knife, knifeIngredient.x, knifeIngredient.y, knifeIngredient.size);
+    image(bread, breadIngredient.x, breadIngredient.y, breadIngredient.size);
+    image(toast, toastIngredient.x, toastIngredient.y, toastIngredient.size);
+    image(cheese, cheeseIngredient.x, cheeseIngredient.y, cheeseIngredient.size);
+    image(slicedCheese, slicedCheeseIngredient.x, slicedCheeseIngredient.y, slicedCheeseIngredient.size);
+    image(butter, butterIngredient.x, butterIngredient.y, butterIngredient.size);
+    image(grilledCheese, grilledCheeseIngredient.x, grilledCheeseIngredient.y, grilledCheeseIngredient.size);
+    image(bowl, bowlIngredient.x, bowlIngredient.y, bowlIngredient.size);
 }
 
 // Interacting with the objects functions
 function handleDragging() {
     // for knife
-    if (shape.isBeingDragged) {
-        shape.x = mouseX + shape.offSetX;
-        shape.y = mouseY + shape.offSetY;
+    if (knifeIngredient.isBeingDragged) {
+        knifeIngredient.x = mouseX + knifeIngredient.offSetX;
+        knifeIngredient.y = mouseY + knifeIngredient.offSetY;
 
-        shape.x = constrain(shape.x, 0, width);
-        shape.y = constrain(shape.y, 0, height);
+        knifeIngredient.x = constrain(knifeIngredient.x, 0, width);
+        knifeIngredient.y = constrain(knifeIngredient.y, 0, height);
     }
 }
 
 function breadHandleDragging() {
-    if (shape2.isBeingDragged) {
-        shape2.x = mouseX + shape2.offSetX;
-        shape2.y = mouseY + shape2.offSetY;
+    if (breadIngredient.isBeingDragged) {
+        breadIngredient.x = mouseX + breadIngredient.offSetX;
+        breadIngredient.y = mouseY + breadIngredient.offSetY;
 
-        shape2.x = constrain(shape2.x, 0, width);
-        shape2.y = constrain(shape2.y, 0, height);
+        breadIngredient.x = constrain(breadIngredient.x, 0, width);
+        breadIngredient.y = constrain(breadIngredient.y, 0, height);
     }
 }
 
 function toastHandleDragging() {
-    if (shape3.isBeingDragged) {
-        shape3.x = mouseX + shape3.offSetX;
-        shape3.y = mouseY + shape3.offSetY;
+    if (toastIngredient.isBeingDragged) {
+        toastIngredient.x = mouseX + toastIngredient.offSetX;
+        toastIngredient.y = mouseY + toastIngredient.offSetY;
 
-        shape3.x = constrain(shape3.x, 0, width);
-        shape3.y = constrain(shape3.y, 0, height);
+        toastIngredient.x = constrain(toastIngredient.x, 0, width);
+        toastIngredient.y = constrain(toastIngredient.y, 0, height);
     }
 }
 
 function cheeseHandleDragging() {
-    if (shape4.isBeingDragged) {
-        shape4.x = mouseX + shape4.offSetX;
-        shape4.y = mouseY + shape4.offSetY;
+    if (cheeseIngredient.isBeingDragged) {
+        cheeseIngredient.x = mouseX + cheeseIngredient.offSetX;
+        cheeseIngredient.y = mouseY + cheeseIngredient.offSetY;
 
-        shape4.x = constrain(shape4.x, 0, width);
-        shape4.y = constrain(shape4.y, 0, height);
+        cheeseIngredient.x = constrain(cheeseIngredient.x, 0, width);
+        cheeseIngredient.y = constrain(cheeseIngredient.y, 0, height);
     }
 }
 
 function slicedCheeseHandleDragging() {
-    if (shape5.isBeingDragged) {
-        shape5.x = mouseX + shape5.offSetX;
-        shape5.y = mouseY + shape5.offSetY;
+    if (slicedCheeseIngredient.isBeingDragged) {
+        slicedCheeseIngredient.x = mouseX + slicedCheeseIngredient.offSetX;
+        slicedCheeseIngredient.y = mouseY + slicedCheeseIngredient.offSetY;
 
-        shape5.x = constrain(shape5.x, 0, width);
-        shape5.y = constrain(shape5.y, 0, height);
+        slicedCheeseIngredient.x = constrain(slicedCheeseIngredient.x, 0, width);
+        slicedCheeseIngredient.y = constrain(slicedCheeseIngredient.y, 0, height);
     }
 }
 
 function butterHandleDragging() {
-    if (shape6.isBeingDragged) {
-        shape6.x = mouseX + shape6.offSetX;
-        shape6.y = mouseY + shape6.offSetY;
+    if (butterIngredient.isBeingDragged) {
+        butterIngredient.x = mouseX + butterIngredient.offSetX;
+        butterIngredient.y = mouseY + butterIngredient.offSetY;
 
-        shape6.x = constrain(shape6.x, 0, width);
-        shape6.y = constrain(shape6.y, 0, height);
+        butterIngredient.x = constrain(butterIngredient.x, 0, width);
+        butterIngredient.y = constrain(butterIngredient.y, 0, height);
     }
 }
 
-// function bowlHandleDragging() {
-//     if (shape6.isBeingDragged) {
-//         shape8.x = mouseX + shape8.offSetX;
-//         shape8.y = mouseY + shape8.offSetY;
-
-//         shape8.x = constrain(shape8.x, 0, width);
-//         shape8.y = constrain(shape8.y, 0, height);
-//     }
-// }
-
 function isOffScreen() {
-    if (shape.x < 0 || shape.x > width || shape.y < 0 || shape.y > height) {
+    if (knifeIngredient.x < 0 || knifeIngredient.x > width || knifeIngredient.y < 0 || knifeIngredient.y > height) {
         return true;
     }
     else {
@@ -316,34 +305,25 @@ function isOffScreen() {
 }
 
 function breadCheckOverlap() {
-    let d = dist(shape.x, shape.y, shape2.x, shape2.y);
-    if (d < shape.size/2 + shape2.size/2) {
-        shape2 = false;
-        shape3.x = width/6;
-        shape3.y = height/2;
+    let d = dist(knifeIngredient.x, knifeIngredient.y, breadIngredient.x, breadIngredient.y);
+    if (d < knifeIngredient.size/2 + breadIngredient.size/2) {
+        breadIngredient = false;
+        toastIngredient.x = width/6;
+        toastIngredient.y = height/2;
     }
 }
 
-// function ingredientsCheckOverlap() {
-//     let d = dist(shape3.x, shape3.y, shape4.x, shape4.y, shape6.x, shape6.y);
-//     if (d < shape.size/2 + shape2.size/2) {
-//         shape2 = false;
-//         shape3.x = width/8;
-//         shape3.y = height/2;
-//     }
-// }
-
 function cheeseCheckOverlap() {
-    let d = dist(shape.x, shape.y, shape4.x, shape4.y);
-    if (d < shape.size/2 + shape4.size/2) {
-        shape4 = false;
-        shape5.x = width/3;
-        shape5.y = height/1.8;
+    let d = dist(knifeIngredient.x, knifeIngredient.y, cheeseIngredient.x, cheeseIngredient.y);
+    if (d < knifeIngredient.size/2 + cheeseIngredient.size/2) {
+        cheeseIngredient = false;
+        slicedCheeseIngredient.x = width/3;
+        slicedCheeseIngredient.y = height/1.8;
     }
 }
 
 function bowlAppear() {
-    if (shape2 === false && shape4 === false) {
+    if (breadIngredient === false && cheeseIngredient === false) {
         push();
         fill(255);
         strokeWeight(2);
@@ -353,38 +333,30 @@ function bowlAppear() {
         textAlign(CENTER, CENTER);
         text("Drag all of the ingredients into the bowl in the correct order to complete your dish!", 515, 200);
         pop();
-        image(bowl, shape8.x, shape8.y, shape8.size);
-        shape8.x = width/1.5;
-        shape8.y = height/2;
+        image(bowl, bowlIngredient.x, bowlIngredient.y, bowlIngredient.size);
+        bowlIngredient.x = width/1.5;
+        bowlIngredient.y = height/2;
     }
 }
 
 function grilledCheeseCheckOverlap() {
-    let shape3Dist = dist(shape3.x, shape3.y, shape8.x, shape8.y);
-    let shape5Dist = dist(shape5.x, shape5.y, shape8.x, shape8.y);
-    let shape6Dist = dist(shape6.x, shape6.y, shape8.x, shape8.y);
-    if (shape3Dist < shape3.size/4 && shape5Dist < shape5.size/4 && shape6Dist < shape6.size/4) {
+    let toastIngredientDist = dist(toastIngredient.x, toastIngredient.y, bowlIngredient.x, bowlIngredient.y);
+    let slicedCheeseIngredientDist = dist(slicedCheeseIngredient.x, slicedCheeseIngredient.y, bowlIngredient.x, bowlIngredient.y);
+    let butterIngredientDist = dist(butterIngredient.x, butterIngredient.y, bowlIngredient.x, bowlIngredient.y);
+    if (toastIngredientDist < toastIngredient.size/4 && slicedCheeseIngredientDist < slicedCheeseIngredient.size/4 && butterIngredientDist < butterIngredient.size/4) {
         state = "food";
     }
-    // let d = dist(shape3.x, shape3.y, shape5.x, shape5.y, shape6.x, shape6.y, shape8.x, shape8.y);
-    // if (d < shape3.size/2 + shape5.size/2 + shape6.size/2 + shape8.size) {
-    //     state = "food";
-    // }
-    // if (shape3.x < width/1.5 && shape3.y < height/1.5 && shape5.x < width/1.5 && shape5.y < height/1.5 && shape6.x < width/1.5 && shape6.y < height/1.5) {
-    //     shape7.x = width/2.2;
-    //     shape7.y = height/2;
-    // }
 }
 
 function food() {
     displayImages();
-    shape = false;
-    shape3 = false;
-    shape5 = false;
-    shape6 = false;
-    shape7.x = width/2.2;
-    shape7.y = height/2;
-    shape8 = false;
+    knifeIngredient = false;
+    toastIngredient = false;
+    slicedCheeseIngredient = false;
+    butterIngredient = false;
+    grilledCheeseIngredient.x = width/2.2;
+    grilledCheeseIngredient.y = height/2;
+    bowlIngredient = false;
     push();
     fill(255);
     strokeWeight(3);
@@ -406,9 +378,9 @@ function food() {
 }
 
 // Mouse related functions
-function mouseIsInsideShape() {
-    let d = dist(mouseX, mouseY, shape.x, shape.y);
-    if (d < shape.size) {
+function mouseIsInsideknifeIngredient() {
+    let d = dist(mouseX, mouseY, knifeIngredient.x, knifeIngredient.y);
+    if (d < knifeIngredient.size) {
         return true;
     }
     else {
@@ -416,9 +388,9 @@ function mouseIsInsideShape() {
     }
 }
 
-function mouseIsInsideShape2() {
-    let d = dist(mouseX, mouseY, shape2.x, shape2.y);
-    if (d < shape2.size) {
+function mouseIsInsidebreadIngredient() {
+    let d = dist(mouseX, mouseY, breadIngredient.x, breadIngredient.y);
+    if (d < breadIngredient.size) {
         return true;
     }
     else {
@@ -426,9 +398,9 @@ function mouseIsInsideShape2() {
     }
 }
 
-function mouseIsInsideShape3() {
-    let d = dist(mouseX, mouseY, shape3.x, shape3.y);
-    if (d < shape3.size) {
+function mouseIsInsidetoastIngredient() {
+    let d = dist(mouseX, mouseY, toastIngredient.x, toastIngredient.y);
+    if (d < toastIngredient.size) {
         return true;
     }
     else {
@@ -436,9 +408,9 @@ function mouseIsInsideShape3() {
     }
 }
 
-function mouseIsInsideShape4() {
-    let d = dist(mouseX, mouseY, shape4.x, shape4.y);
-    if (d < shape4.size) {
+function mouseIsInsidecheeseIngredient() {
+    let d = dist(mouseX, mouseY, cheeseIngredient.x, cheeseIngredient.y);
+    if (d < cheeseIngredient.size) {
         return true;
     }
     else {
@@ -446,9 +418,9 @@ function mouseIsInsideShape4() {
     }
 }
 
-function mouseIsInsideShape5() {
-    let d = dist(mouseX, mouseY, shape5.x, shape5.y);
-    if (d < shape5.size) {
+function mouseIsInsideslicedCheeseIngredient() {
+    let d = dist(mouseX, mouseY, slicedCheeseIngredient.x, slicedCheeseIngredient.y);
+    if (d < slicedCheeseIngredient.size) {
         return true;
     }
     else {
@@ -456,9 +428,9 @@ function mouseIsInsideShape5() {
     }
 }
 
-function mouseIsInsideShape6() {
-    let d = dist(mouseX, mouseY, shape6.x, shape6.y);
-    if (d < shape6.size) {
+function mouseIsInsidebutterIngredient() {
+    let d = dist(mouseX, mouseY, butterIngredient.x, butterIngredient.y);
+    if (d < butterIngredient.size) {
         return true;
     }
     else {
@@ -467,35 +439,35 @@ function mouseIsInsideShape6() {
 }
 
 function mousePressed() {
-    if (shape.active && mouseIsInsideShape()) {
-        shape.isBeingDragged = true;
-        shape.offSetX = shape.x - mouseX;
-        shape.offSetY = shape.y - mouseY;
+    if (knifeIngredient.active && mouseIsInsideknifeIngredient()) {
+        knifeIngredient.isBeingDragged = true;
+        knifeIngredient.offSetX = knifeIngredient.x - mouseX;
+        knifeIngredient.offSetY = knifeIngredient.y - mouseY;
     }
-    if (shape2.active && mouseIsInsideShape2()) {
-        shape2.isBeingDragged = true;
-        shape2.offSetX = shape2.x - mouseX;
-        shape2.offSetY = shape2.y - mouseY;
+    if (breadIngredient.active && mouseIsInsidebreadIngredient()) {
+        breadIngredient.isBeingDragged = true;
+        breadIngredient.offSetX = breadIngredient.x - mouseX;
+        breadIngredient.offSetY = breadIngredient.y - mouseY;
     }
-    if (shape3.active && mouseIsInsideShape3()) {
-        shape3.isBeingDragged = true;
-        shape3.offSetX = shape3.x - mouseX;
-        shape3.offSetY = shape3.y - mouseY;
+    if (toastIngredient.active && mouseIsInsidetoastIngredient()) {
+        toastIngredient.isBeingDragged = true;
+        toastIngredient.offSetX = toastIngredient.x - mouseX;
+        toastIngredient.offSetY = toastIngredient.y - mouseY;
     }
-    if (shape4.active && mouseIsInsideShape4()) {
-        shape4.isBeingDragged = true;
-        shape4.offSetX = shape4.x - mouseX;
-        shape4.offSetY = shape4.y - mouseY;
+    if (cheeseIngredient.active && mouseIsInsidecheeseIngredient()) {
+        cheeseIngredient.isBeingDragged = true;
+        cheeseIngredient.offSetX = cheeseIngredient.x - mouseX;
+        cheeseIngredient.offSetY = cheeseIngredient.y - mouseY;
     }
-    if (shape5.active && mouseIsInsideShape5()) {
-        shape5.isBeingDragged = true;
-        shape5.offSetX = shape5.x - mouseX;
-        shape5.offSetY = shape5.y - mouseY;
+    if (slicedCheeseIngredient.active && mouseIsInsideslicedCheeseIngredient()) {
+        slicedCheeseIngredient.isBeingDragged = true;
+        slicedCheeseIngredient.offSetX = slicedCheeseIngredient.x - mouseX;
+        slicedCheeseIngredient.offSetY = slicedCheeseIngredient.y - mouseY;
     }
-    if (shape6.active && mouseIsInsideShape6()) {
-        shape6.isBeingDragged = true;
-        shape6.offSetX = shape6.x - mouseX;
-        shape6.offSetY = shape6.y - mouseY;
+    if (butterIngredient.active && mouseIsInsidebutterIngredient()) {
+        butterIngredient.isBeingDragged = true;
+        butterIngredient.offSetX = butterIngredient.x - mouseX;
+        butterIngredient.offSetY = butterIngredient.y - mouseY;
     }
 
     if (state === "title") {
@@ -504,34 +476,34 @@ function mousePressed() {
 }
 
 function mouseReleased() {
-    if (shape.isBeingDragged && shape.x > width/2.5) {
-        shape.isBeingDragged = false;
-        shape.offSetX = 0;
-        shape.offSetY = 0;
+    if (knifeIngredient.isBeingDragged && knifeIngredient.x > width/2.5) {
+        knifeIngredient.isBeingDragged = false;
+        knifeIngredient.offSetX = 0;
+        knifeIngredient.offSetY = 0;
     }
-    if (shape2.isBeingDragged && shape2.x > width/8) {
-        shape2.isBeingDragged = false;
-        shape2.offSetX = 0;
-        shape2.offSetY = 0;
+    if (breadIngredient.isBeingDragged && breadIngredient.x > width/8) {
+        breadIngredient.isBeingDragged = false;
+        breadIngredient.offSetX = 0;
+        breadIngredient.offSetY = 0;
     }
-    if (shape3.isBeingDragged && shape3.x > width/6) {
-        shape3.isBeingDragged = false;
-        shape3.offSetX = 0;
-        shape3.offSetY = 0;
+    if (toastIngredient.isBeingDragged && toastIngredient.x > width/6) {
+        toastIngredient.isBeingDragged = false;
+        toastIngredient.offSetX = 0;
+        toastIngredient.offSetY = 0;
     }
-    if (shape4.isBeingDragged && shape4.x > width/3) {
-        shape4.isBeingDragged = false;
-        shape4.offSetX = 0;
-        shape4.offSetY = 0;
+    if (cheeseIngredient.isBeingDragged && cheeseIngredient.x > width/3) {
+        cheeseIngredient.isBeingDragged = false;
+        cheeseIngredient.offSetX = 0;
+        cheeseIngredient.offSetY = 0;
     }
-    if (shape5.isBeingDragged && shape5.x > width/2.5) {
-        shape5.isBeingDragged = false;
-        shape5.offSetX = 0;
-        shape5.offSetY = 0;
+    if (slicedCheeseIngredient.isBeingDragged && slicedCheeseIngredient.x > width/2.5) {
+        slicedCheeseIngredient.isBeingDragged = false;
+        slicedCheeseIngredient.offSetX = 0;
+        slicedCheeseIngredient.offSetY = 0;
     }
-    if (shape6.isBeingDragged && shape6.x > width/2) {
-        shape6.isBeingDragged = false;
-        shape6.offSetX = 0;
-        shape6.offSetY = 0;
+    if (butterIngredient.isBeingDragged && butterIngredient.x > width/2) {
+        butterIngredient.isBeingDragged = false;
+        butterIngredient.offSetX = 0;
+        butterIngredient.offSetY = 0;
     }
 }
