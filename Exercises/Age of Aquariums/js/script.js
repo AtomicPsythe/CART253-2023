@@ -9,13 +9,15 @@
 "use strict";
 
 let school = [];
-let schoolSize = 1;
+let schoolSize = 10;
+let shark;
 
 /**
  * Description of preload
 */
 function preload() {
-
+    // school = loadImage("assets/images/fish.png");
+    // shark = loadImage("assets/images/shark.png");
 }
 
 
@@ -79,7 +81,11 @@ function displayFish(fish) {
     pop();
 }
 
-function mousePressed() {
+function keyPressed() {
     let fish = createFish(mouseX, mouseY);
     school.push(fish);
+}
+
+function mousePressed() {
+    
 }
