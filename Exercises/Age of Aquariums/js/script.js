@@ -20,7 +20,7 @@ let user = {
     size: 100
 }
 
-let colorArray = [100, 125, 150, 175, 200, 225, 250];
+let colorArray = [100, 125, 150, 175, 200, 225];
 
 let state = "title" // can be title, simulation, ending1, ending2
 
@@ -45,6 +45,7 @@ function setup() {
         let fish = createFish(random(0, width), random(0, height));
         school.push(fish);
     }
+    colorArray.push(250);
 }
 
 function createFish(x, y) {
