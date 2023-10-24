@@ -2,12 +2,12 @@
  * Exercise 4: Age of Aquariums
  * Foti Aivaliklis
  * 
- * This is a template. You must fill in the title, author, 
- * and this description to match your project!
+ * An interesting exercise that involves the user avoiding circles that are fish while simultaneously spawning more to encounter different and unique endings!
  */
 
 "use strict";
 
+// defining the variables
 let school = [];
 let schoolSize = 2;
 let fish;
@@ -20,12 +20,13 @@ let user = {
     size: 100
 }
 
+// different fish color options
 let colorArray = [100, 125, 150, 175, 200, 225];
 
 let state = "title" // can be title, simulation, ending1, ending2
 
 /**
- * Description of preload
+ * Defines the image variables
 */
 function preload() {
     shark = loadImage("assets/images/shark.png");
@@ -34,13 +35,13 @@ function preload() {
 
 
 /**
- * Description of setup
+ * Creates the canvas and the two starting fish
 */
 
 function setup() {
     createCanvas(600, 600);
 
-    // create 4 fish positioned randomly
+    // create 2 fish positioned randomly
     for (let i = 0; i < schoolSize; i++) {
         let fish = createFish(random(0, width), random(0, height));
         school.push(fish);
@@ -48,6 +49,7 @@ function setup() {
     colorArray.push(250);
 }
 
+// the function to create the new fish spawned
 function createFish(x, y) {
     let fish = {
         x: x, 
@@ -62,7 +64,7 @@ function createFish(x, y) {
 }
 
 /**
- * Description of draw()
+ * Calls the different state functions to enter different phases of the simulation
 */
 function draw() {
     background(0);
@@ -81,6 +83,7 @@ function draw() {
     }
 }
 
+// the beginning state of the simulation that shows the title and the instructions
 function title() {
     background(ocean);
     push();
@@ -111,6 +114,7 @@ function title() {
     pop();
 }
 
+// the simulation itself
 function simulation() {
     push();
     background(ocean);
@@ -124,6 +128,7 @@ function simulation() {
     checkOverlap();
 }
 
+// the special ending 1 that happens if you overlap the cursor with the circles
 function ending1() {
     background(ocean);
     push();
@@ -140,6 +145,7 @@ function ending1() {
     pop();
 }
 
+// the special ending 2 that happens if you spawn a circle of a certain color
 function ending2() {
     background(ocean);
     push();
@@ -156,10 +162,12 @@ function ending2() {
     pop();
 }
 
+// presents the mouse image as a shark
 function mouseImage() {
     image(shark, mouseX, mouseY, 100, 100);
 }
 
+// how the fish move independently
 function moveFish(fish) {
     let change = random(0, 1);
     if (change < 0.05) {
@@ -174,6 +182,7 @@ function moveFish(fish) {
     fish.y = constrain(fish.y, 0, height);
 }
 
+// checks if the mouse overlaps with the fish
 function checkOverlap(fish) {
     for (let i = 0; i < school.length; i++) {
         let fish = school[i];
@@ -185,6 +194,7 @@ function checkOverlap(fish) {
     }
 }
 
+// displays each new fish spawned
 function displayFish(fish) {
     push();
     noStroke();
@@ -193,17 +203,20 @@ function displayFish(fish) {
     pop();
 }
 
+// checks if a special coloured fish gets spawned
 function specialColor(fish) {
     if (fish.color === 250) {
         state = "ending2";
     }
 }
 
+// keyPressed function for spawning new fish
 function keyPressed() {
     let fish = createFish(random(0, width), random(0, height));
     school.push(fish);
 }
 
+// mousePressed function for transitioning from the title to the simulation state
 function mousePressed() {
     if (state === "title") {
         state = "simulation";
