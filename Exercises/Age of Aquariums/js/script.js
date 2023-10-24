@@ -9,10 +9,18 @@
 "use strict";
 
 let school = [];
-let schoolSize = 5;
+let schoolSize = 2;
 let fish;
 let shark;
 let ocean;
+
+let user = {
+    x: 0, 
+    y: 0,
+    size: 100
+}
+
+let colorArray = [100, 125, 150, 175, 200, 225, 250];
 
 let state = "title" // can be title, simulation, ending1, ending2
 
@@ -44,7 +52,7 @@ function createFish(x, y) {
         x: x, 
         y: y,
         size: 50, 
-        color: random(0, 250),
+        color: random(colorArray),
         vx: 0,
         vy: 0,
         speed: 2
@@ -94,25 +102,27 @@ function simulation() {
     for (let i = 0; i < school.length; i++) {
         moveFish(school[i]);
         displayFish(school[i]);
+        specialColor(school[i]);
     }
     checkOverlap();
 }
 
 function ending1() {
     push();
-    textSize(40);
-    fill(0, 250, 250);
-    textAllign(CENTER, CENTER);
-    text("The peace between the fish and the sharks has ended, this means war!", width/2, height/3);
+    textSize(20);
+    fill(255, 255, 255);
+    textAlign(CENTER, CENTER);
+    text("The peace between the fish and the sharks has ended, \n this means war!", width/2, height/2);
     pop();
 }
 
 function ending2() {
     push();
-    textSize(40);
-    fill(0, 250, 250);
+    textSize(20);
+    fill(255, 255, 255);
     textAlign(CENTER, CENTER);
-    text("Woah, a rare species of fish has spawned!", width/2, height/1.5);
+    text("Woah, a rare species of fish has spawned!", width/2, height/2);
+    pop();
 }
 
 function mouseImage() {
@@ -134,11 +144,14 @@ function moveFish(fish) {
 }
 
 function checkOverlap(fish) {
-    // push();
-    // if(dist(mouseX, mouseY, fish.x, fish.y)>20) {
-    //     state = "ending1";
-    // }
-    // pop();
+    for (let i = 0; i < school.length; i++) {
+        let fish = school[i];
+        let d = dist(mouseX, mouseY, fish.x, fish.y);
+        if (d < (user.size/2) + fish.size/2) {
+            school.splice(i, 1);
+            state = "ending1";
+        }
+    }
 }
 
 function displayFish(fish) {
@@ -155,7 +168,7 @@ function displayFish(fish) {
 }
 
 function specialColor(fish) {
-    if (fill(fish.color) = color(black)) {
+    if (fish.color === 250) {
         state = "ending2";
     }
 }
