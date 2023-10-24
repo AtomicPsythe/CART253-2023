@@ -90,7 +90,7 @@ function simulation() {
     push();
 
     pop();
-    // mouseImage();
+    mouseImage();
     for (let i = 0; i < school.length; i++) {
         moveFish(school[i]);
         displayFish(school[i]);
@@ -113,6 +113,10 @@ function ending2() {
     fill(0, 250, 250);
     textAlign(CENTER, CENTER);
     text("Woah, a rare species of fish has spawned!", width/2, height/1.5);
+}
+
+function mouseImage() {
+    image(shark, mouseX, mouseY, 100, 100);
 }
 
 function moveFish(fish) {
