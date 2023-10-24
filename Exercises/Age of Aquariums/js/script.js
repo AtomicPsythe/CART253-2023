@@ -1,6 +1,6 @@
 /**
  * Exercise 4: Age of Aquariums
- * Author Name
+ * Foti Aivaliklis
  * 
  * This is a template. You must fill in the title, author, 
  * and this description to match your project!
@@ -9,33 +9,25 @@
 "use strict";
 
 let school = [];
-let schoolSize = 10;
+let schoolSize = 5;
+let fish;
 let shark;
+let ocean;
+
 let state = "title" // can be title, simulation, ending1, ending2
 
 /**
  * Description of preload
 */
 function preload() {
-    // school = loadImage("assets/images/fish.png");
-    // shark = loadImage("assets/images/shark.png");
+    fish = loadImage("assets/images/fish.png");
+    shark = loadImage("assets/images/shark.png");
 }
 
 
 /**
  * Description of setup
 */
-function createFish(x, y) {
-    let fish = {
-        x: x, 
-        y: y,
-        size: 50, 
-        vx: 0,
-        vy: 0,
-        speed: 2
-    };
-    return fish;
-}
 
 function setup() {
     createCanvas(600, 600);
@@ -45,15 +37,20 @@ function setup() {
         let fish = createFish(random(0, width), random(0, height));
         school.push(fish);
     }
-
-    for (let i = 0; i < school.length; i++) {
-        moveFish(school[i]);
-        displayFish(school[i]);
-    }
-
-    createFish(5, 10);
 }
 
+function createFish(x, y) {
+    let fish = {
+        x: x, 
+        y: y,
+        size: 50, 
+        color: random(0, 250),
+        vx: 0,
+        vy: 0,
+        speed: 2
+    };
+    return fish;
+}
 
 /**
  * Description of draw()
@@ -90,8 +87,32 @@ function title() {
 }
 
 function simulation() {
-    moveFish();
-    displayFish();
+    push();
+
+    pop();
+    // mouseImage();
+    for (let i = 0; i < school.length; i++) {
+        moveFish(school[i]);
+        displayFish(school[i]);
+    }
+    checkOverlap();
+}
+
+function ending1() {
+    push();
+    textSize(40);
+    fill(0, 250, 250);
+    textAllign(CENTER, CENTER);
+    text("The peace between the fish and the sharks has ended, this means war!", width/2, height/3);
+    pop();
+}
+
+function ending2() {
+    push();
+    textSize(40);
+    fill(0, 250, 250);
+    textAlign(CENTER, CENTER);
+    text("Woah, a rare species of fish has spawned!", width/2, height/1.5);
 }
 
 function moveFish(fish) {
@@ -108,16 +129,35 @@ function moveFish(fish) {
     fish.y = constrain(fish.y, 0, height);
 }
 
+function checkOverlap(fish) {
+    // push();
+    // if(dist(mouseX, mouseY, fish.x, fish.y)>20) {
+    //     state = "ending1";
+    // }
+    // pop();
+}
+
 function displayFish(fish) {
     push();
-    fill(200, 100, 100);
     noStroke();
+    fill(fish.color);
     ellipse(fish.x, fish.y, fish.size);
     pop();
+    // push();
+    // fill(200, 100, 100);
+    // noStroke();
+    // ellipse(fish.x, fish.y, fish.size);
+    // pop();
+}
+
+function specialColor(fish) {
+    if (fill(fish.color) = color(black)) {
+        state = "ending2";
+    }
 }
 
 function keyPressed() {
-    let fish = createFish(mouseX, mouseY);
+    let fish = createFish(random(0, width), random(0, height));
     school.push(fish);
 }
 
