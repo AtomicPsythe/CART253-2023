@@ -1,6 +1,6 @@
 class Flower {
 
-    constructor() {
+    constructor(x, y, size, stemLength, petalColor) {
         this.x = random(0, width);
         this.y = random(0, height);
         this.size = 50;

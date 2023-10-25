@@ -1,9 +1,6 @@
 /**
  * Object Oriented Programming Experiments
  * Foti Aivaliklis
- * 
- * This is a template. You must fill in the title, author, 
- * and this description to match your project!
  */
 
 "use strict";
@@ -12,7 +9,7 @@ let garden = {
     // array that creates the flowers
     flowers: [],
     // how many flowers are made
-    numFlowers: 20, 
+    numFlowers: 100, 
     // creates the grass
     grassColor: {
         r: 120,
@@ -22,14 +19,6 @@ let garden = {
 };
 
 /**
- * Description of preload
-*/
-function preload() {
-
-}
-
-
-/**
  * Description of setup
 */
 function setup() {
@@ -37,6 +26,15 @@ function setup() {
 
     // creates our flowers by counting up to the number of flowers
     for (let i = 0; 1 < garden.numFlowers; i++) {
+        let x = random(0, width);
+        let y = random(0, height);
+        let size = random(50, 80);
+        let stemLength = random(50, 100);
+        let petalColor = {
+            r: random(100, 255),
+            g: random(100, 255),
+            b: random(100, 255)
+        };
         // creates new flower
         let flower = new Flower();
         // adds flowers to the array
@@ -52,6 +50,6 @@ function draw() {
 
     for (let i = 0; i < garden.flowers.length; i++) {
         let flower = garden.flowers[i];
-        displayFlower(flower);
+        flower.display();
     }
 }
