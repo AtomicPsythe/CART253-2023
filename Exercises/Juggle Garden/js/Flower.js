@@ -6,11 +6,11 @@ class Flower {
       this.x = x;
       this.y = y;
       this.size = size;
-      this.maxSize = size; // NEW! To limit growth
+      this.maxSize = size; // To limit growth
       this.stemLength = stemLength;
       this.stemThickness = 10;
       this.petalThickness = 10;
-      this.maxPetalThickness = 10; // NEW! To limit growth
+      this.maxPetalThickness = 10; // To limit growth
       // Color information
       this.stemColor = {
         r: 50,
@@ -26,8 +26,7 @@ class Flower {
       this.alive = true;
     }
   
-    // shrink()
-    // Shrinks the flower
+    // shrink() Shrinks the flower
     shrink() {
       // Choose a random amount to shrink
       let shrinkage = random(0, 0.1);
@@ -42,7 +41,7 @@ class Flower {
       }
     }
   
-    // NEW! pollinate() handles the flower being pollinated (it grows)
+    // pollinate() handles the flower being pollinated (it grows)
     pollinate() {
       // Choose a random amount to grow
       let growth = random(0, 0.5);
@@ -56,8 +55,7 @@ class Flower {
       this.size = constrain(this.size, 0, this.maxSize);
     }
   
-    // display()
-    // Displays the flower on the canvas
+    // display() Displays the flower on the canvas
     display() {
       push();
       // Set the stroke weight for the petals and the stem

@@ -26,19 +26,15 @@ class Bee {
       }
     }
   
-    // tryToPollinate() attempts to pollinate the flower provided as a parameter
-    // If pollination succeeds (the two overlap) then both grow
+    // tryToPollinate() attempts to pollinate the flower provided as a parameter, if pollination succeeds (the two overlap) then both grow
     tryToPollinate(flower) {
       // Calculate the distance between the bee and the flower
       let d = dist(this.x, this.y, flower.x, flower.y);
       // If they overlap...
       if (d < this.size / 2 + flower.size / 2) {
         // The bee should grow
-        // Notice how we can call OTHER METHODS of the Bee by using "this"
-        // So this.grow() calls the grow() method for THIS bee
         this.grow();
         // The flower should react to being pollinated so we call its method
-        // that handles that!
         flower.pollinate();
       }
     }
@@ -51,8 +47,7 @@ class Bee {
       this.size = constrain(this.size, 0, this.maxSize);
     }
   
-    // move() moves the bee by potentially changing direction
-    // and then changing position based on velocity
+    // move() moves the bee by potentially changing direction and then changing position based on velocity
     move() {
       // First check if we should change direction
       let r = random(0, 1);

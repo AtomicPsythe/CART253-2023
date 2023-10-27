@@ -1,6 +1,9 @@
 /**
  * Object Oriented Programming Experiments
  * Foti Aivaliklis
+ * 
+ * description
+ * 
  */
 
 "use strict";
@@ -32,13 +35,17 @@ let sky = {
 let sun = {
   x: 250,
   y: 340,
-  maxHeight: 600,
+  maxHeight: 160,
   minHeight: 0,
+  maxWidth: 600,
+  minWidth: 0,
   size: 80,
   r: 250,
   g: 223,
   b: 107,
 };
+
+let state = "title" // can be title, simulation, ending1, ending2
 
 // setup() creates the canvas and the flowers in the garden
 function setup() {
@@ -48,7 +55,7 @@ function setup() {
   for (let i = 0; i < garden.numFlowers; i++) {
     // Create variables for our arguments for clarity
     let x = random(0, width);
-    let y = random(0, height);
+    let y = random(height/3, height);
     let size = random(50, 80);
     let stemLength = random(50, 100);
     let petalColor = {
@@ -72,18 +79,35 @@ function setup() {
     // Add the bee to the array of bees
     garden.bees.push(bee);
   }
-
 }
 
-// draw()
-// Displays our flowers
+// draw() displays our flowers
 function draw() {
-  // Display the grass
-  // background(garden.grassColor.r, garden.grassColor.g, garden.grassColor.b);
+  // if (state === "title") {
+  //   title();
+  // }
+  // else if (state === "simulation") {
+  //   simulation();
+  // }
+  // else if (state === "ending1") {
+  //   ending1();
+  // }
+  // else if (state === "ending2") {
+  //   ending2();
+  // }
+
+  push();
   background(sky.r, sky.g, sky.b);
   sky.b = mouseY;
-  // sky.b = map(0, 0, 250, mouseY, 0);
+  sky.b = map(mouseY, 0, 160, 160, 0);
+  pop();
+
+  // grass area
+  push();
   noStroke();
+  fill(0, 100, 0);
+  rect(0, height/3, 600, 600);
+  pop();
 
   // Loop through all the flowers in the array and display them
   for (let i = 0; i < garden.flowers.length; i++) {
@@ -105,9 +129,7 @@ function draw() {
       bee.shrink();
       bee.move();
 
-      // NEW! Go through the entire flower array and try to pollinate the flowers!
-      // Note that we use j in our for-loop here because we're already inside
-      // a for-loop using i!
+      // Goes through the entire flower array and try to pollinate the flowers!
       for (let j = 0; j < garden.flowers.length; j++) {
         let flower = garden.flowers[j];
         bee.tryToPollinate(flower);
@@ -119,11 +141,12 @@ function draw() {
   }
 
   // the sun
+  noStroke();
   fill(sun.r, sun.g, sun.b);
   ellipse(sun.x, sun.y, sun.size);
   sun.y = mouseY;
   sun.y = constrain(sun.y, sun.minHeight, sun.maxHeight);
   sun.x = mouseX;
-  sun.x = constrain(sun.x, sun.minHeight, sun.maxHeight);
+  sun.x = constrain(sun.x, sun.minWidth, sun.maxWidth);
 
 }
