@@ -15,12 +15,29 @@ let garden = {
   bees: [],
   // How many bees in the garden
   numBees: 5,
-  // The color of the grass (background)
+  // The color of the grass 
   grassColor: {
     r: 120,
     g: 180,
     b: 120
   }
+};
+
+let sky = {
+  r: 159,
+  g: 224, 
+  b: 252
+};
+
+let sun = {
+  x: 250,
+  y: 340,
+  maxHeight: 600,
+  minHeight: 0,
+  size: 80,
+  r: 250,
+  g: 223,
+  b: 107,
 };
 
 // setup() creates the canvas and the flowers in the garden
@@ -62,7 +79,11 @@ function setup() {
 // Displays our flowers
 function draw() {
   // Display the grass
-  background(garden.grassColor.r, garden.grassColor.g, garden.grassColor.b);
+  // background(garden.grassColor.r, garden.grassColor.g, garden.grassColor.b);
+  background(sky.r, sky.g, sky.b);
+  sky.b = mouseY;
+  // sky.b = map(0, 0, 250, mouseY, 0);
+  noStroke();
 
   // Loop through all the flowers in the array and display them
   for (let i = 0; i < garden.flowers.length; i++) {
@@ -96,5 +117,13 @@ function draw() {
       bee.display();
     }
   }
+
+  // the sun
+  fill(sun.r, sun.g, sun.b);
+  ellipse(sun.x, sun.y, sun.size);
+  sun.y = mouseY;
+  sun.y = constrain(sun.y, sun.minHeight, sun.maxHeight);
+  sun.x = mouseX;
+  sun.x = constrain(sun.x, sun.minHeight, sun.maxHeight);
 
 }
