@@ -3,9 +3,9 @@ class Bee {
     constructor(x, y) {
       this.x = x;
       this.y = y;
-      this.size = 40;
-      this.minSize = 10; // If we get smaller than this minimum we're dead
-      this.maxSize = 40; // We can't get bigger than this
+      this.size = 60;
+      this.minSize = 5; // If we get smaller than this minimum we're dead
+      this.maxSize = 60; // We can't get bigger than this
       this.vx = 0;
       this.vy = 0;
       this.speed = 5;

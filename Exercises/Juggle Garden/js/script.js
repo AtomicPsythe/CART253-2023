@@ -13,11 +13,11 @@ let garden = {
   // An array to store the individual flowers
   flowers: [],
   // How many flowers in the garden
-  numFlowers: 5,
+  numFlowers: 10,
   // An array to our the bees
   bees: [],
   // How many bees in the garden
-  numBees: 5,
+  numBees: 2,
   // The color of the grass 
   grassColor: {
     r: 120,
@@ -33,20 +33,16 @@ let sky = {
 };
 
 let sun = {
-  x: 250,
-  y: 340,
-  maxHeight: 160,
-  minHeight: 0,
-  maxWidth: 600,
-  minWidth: 0,
-  size: 80,
+  x: 50,
+  y: 50,
+  size: 150,
   r: 250,
   g: 223,
   b: 107,
 };
 
-let cloudsInSky = [];
-let timer = 0;
+let clouds = [];
+let numClouds = 10;
 
 let state = "title" // can be title, simulation, ending1, ending2
 
@@ -83,8 +79,9 @@ function setup() {
     garden.bees.push(bee);
   }
 
-  cloudsInSky.push(new Cloud());
-  console.log(cloudsInSky);
+  for (let i = 0; i < numClouds; i++) {
+    clouds.push(new Cloud(random(width), height/10, random(60, 90)));
+  }
 }
 
 // draw() displays our flowers
@@ -136,9 +133,16 @@ function title() {
 function simulation() {
   push();
   background(sky.r, sky.g, sky.b);
-  // sky.b = mouseY;
-  sky.b = map(mouseY, 0, 160, 160, 0);
-  pop();
+
+  for (let cloud of clouds) {
+    cloud.move();
+    cloud.display();
+  }
+
+  // the sun
+  noStroke();
+  fill(sun.r, sun.g, sun.b);
+  ellipse(sun.x, sun.y, sun.size);
 
   // grass area
   push();
@@ -156,6 +160,9 @@ function simulation() {
       flower.shrink();
       flower.display();
     }
+    else {
+      state = "ending1";
+    }
   }
 
   // Loop through all the bees in the array and display them
@@ -172,27 +179,18 @@ function simulation() {
         let flower = garden.flowers[j];
         bee.tryToPollinate(flower);
       }
-
       // Display the bee
       bee.display();
     }
+    else {
+      state = "ending2";
+    }
   }
-
-  // the sun
-  noStroke();
-  fill(sun.r, sun.g, sun.b);
-  ellipse(sun.x, sun.y, sun.size);
-  sun.y = mouseY;
-  sun.y = constrain(sun.y, sun.minHeight, sun.maxHeight);
-  sun.x = mouseX;
-  sun.x = constrain(sun.x, sun.minWidth, sun.maxWidth);
-
-  deadFlowers();
 }
 
 // the special ending 1 that happens if you overlap the cursor with the circles
 function ending1() {
-  background(ocean);
+  background(240, 230, 140);
   push();
   fill(255);
   stroke(0, 0, 139);
@@ -203,15 +201,24 @@ function ending1() {
   textSize(20);
   fill(179, 98, 0);
   textAlign(CENTER, CENTER);
-  text("The peace between the fish and the sharks has ended, \n this means war! AAAAAAAAAAAAAA", width/2, height/2);
+  text("Oh no! All of the flowers have died. \n Looks like the bees took over the garden.", width/2, height/2);
   pop();
 }
 
-
-function deadFlowers() {
-  if (Flower === 0) {
-    state = "ending1"
-  }
+function ending2() {
+  background(240, 230, 140);
+  push();
+  fill(255);
+  stroke(0, 0, 139);
+  strokeWeight(5);
+  rect(40, 265, 520, 70);
+  pop();
+  push();
+  textSize(20);
+  fill(179, 98, 0);
+  textAlign(CENTER, CENTER);
+  text("The flowers have managed to outlive the bees! \n But for how long...? And at what cost...?", width/2, height/2);
+  pop();
 }
 
 // keyPressed function for spawning new flower
@@ -237,5 +244,14 @@ function keyPressed() {
 function mousePressed() {
   if (state === "title") {
       state = "simulation";
+  }
+  for (let i = 0; i < garden.numBees; i++) {
+    // Create variables for our arguments for clarity
+    let x = random(0, width);
+    let y = random(0, height);
+    // Create a new bee using the arguments
+    let bee = new Bee(x, y);
+    // Add the bee to the array of bees
+    garden.bees.push(bee);
   }
 }
