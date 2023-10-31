@@ -1,8 +1,8 @@
 /**
  * Object Oriented Programming Experiments
- * Student Name
+ * Foti Aivaliklis
  * 
- * description
+ * A garden survival type simulation that involves the user using the keyboard keys and or the mouse to spawn either more bees or more flowers to test and see which of the two will survive the longest in the garden.
  * 
  */
 
@@ -26,12 +26,14 @@ let garden = {
   }
 };
 
+// the sky
 let sky = {
   r: 159,
   g: 224, 
   b: 252
 };
 
+// the sun
 let sun = {
   x: 50,
   y: 50,
@@ -41,9 +43,11 @@ let sun = {
   b: 107,
 };
 
+// cloud variables
 let clouds = [];
 let numClouds = 10;
 
+// defining the state
 let state = "title" // can be title, simulation, ending1, ending2
 
 // setup() creates the canvas and the flowers in the garden
@@ -79,12 +83,13 @@ function setup() {
     garden.bees.push(bee);
   }
 
+  // creates the animation for the clouds
   for (let i = 0; i < numClouds; i++) {
     clouds.push(new Cloud(random(width), height/10, random(60, 90)));
   }
 }
 
-// draw() displays our flowers
+// calls to the different states
 function draw() {
   if (state === "title") {
     title();
@@ -100,6 +105,7 @@ function draw() {
   }
 }
 
+// title screen - presents the title and instructions
 function title() {
   background(240, 230, 140);
   push();
@@ -126,14 +132,16 @@ function title() {
   textAlign(CENTER, CENTER);
   text("Click the screen to begin the simulation!", width/2, height/2);
   textSize(15);
-  text("As the shark, your goal is to avoid the fish circles, \n while using the keyboard keys to spawn more to not disrupt \n the relationship between both groups. If you do... special things will happen...!", width/2, height/1.7);
+  text("Click the mouse to spawn more bees or \n click the keyboard's keys to create more flowers to challenge \n and see which one will die out first!", width/2, height/1.7);
   pop();
 }
 
+// the actual simulation - creates the flowers, bees, clouds, and background
 function simulation() {
-  push();
+  // the sky
   background(sky.r, sky.g, sky.b);
 
+  // the clouds
   for (let cloud of clouds) {
     cloud.move();
     cloud.display();
@@ -188,7 +196,7 @@ function simulation() {
   }
 }
 
-// the special ending 1 that happens if you overlap the cursor with the circles
+// the special ending 1 that happens if all of the flowers have died before all of the bees have died
 function ending1() {
   background(240, 230, 140);
   push();
@@ -205,6 +213,7 @@ function ending1() {
   pop();
 }
 
+// the special ending 2 that happens if all of the bees have died before all of the flowers have died
 function ending2() {
   background(240, 230, 140);
   push();
@@ -240,7 +249,7 @@ function keyPressed() {
     garden.flowers.push(flower);
   }
 }
-// mousePressed function for transitioning from the title to the simulation state
+// mousePressed function for transitioning from the title to the simulation state and for spawning new bees
 function mousePressed() {
   if (state === "title") {
       state = "simulation";
