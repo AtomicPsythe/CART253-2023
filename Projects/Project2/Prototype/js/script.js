@@ -12,6 +12,7 @@ let state = "title" // can be title, simulation, ending1, ending2
 let scene = 0 // variable for which scene you are at within the visual novel
 let charName = " " // variable for the speaking character's name
 let txt = " " // variable for the text (dialogue, narration)
+let startButton; // variable for the start button
 
 let sceneDialogue = [{
   charName: "Protagonist",
@@ -19,11 +20,17 @@ let sceneDialogue = [{
 }, {
   charName: "Character 2",
   txt: "Are you sure this is a test...?"
+}, {
+  charName: "Protagonist",
+  txt: "SEE, I told you this was a test!" // choice1A
+}, {
+  charName: "Protagonist",
+  txt: "WHAT?? How is this not a test? Blasphemous I tell you, BLASPHEMOUS!" // choice1B
 }];
 
 // strings for the choice options
-let choice1A = " ";
-let choice1B = " ";
+let choice1A = "Yes this is a test";
+let choice1B = "No this is not a test";
 
 // image variables
 let bedroom;
@@ -40,12 +47,14 @@ function preload() {
  * Description of setup
 */
 function setup() {
+  // creates the canvas
   createCanvas(1000, 600);
+  // creates the button
   button();
 }
 
 function button() {
-  let startButton = { // the button the player presses to start the simulation
+  startButton = { // the button the player presses to start the simulation
     x: 360,
     y: 350,
     size: 100,
@@ -56,11 +65,10 @@ function button() {
   startButton.position(700, 350);
   startButton.size(150);
   startButton.mousePressed(reset)
-  // startButton.hide();
 }
 
 function reset() {
-  let startButton;
+  simulation();
   state = "simulation";
   startButton.hide();
 }
@@ -110,14 +118,14 @@ function title() {
 }
 
 function simulation() {
+  // scene = 1;
   background(132, 100, 98);
-  text("test", width/2, height/2);
   mentalHealthMeter();
-  // storyText();
+  storyText();
 }
 
 function mentalHealthMeter() {
-  // initial meter itself
+  // initial mental health meter itself
   push();
   background(bedroom);
   rectMode(CORNER);
@@ -126,11 +134,33 @@ function mentalHealthMeter() {
   pop();
 }
 
-// function storyText() {
-//   //Displaying the text by using the arrays strings from earlier and also wrapping it by word so it doesn't overflow in case the lines are too long.
-//   fill(0);
-//   textSize(30);
-//   textWrap(WORD);
-//   text(sceneDialogue[scene].txt, 100, 520, 1125, 242);
-//   text(sceneDialogue[scene].name, 100, 450, 300);
-// }
+function storyText() {
+  // displays both the text box for the character's dialogue and the box for the speaking character's name
+  push();
+  fill(255);
+  stroke(0);
+  strokeWeight(2);
+  rect(20, 440, 960, 150);
+  pop();
+  push();
+  fill(255);
+  stroke(0);
+  strokeWeight(2);
+  rect(20, 385, 280, 50);
+  
+  // displays the text and the speaking character's name
+  push();
+  fill(0);
+  textSize(30);
+  noStroke();
+  textWrap(WORD);
+  text(sceneDialogue[scene].txt, 40, 460, 1125, 242);
+  text(sceneDialogue[scene].charName, 40, 397, 300);
+  pop();
+}
+
+function mousePressed() {
+  if ((mouseX > 20) && (mouseY < 385) && (mouseX > 280) && (mouseY < 50))  {
+    scene = 2;
+  }
+}
