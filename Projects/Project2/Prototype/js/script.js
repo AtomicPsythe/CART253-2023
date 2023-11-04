@@ -16,16 +16,16 @@ let startButton; // variable for the start button
 
 let sceneDialogue = [{
   charName: "Protagonist",
-  txt: "Test test test"
+  txt: "Test test test" // scene 0
 }, {
   charName: "Character 2",
-  txt: "Are you sure this is a test...?"
+  txt: "Are you sure this is a test...?" // scene 1
 }, {
   charName: "Protagonist",
-  txt: "SEE, I told you this was a test!" // choice1A
+  txt: "SEE, I told you this was a test!" // scene 2, choice1A
 }, {
   charName: "Protagonist",
-  txt: "WHAT?? How is this not a test? Blasphemous I tell you, BLASPHEMOUS!" // choice1B
+  txt: "WHAT?? How is this not a test? Blasphemous I tell you, BLASPHEMOUS!" // scene 3, choice1B
 }];
 
 // strings for the choice options
@@ -34,12 +34,23 @@ let choice1B = "No this is not a test";
 
 // image variables
 let bedroom;
+let nextButton;
+let protagNormal;
+let protagHappy;
+let protagAngry;
+
+// variable for the endings (mental health meter)
+let mentalMeter;
 
 /**
  * Description of preload
 */
 function preload() {
   bedroom = loadImage("assets/images/bedroom.png");
+  nextButton = loadImage("assets/images/next_button.jpg");
+  protagNormal = loadImage("assets/images/protag_normal.png");
+  protagHappy = loadImage("assets/images/protag_happy.png");
+  protagAngry = loadImage("assets/images/protag_angry.png");
 }
 
 
@@ -83,7 +94,11 @@ function draw() {
       tutorial();
     } else if (state === `simulation`) {
       simulation();
-  }
+    } else if (state === "goodEnding") {
+      goodEnding();
+    } else if (state === "badEnding") {
+      badEnding();
+    }
 }
 
 function title() {
@@ -118,10 +133,11 @@ function title() {
 }
 
 function simulation() {
-  // scene = 1;
   background(132, 100, 98);
+  image(protagNormal, 200, 200, 200, 200);
   mentalHealthMeter();
   storyText();
+  choiceOptions();
 }
 
 function mentalHealthMeter() {
@@ -132,6 +148,34 @@ function mentalHealthMeter() {
   strokeWeight(2)
   rect(20, 10, 500, 40);
   pop();
+  push();
+  fill(173, 255, 47);
+  rectMode(CORNER);
+  strokeWeight(2)
+  rect(20, 10, 250, 40);
+  pop();
+
+  // if one good choice is made
+  if (mentalMeter == 1) {
+    push();
+    fill(173, 255, 47);
+    rectMode(CORNER);
+    strokeWeight(2)
+    rect(20, 10, 270, 40);
+    pop();
+    goodEnding();
+  }
+
+  // if one bad choice is made
+  if (mentalMeter == -1) {
+    push();
+    fill(173, 255, 47);
+    rectMode(CORNER);
+    strokeWeight(2)
+    rect(20, 10, 230, 40);
+    pop();
+    badEnding();
+  }
 }
 
 function storyText() {
@@ -147,11 +191,14 @@ function storyText() {
   stroke(0);
   strokeWeight(2);
   rect(20, 385, 280, 50);
+
+  // displays the arrow you click to continue in the story
+  image(nextButton, 890, 470, 80, 110);
   
   // displays the text and the speaking character's name
   push();
   fill(0);
-  textSize(30);
+  textSize(20);
   noStroke();
   textWrap(WORD);
   text(sceneDialogue[scene].txt, 40, 460, 1125, 242);
@@ -159,8 +206,57 @@ function storyText() {
   pop();
 }
 
-function mousePressed() {
-  if ((mouseX > 20) && (mouseY < 385) && (mouseX > 280) && (mouseY < 50))  {
-    scene = 2;
+function choiceOptions() {
+  if (scene === 1) {
+    // choice boxes
+    push();
+    fill(255);
+    rectMode(CENTER);
+    strokeWeight(2);
+    rect(width/2, 170, 350, 55);
+    rect(width/2, 300, 350, 55);
+    pop();
+
+    // choice options themselves
+    push();
+    fill(0);
+    textAlign(CENTER);
+    textSize(18);
+    noStroke();
+    text(choice1A, width/2, 175);
+    text(choice1B, width/2, 305);
+    pop();
   }
+}
+
+function goodEnding() {
+  background(255, 255, 0);
+  noLoop();
+}
+
+function badEnding() {
+  background(128, 0, 0);
+  noLoop();
+}
+
+function mousePressed() {
+  if (mouseX >= 890 && mouseX <= 990 && mouseY >= 470 && mouseY <= 570 && scene !== 1) {
+    scene += 1;
+  }  
+
+  if ((mouseX > 890) && (mouseY < 470) && (mouseX < 990) && (mouseY > 570) && scene == 0)  {
+    scene += 1;
+  }
+
+  if (mouseX >= 440 && mouseX <= 830 && mouseY >= 170 && mouseY <= 200 && scene == 1) {
+    scene = 2;
+    mentalMeter = 1;
+    image(protagHappy, width/2);
+  }
+
+  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 1) {
+    scene = 3;
+    mentalMeter = -1;
+    image(protagAngry, width/2);
+  } 
 }
