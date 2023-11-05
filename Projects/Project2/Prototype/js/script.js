@@ -38,12 +38,13 @@ let nextButton;
 let protagNormal;
 let protagHappy;
 let protagAngry;
+let titleScreenImage;
 
 // variable for the endings (mental health meter)
 let mentalMeter;
 
 /**
- * Description of preload
+ * Preload defines the assets' variables that will be used for the prototype (character images, backgrounds, UI assets)
 */
 function preload() {
   bedroom = loadImage("assets/images/bedroom.png");
@@ -51,6 +52,7 @@ function preload() {
   protagNormal = loadImage("assets/images/protag_normal.png");
   protagHappy = loadImage("assets/images/protag_happy.png");
   protagAngry = loadImage("assets/images/protag_angry.png");
+  titleScreenImage = loadImage("assets/images/title.jpg");
 }
 
 
@@ -102,7 +104,8 @@ function draw() {
 }
 
 function title() {
-  background(173, 216, 230)
+  // background(173, 216, 230)
+  background(titleScreenImage);
   // title 
   push();
   fill(255);
@@ -134,10 +137,17 @@ function title() {
 
 function simulation() {
   background(132, 100, 98);
-  image(protagNormal, 200, 200, 200, 200);
+  images();
   mentalHealthMeter();
   storyText();
   choiceOptions();
+}
+
+function images() {
+  image(protagHappy, 340, 100, 340, 360);
+  // if (scene != 2 && scene != 3) {
+  //   image(protagHappy, 340, 100, 340, 360);
+  // }
 }
 
 function mentalHealthMeter() {
@@ -230,12 +240,13 @@ function choiceOptions() {
 }
 
 function goodEnding() {
-  background(255, 255, 0);
+  // background(255, 255, 0);
+  image(protagHappy, 340, 100, 340, 360);
   noLoop();
 }
 
 function badEnding() {
-  background(128, 0, 0);
+  // background(128, 0, 0);
   noLoop();
 }
 
@@ -248,15 +259,15 @@ function mousePressed() {
     scene += 1;
   }
 
-  if (mouseX >= 440 && mouseX <= 830 && mouseY >= 170 && mouseY <= 200 && scene == 1) {
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 1) {
     scene = 2;
     mentalMeter = 1;
-    image(protagHappy, width/2);
+    image(protagHappy, 340, 100, 340, 360);
   }
 
   if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 1) {
     scene = 3;
     mentalMeter = -1;
-    image(protagAngry, width/2);
+    image(protagAngry, 340, 100, 340, 360);
   } 
 }
