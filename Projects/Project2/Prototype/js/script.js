@@ -251,14 +251,14 @@ function choiceOptions() {
 // function for the good ending (if the mental health meter is > 50%)
 function goodEnding() {
   // background(255, 255, 0);
-  image(protagHappy, 340, 100, 340, 360);
+  // image(protagHappy, 340, 100, 340, 360);
   noLoop();
 }
 
 // function for the bad ending (if the mental health meter is < 50%)
 function badEnding() {
   // background(128, 0, 0);
-  image(protagAngry, 340, 100, 340, 360);
+  // image(protagAngry, 340, 100, 340, 360);
   noLoop();
 }
 
@@ -274,12 +274,10 @@ function mousePressed() {
   if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 1) {
     scene = 2;
     mentalMeter = 1;
-    image(protagHappy, 340, 100, 340, 360);
   }
 
   if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 1) {
     scene = 3;
     mentalMeter = -1;
-    image(protagAngry, 340, 100, 340, 360);
   } 
 }
