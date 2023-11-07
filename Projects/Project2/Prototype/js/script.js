@@ -1,19 +1,23 @@
 /**
  * Project 2 - Prototype
- * Author Name
+ * Foti Aivaliklis
  * 
- * This is a template. You must fill in the title, author, 
- * and this description to match your project!
+ * The following simulation is a mental health visual novel game prototype that tackles the early stages of setting up the base code for the game.
+ * This includescreating the title screen with an interactable button, establishing how to advance from one scene to another with dialogue and character sprites present, 
+ * displaying the increasing and decreasing mental health bar on the top left that will vary depending on the choices the player makes and having unique choice options 
+ * displayed on the screen for the player to choose, which progresses into different story paths resulting into different endings. 
  */
 
 "use strict";
 
+// variables for the state, scenes, charcter names, dialogue/narration text, and the start button
 let state = "title" // can be title, simulation, ending1, ending2
 let scene = 0 // variable for which scene you are at within the visual novel
 let charName = " " // variable for the speaking character's name
 let txt = " " // variable for the text (dialogue, narration)
 let startButton; // variable for the start button
 
+// variable and sets up the text being displayed on the screen for each scene
 let sceneDialogue = [{
   charName: "Protagonist",
   txt: "Test test test" // scene 0
@@ -57,7 +61,7 @@ function preload() {
 
 
 /**
- * Description of setup
+ * Creates the canvas and calls to the button function where the initial start button is created
 */
 function setup() {
   // creates the canvas
@@ -87,7 +91,7 @@ function reset() {
 }
 
 /**
- * Description of draw()
+ * Checks for which state is active and calls to that state's respective function to display all of its elements
 */
 function draw() {
   if (state === `title`) {
@@ -103,8 +107,8 @@ function draw() {
     }
 }
 
+// function that displays all of the elements on the initial title screen
 function title() {
-  // background(173, 216, 230)
   background(titleScreenImage);
   // title 
   push();
@@ -135,21 +139,24 @@ function title() {
   pop();
 }
 
+// the function that calls to all of the elements for the main game itself
 function simulation() {
-  background(132, 100, 98);
   images();
+  background(132, 100, 98);
   mentalHealthMeter();
   storyText();
   choiceOptions();
 }
 
+// displays all of the necessary images including the changing character sprites and backgrounds
 function images() {
-  image(protagHappy, 340, 100, 340, 360);
-  // if (scene != 2 && scene != 3) {
-  //   image(protagHappy, 340, 100, 340, 360);
-  // }
+  // image(protagHappy, 340, 100, 340, 360);
+  if (scene !== 2 && scene !== 3) {
+    image(protagHappy, 340, 100, 340, 360);
+  }
 }
 
+// creates and displays the mental health meter on the top left of the screen
 function mentalHealthMeter() {
   // initial mental health meter itself
   push();
@@ -188,6 +195,7 @@ function mentalHealthMeter() {
   }
 }
 
+// displays the speaking character's name, the character dialogue or narration, and the next button to progress further into the game
 function storyText() {
   // displays both the text box for the character's dialogue and the box for the speaking character's name
   push();
@@ -216,6 +224,7 @@ function storyText() {
   pop();
 }
 
+// displays the choice options and the choice boxes during the appropriate scenes 
 function choiceOptions() {
   if (scene === 1) {
     // choice boxes
@@ -239,14 +248,17 @@ function choiceOptions() {
   }
 }
 
+// function for the good ending (if the mental health meter is > 50%)
 function goodEnding() {
   // background(255, 255, 0);
   image(protagHappy, 340, 100, 340, 360);
   noLoop();
 }
 
+// function for the bad ending (if the mental health meter is < 50%)
 function badEnding() {
   // background(128, 0, 0);
+  image(protagAngry, 340, 100, 340, 360);
   noLoop();
 }
 
