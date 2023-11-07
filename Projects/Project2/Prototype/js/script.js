@@ -3,7 +3,7 @@
  * Foti Aivaliklis
  * 
  * The following simulation is a mental health visual novel game prototype that tackles the early stages of setting up the base code for the game.
- * This includescreating the title screen with an interactable button, establishing how to advance from one scene to another with dialogue and character sprites present, 
+ * This includes creating the title screen with an interactable button, establishing how to advance from one scene to another with dialogue and character sprites present, 
  * displaying the increasing and decreasing mental health bar on the top left that will vary depending on the choices the player makes and having unique choice options 
  * displayed on the screen for the player to choose, which progresses into different story paths resulting into different endings. 
  */
@@ -45,7 +45,7 @@ let protagAngry;
 let titleScreenImage;
 
 // variable for the endings (mental health meter)
-let mentalMeter;
+let mentalMeter = 0;
 
 /**
  * Preload defines the assets' variables that will be used for the prototype (character images, backgrounds, UI assets)
@@ -66,24 +66,20 @@ function preload() {
 function setup() {
   // creates the canvas
   createCanvas(1000, 600);
-  // creates the button
+  // calls to the function that creates the start button
   button();
 }
 
+// creates the start button on the title screen that the player presses to start the simulation
 function button() {
-  startButton = { // the button the player presses to start the simulation
-    x: 360,
-    y: 350,
-    size: 100,
-    height: 200, 
-    width: 200
-  } 
   startButton = createButton("Start");
-  startButton.position(700, 350);
-  startButton.size(150);
+  startButton.size(200, 40);
+  startButton.position(windowWidth/2 - startButton.width/2, windowHeight/2 - startButton.height/2);
+  console.log(startButton.width);
   startButton.mousePressed(reset)
 }
 
+// removes the button once it is clicked and transitions to the simulation state
 function reset() {
   simulation();
   state = "simulation";
@@ -123,6 +119,7 @@ function title() {
   textAlign(CENTER, CENTER);
   text("Visual Novel Prototype", width/2, height/4.5);
   pop();
+
   // instructions
   push();
   fill(255);
@@ -135,14 +132,13 @@ function title() {
   fill(179, 98, 0);
   textAlign(CENTER, CENTER);
   textSize(14);
-  text("The following visual novel is a mental health simulator where the player progresses \n through their school day, but are presented with two choices during certain scenes that \n will change the course of the story, which will affect the mental health meter at the \n top right of the screen that presents the character's increasing or decreasing mental health \n based on the choices made by you the player. \n So have fun, enjoy the game, and choose wisely!", width/1.99, height/1.35);
+  text("The following visual novel is a mental health simulator where the player progresses \n through their school day, but are presented with two choices during certain scenes that \n will change the course of the story. These choices will affect the mental health meter at the \n top right of the screen that presents the character's increasing or decreasing mental health \n based on the choices made by you the player. \n So have fun, enjoy the game, and choose wisely!", width/1.99, height/1.35);
   pop();
 }
 
 // the function that calls to all of the elements for the main game itself
 function simulation() {
   images();
-  background(132, 100, 98);
   mentalHealthMeter();
   storyText();
   choiceOptions();
@@ -150,8 +146,16 @@ function simulation() {
 
 // displays all of the necessary images including the changing character sprites and backgrounds
 function images() {
-  // image(protagHappy, 340, 100, 340, 360);
+  if (scene == 0 || scene == 1 || scene == 2 || scene == 3) {
+    background(bedroom);
+  }
   if (scene !== 2 && scene !== 3) {
+    image(protagNormal, 340, 100, 340, 360);
+  }
+  if (scene !== 0 && scene !== 1 && scene !== 2) {
+    image(protagAngry, 340, 100, 340, 360);
+  }
+  if (scene !== 0 && scene !== 1 && scene !== 3) {
     image(protagHappy, 340, 100, 340, 360);
   }
 }
@@ -160,17 +164,19 @@ function images() {
 function mentalHealthMeter() {
   // initial mental health meter itself
   push();
-  background(bedroom);
   rectMode(CORNER);
   strokeWeight(2)
   rect(20, 10, 500, 40);
   pop();
-  push();
-  fill(173, 255, 47);
-  rectMode(CORNER);
-  strokeWeight(2)
-  rect(20, 10, 250, 40);
-  pop();
+
+  if (mentalMeter == 0) {
+    push();
+    fill(173, 255, 47);
+    rectMode(CORNER);
+    strokeWeight(2)
+    rect(20, 10, 250, 40);
+    pop();
+  }
 
   // if one good choice is made
   if (mentalMeter == 1) {
@@ -250,15 +256,11 @@ function choiceOptions() {
 
 // function for the good ending (if the mental health meter is > 50%)
 function goodEnding() {
-  // background(255, 255, 0);
-  // image(protagHappy, 340, 100, 340, 360);
   noLoop();
 }
 
 // function for the bad ending (if the mental health meter is < 50%)
 function badEnding() {
-  // background(128, 0, 0);
-  // image(protagAngry, 340, 100, 340, 360);
   noLoop();
 }
 
