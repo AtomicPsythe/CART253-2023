@@ -20,7 +20,7 @@ let startButton; // variable for the start button
 // variable and sets up the text being displayed on the screen for each scene
 let sceneDialogue = [{
   charName: "Protagonist",
-  txt: "Test test test" // scene 0
+  txt: "Test test test..." // scene 0
 }, {
   charName: "Character 2",
   txt: "Are you sure this is a test...?" // scene 1
@@ -33,8 +33,8 @@ let sceneDialogue = [{
 }];
 
 // strings for the choice options
-let choice1A = "Yes this is a test";
-let choice1B = "No this is not a test";
+let choice1A = "Yes, this is a test";
+let choice1B = "No, this is not a test";
 
 // image variables
 let bedroom;
@@ -42,6 +42,9 @@ let nextButton;
 let protagNormal;
 let protagHappy;
 let protagAngry;
+let character2Normal;
+let character2Surprised;
+let character2Smirk;
 let titleScreenImage;
 
 // variable for the endings (mental health meter)
@@ -56,6 +59,9 @@ function preload() {
   protagNormal = loadImage("assets/images/protag_normal.png");
   protagHappy = loadImage("assets/images/protag_happy.png");
   protagAngry = loadImage("assets/images/protag_angry.png");
+  character2Normal = loadImage("assets/images/character2_normal.png");
+  character2Surprised = loadImage("assets/images/character2_surprised.png");
+  character2Smirk = loadImage("assets/images/character2_smirk.png");
   titleScreenImage = loadImage("assets/images/title.jpg");
 }
 
@@ -150,25 +156,31 @@ function images() {
     background(bedroom);
   }
   if (scene !== 2 && scene !== 3) {
-    image(protagNormal, 340, 100, 340, 360);
+    image(protagNormal, 150, 100, 340, 360);
+  }
+  if (scene == 1) {
+    image(character2Normal, 500, 100, 340, 360);
   }
   if (scene !== 0 && scene !== 1 && scene !== 2) {
-    image(protagAngry, 340, 100, 340, 360);
+    image(protagAngry, 150, 100, 340, 360);
+    image(character2Smirk, 500, 100, 340, 360);
   }
   if (scene !== 0 && scene !== 1 && scene !== 3) {
-    image(protagHappy, 340, 100, 340, 360);
+    image(protagHappy, 150, 100, 340, 360);
+    image(character2Surprised, 500, 100, 340, 360);
   }
 }
 
 // creates and displays the mental health meter on the top left of the screen
 function mentalHealthMeter() {
-  // initial mental health meter itself
+  // the mental health meter itself
   push();
   rectMode(CORNER);
   strokeWeight(2)
   rect(20, 10, 500, 40);
   pop();
 
+  // the mental health meter at its initial 50%
   if (mentalMeter == 0) {
     push();
     fill(173, 255, 47);
@@ -235,7 +247,7 @@ function choiceOptions() {
   if (scene === 1) {
     // choice boxes
     push();
-    fill(255);
+    fill(255, 255, 255, 180);
     rectMode(CENTER);
     strokeWeight(2);
     rect(width/2, 170, 350, 55);
