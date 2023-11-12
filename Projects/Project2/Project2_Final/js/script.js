@@ -108,172 +108,172 @@ let sceneDialogue = [{
 }, {
   // choice2A
   charName: "Sebastian",
-  txt: " Mhm, that sounds like the smart thing to do, I assume then that you have a good amount of work to complete right?"
+  txt: " Mhm, that sounds like the smart thing to do, I assume then that you have a good amount of work to complete right?" // scene 28
 }, {
   charName: "Cleo",
-  txt: "Yea, missing classes a lot earlier this week doesn’t help with that either let’s just say that…"
+  txt: "Yea, missing classes a lot earlier this week doesn’t help with that either let’s just say that…" // scene 29
 }, {
   charName: "Sebastian",
-  txt: "I can only imagine. But, I won’t keep you hanging any longer, good luck with those assignments and \n hey if you’re ever feeling down or not at your peak, don’t hesitate to reach out to me. \n I wanna make sure you’re doing well."
+  txt: "I can only imagine. But, I won’t keep you hanging any longer, good luck with those assignments and \n hey if you’re ever feeling down or not at your peak, don’t hesitate to reach out to me. \n I wanna make sure you’re doing well." // scene 30
 }, {
   charName: "Cleo",
-  txt: "Thanks and will do, Sebastian, thank you for caring so much about me."
+  txt: "Thanks and will do, Sebastian, thank you for caring so much about me." // scene 31
 }, {
   charName: "Sebastian",
-  txt: "Of course Cleo, now go on, your homework awaits haha."
+  txt: "Of course Cleo, now go on, your homework awaits haha." // scene 32
 }, {
   charName: "Cleo",
-  txt: "Yes yes, I will professor Seb haha"
+  txt: "Yes yes, I will professor Seb haha" // scene 33
 }, {
   charName: " ",
-  txt: "*proceeds to go home*"
+  txt: "*proceeds to go home*" // scene 34
 }, {
   // choice2B
   charName: "Sebastian",
-  txt: "Oh would you like to hang out together? I also don’t happen to have any more \n classes for the rest of the day, plus we haven’t hung out together in a fair bit."
+  txt: "Oh would you like to hang out together? I also don’t happen to have any more \n classes for the rest of the day, plus we haven’t hung out together in a fair bit." // scene 35
 }, {
   charName: "Cleo",
-  txt: " Sure yea that would be great, we can go to the mall for a couple of hours, hit some \n stores and get some food if thats cool?"
+  txt: " Sure yea that would be great, we can go to the mall for a couple of hours, hit some \n stores and get some food if thats cool?" // scene 36
 }, {
   charName: "Sebastian",
-  txt: "Yep, that works for me!"
+  txt: "Yep, that works for me!" // scene 37
 }, {
   charName: " ",
-  txt: "*the two of you proceed to leave school and make your way to the mall where you do exactly \n as you said*"
+  txt: "*the two of you proceed to leave school and make your way to the mall where you do exactly \n as you said*" // scene 38
 }, {
   charName: "Sebastian",
-  txt: "Wow today was so much fun, I didn’t even know that half of these stores even existed here."
+  txt: "Wow today was so much fun, I didn’t even know that half of these stores even existed here." // scene 39
 }, {
   charName: "Cleo",
-  txt: "Yea same I had a lot of fun as well, we should do this again sometime."
+  txt: "Yea same I had a lot of fun as well, we should do this again sometime." // scene 40
 }, {
   charName: "Sebastian",
-  txt: "Agreed I’d love that, but since it is getting late I’m gonna head back home, if you’d \n like to you are more than welcome to come sleepover. My older sister is out of town right now, \n and my mom hasn’t seen you for a while, I’m sure she’d be happy to see you again."
+  txt: "Agreed I’d love that, but since it is getting late I’m gonna head back home, if you’d \n like to you are more than welcome to come sleepover. My older sister is out of town right now, \n and my mom hasn’t seen you for a while, I’m sure she’d be happy to see you again." // scene 41
 }, {
   // choice 3A
   charName: "Sebastian",
-  txt: "That’s fair, I respect your decision, besides I’m sure you have some stuff to do \n before the end of the day. In that case, I’ll be heading out, thanks again for today Cleo!"
+  txt: "That’s fair, I respect your decision, besides I’m sure you have some stuff to do \n before the end of the day. In that case, I’ll be heading out, thanks again for today Cleo!" // scene 42
 }, {
   charName: "Cleo",
-  txt: "Bye Seb, I had loads of fun as well!"
+  txt: "Bye Seb, I had loads of fun as well!" // scene 43
 }, {
   charName: " ",
-  txt: "*the two of you part ways and you head home*"
+  txt: "*the two of you part ways and you head home*" // scene 44
 }, {
   charName: "Cleo",
-  txt: "Hey mom, I’m home."
+  txt: "Hey mom, I’m home." // scene 45
 }, {
   charName: "Mom",
-  txt: "Welcome home Cleo, how was your day? Did you show up to class on time?"
+  txt: "Welcome home Cleo, how was your day? Did you show up to class on time?" // scene 46
 }, {
   // choice4A
   charName: "Mom",
-  txt: "Oh well, your school called me and said that you were late actually. I don’t appreciate \n lies Cleo."
+  txt: "Oh well, your school called me and said that you were late actually. I don’t appreciate \n lies Cleo." // scene 47
 }, {
   charName: "Cleo",
-  txt: "Sorry mom..."
+  txt: "Sorry mom..." // scene 48
 }, {
   charName: "Mom",
-  txt: "Sorry is not going to cut it, you need to do better and be better!"
+  txt: "Sorry is not going to cut it, you need to do better and be better!" // scene 49
 }, {
   charName: "Cleo",
-  txt: "I’m trying my best ok, ugh."
+  txt: "I’m trying my best ok, ugh." // scene 50
 }, {
   charName: "Mom",
-  txt: "Just go to your room."
+  txt: "Just go to your room." // scene 51
 }, {
   charName: " ",
-  txt: "*goes to your room*"
+  txt: "*goes to your room*" // scene 52
 }, {
   // choice4B
   charName: "Mom",
-  txt: "Oh well, your school called and told me you were late. But, I do appreciate your honesty \n on that. So thank you for opening up to me. "
+  txt: "Oh well, your school called and told me you were late. But, I do appreciate your honesty \n on that. So thank you for opening up to me. " // scene 53
 }, {
   charName: "Cleo",
-  txt: "Yea sorry about that, I’m trying to get better."
+  txt: "Yea sorry about that, I’m trying to get better." // scene 54
 }, {
   charName: "Mom",
-  txt: "Well if you ever need help on anything, just know that I am here for you no matter what."
+  txt: "Well if you ever need help on anything, just know that I am here for you no matter what." // scene 55
 }, {
   charName: "Cleo",
-  txt: "Yes mom, thank you."
+  txt: "Yes mom, thank you." // scene 56
 }, {
   charName: "Mom",
-  txt: "You’re welcome sweetie."
+  txt: "You’re welcome sweetie." // scene 57
 }, {
   charName: " ",
-  txt: "*goes to room and decide to do some homework before bed*"
+  txt: "*goes to room and decide to do some homework before bed*" // scene 58
 }, {
   charName: "Cleo",
-  txt: "Phew, now that that’s done it’s finally time to unwind for the evening, but hmm what to \n do?"
+  txt: "Phew, now that that’s done it’s finally time to unwind for the evening, but hmm what to \n do?" // scene 59
 }, {
   // choice5A
   charName: "Cleo",
-  txt: "After today’s long day, I think getting some good rest will do me some good."
+  txt: "After today’s long day, I think getting some good rest will do me some good." // scene 60
 }, {
   charName: "Cleo",
-  txt: "Today’s been a rollercoaster of emotions, but thank YOU, the player, for tagging along \n with me through today."
+  txt: "Today’s been a rollercoaster of emotions, but thank YOU, the player, for tagging along \n with me through today." // scene 61
 }, {
   charName: "Cleo",
-  txt: "Always remember if you are experiencing anything overwhelming or feeling down that \n there are always people that you can reach out to for help and or resources that can help you \n get better! Never give up!"
+  txt: "Always remember if you are experiencing anything overwhelming or feeling down that \n there are always people that you can reach out to for help and or resources that can help you \n get better! Never give up!" // scene 62
   // STORY END
 }, {
   // choice5B
   charName: "Cleo",
-  txt: "Honestly, I’m kind of in the mood to continue my book, it’s been at the back of my mind \n all day. A couple pages won’t hurt"
+  txt: "Honestly, I’m kind of in the mood to continue my book, it’s been at the back of my mind \n all day. A couple pages won’t hurt" // scene 63
 },{
   charName: " ",
-  txt: "*proceeds to read and finish said book for 2 hours*"
+  txt: "*proceeds to read and finish said book for 2 hours*" // scene 64
 }, {
   charName: "Cleo",
-  txt: "Wow that was a great book, did not expect it to end that way. What time is it now \n anyways… 3 AM???? Oh no, I’m going to be so dead tomorrow for school, ugh I should have \n went to sleep. It’s fine I’ll just deal with it… "
+  txt: "Wow that was a great book, did not expect it to end that way. What time is it now \n anyways… 3 AM???? Oh no, I’m going to be so dead tomorrow for school, ugh I should have \n went to sleep. It’s fine I’ll just deal with it… " // scene 65
 }, {
   charName: "Cleo",
-  txt: "Let’s hope tomorrow goes better."
+  txt: "Let’s hope tomorrow goes better." // scene 66
   // STORY END
 }, {
   // choice 3B
   charName: "Sebastian",
-  txt: "Sweet, let's head over to my place then to get set up"
+  txt: "Sweet, let's head over to my place then to get set up" // scene 67
 }, {
   charName: " ",
-  txt: "*the two of you head over to Sebastian's house for the sleepover*"
+  txt: "*the two of you head over to Sebastian's house for the sleepover*" // scene 68
 }, {
   charName: "Sebastian",
-  txt: "Hey mom, I'm home, and Cleo's here as well to sleep over"
+  txt: "Hey mom, I'm home, and Cleo's here as well to sleep over" // scene 69
 }, {
   charName: "Sebastian's mom",
-  txt: "Welcome home sweetie, and hello Cleo you're welcome to stay for as long as you like \n it's just me and Sebastian here tonight!"
+  txt: "Welcome home sweetie, and hello Cleo you're welcome to stay for as long as you like \n it's just me and Sebastian here tonight!" // scene 70
 }, {
   charName: "Cleo",
-  txt: "Thank you ma'am!"
+  txt: "Thank you ma'am!" // scene 71
 }, {
   charName: " ",
-  txt: "*the two of you go upstairs to Sebastian's room and hang out for the evening"
+  txt: "*the two of you go upstairs to Sebastian's room and hang out for the evening" // scene 72
 }, {
   charName: "Sebastian",
-  txt: "Hey Cleo, I forgot to ask did you complete the assignment that was due tonight?"
+  txt: "Hey Cleo, I forgot to ask did you complete the assignment that was due tonight?" // scene 73
 }, {
   charName: "Cleo",
-  txt: "Assignmet? What assignment?"
+  txt: "Assignmet? What assignment?" // scene 74
 }, {
   charName: "Sebastian",
-  txt: "Our math one? It just hit midnight. Did you not do it...?"
+  txt: "Our math one? It just hit midnight. Did you not do it...?" // scene 75
 }, {
   charName: "Cleo",
-  txt: "Oh my god no??? Ugh I was supposed to do it today, but got sidetracked."
+  txt: "Oh my god no??? Ugh I was supposed to do it today, but got sidetracked." // scene 76
 }, {
   charName: "Sebastian",
-  txt: "Oh no, I'm sorry to hear that... maybe you can talk to the professor about it."
+  txt: "Oh no, I'm sorry to hear that... maybe you can talk to the professor about it." // scene 77
 }, {
   charName: "Cleo",
-  txt: "Yea maybe... but it's fine... I think I'll just head to sleep."
+  txt: "Yea maybe... but it's fine... I think I'll just head to sleep." // scene 78
 }, {
   charName: "Sebastian",
-  txt: "Sounds good to me, sorry again for that."
+  txt: "Sounds good to me, sorry again for that." // scene 79
 }, {
   charName: "Cleo",
-  txt: "It's ok, thanks for your sympathy."
+  txt: "It's ok, thanks for your sympathy." // scene 80
   // STORY END
 }];
 
