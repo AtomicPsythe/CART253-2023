@@ -1,5 +1,5 @@
 /**
- * Project 2 - Prototype
+ * Project 2 - Final Project
  * Foti Aivaliklis
  * 
  * The following simulation is a mental health visual novel game prototype that tackles the early stages of setting up the base code for the game.
@@ -23,7 +23,7 @@ let sceneDialogue = [{
   txt: "Pzzzz... pzzzz... pzzzz... pzz..." // scene 0
 }, {
   charName: "Cleo",
-  txt: "*yawns* My goodness it’s way too early to be awake for school. It doesnt help that i didnt get \n much sleep last night… I got too caught up in a novel I was reading. I guess it’s my fault for \n that but still..." // scene 1
+  txt: "*yawns* My goodness it’s way too early to be awake for school. It doesnt help that I didn't get \n much sleep last night… I got too caught up in a novel I was reading. I guess it’s my fault for \n that but still..." // scene 1
 }, {
   charName: "Cleo",
   txt: "Now the question is, should I be a good student and succumb to waking up early or just treat myself and sleep in a little bit more?" // scene 2
@@ -89,11 +89,215 @@ let sceneDialogue = [{
 }, {
   charName: "Teacher", 
   txt: "Well I'm glad you had a lovely morning, now everyone grab your seats so we can start \n the lecture for today." // scene 22
+}, {
+  // normal story again
+  charName: " ",
+  txt: "*bell rings*" // scene 23
+}, {
+  charName: "Cleo",
+  txt: "Finally, class is done. That felt much harder to get through than usual." // scene 24
+}, {
+  charName: "Sebastian",
+  txt: "Yea it was alright, I enjoyed it, but then again I really like this class so..." // scene 25
+}, {
+  charName: "Cleo",
+  txt: "Yea that is true." // scene 26
+}, {
+  charName: "Sebastian",
+  txt: "Anyways, enough about that, what do you have planned for the rest of your day, Cleo?" // scene 27
+}, {
+  // choice2A
+  charName: "Sebastian",
+  txt: " Mhm, that sounds like the smart thing to do, I assume then that you have a good amount of work to complete right?"
+}, {
+  charName: "Cleo",
+  txt: "Yea, missing classes a lot earlier this week doesn’t help with that either let’s just say that…"
+}, {
+  charName: "Sebastian",
+  txt: "I can only imagine. But, I won’t keep you hanging any longer, good luck with those assignments and \n hey if you’re ever feeling down or not at your peak, don’t hesitate to reach out to me. \n I wanna make sure you’re doing well."
+}, {
+  charName: "Cleo",
+  txt: "Thanks and will do, Sebastian, thank you for caring so much about me."
+}, {
+  charName: "Sebastian",
+  txt: "Of course Cleo, now go on, your homework awaits haha."
+}, {
+  charName: "Cleo",
+  txt: "Yes yes, I will professor Seb haha"
+}, {
+  charName: " ",
+  txt: "*proceeds to go home*"
+}, {
+  // choice2B
+  charName: "Sebastian",
+  txt: "Oh would you like to hang out together? I also don’t happen to have any more \n classes for the rest of the day, plus we haven’t hung out together in a fair bit."
+}, {
+  charName: "Cleo",
+  txt: " Sure yea that would be great, we can go to the mall for a couple of hours, hit some \n stores and get some food if thats cool?"
+}, {
+  charName: "Sebastian",
+  txt: "Yep, that works for me!"
+}, {
+  charName: " ",
+  txt: "*the two of you proceed to leave school and make your way to the mall where you do exactly \n as you said*"
+}, {
+  charName: "Sebastian",
+  txt: "Wow today was so much fun, I didn’t even know that half of these stores even existed here."
+}, {
+  charName: "Cleo",
+  txt: "Yea same I had a lot of fun as well, we should do this again sometime."
+}, {
+  charName: "Sebastian",
+  txt: "Agreed I’d love that, but since it is getting late I’m gonna head back home, if you’d \n like to you are more than welcome to come sleepover. My older sister is out of town right now, \n and my mom hasn’t seen you for a while, I’m sure she’d be happy to see you again."
+}, {
+  // choice 3A
+  charName: "Sebastian",
+  txt: "That’s fair, I respect your decision, besides I’m sure you have some stuff to do \n before the end of the day. In that case, I’ll be heading out, thanks again for today Cleo!"
+}, {
+  charName: "Cleo",
+  txt: "Bye Seb, I had loads of fun as well!"
+}, {
+  charName: " ",
+  txt: "*the two of you part ways and you head home*"
+}, {
+  charName: "Cleo",
+  txt: "Hey mom, I’m home."
+}, {
+  charName: "Mom",
+  txt: "Welcome home Cleo, how was your day? Did you show up to class on time?"
+}, {
+  // choice4A
+  charName: "Mom",
+  txt: "Oh well, your school called me and said that you were late actually. I don’t appreciate \n lies Cleo."
+}, {
+  charName: "Cleo",
+  txt: "Sorry mom..."
+}, {
+  charName: "Mom",
+  txt: "Sorry is not going to cut it, you need to do better and be better!"
+}, {
+  charName: "Cleo",
+  txt: "I’m trying my best ok, ugh."
+}, {
+  charName: "Mom",
+  txt: "Just go to your room."
+}, {
+  charName: " ",
+  txt: "*goes to your room*"
+}, {
+  // choice4B
+  charName: "Mom",
+  txt: "Oh well, your school called and told me you were late. But, I do appreciate your honesty \n on that. So thank you for opening up to me. "
+}, {
+  charName: "Cleo",
+  txt: "Yea sorry about that, I’m trying to get better."
+}, {
+  charName: "Mom",
+  txt: "Well if you ever need help on anything, just know that I am here for you no matter what."
+}, {
+  charName: "Cleo",
+  txt: "Yes mom, thank you."
+}, {
+  charName: "Mom",
+  txt: "You’re welcome sweetie."
+}, {
+  charName: " ",
+  txt: "*goes to room and decide to do some homework before bed*"
+}, {
+  charName: "Cleo",
+  txt: "Phew, now that that’s done it’s finally time to unwind for the evening, but hmm what to \n do?"
+}, {
+  // choice5A
+  charName: "Cleo",
+  txt: "After today’s long day, I think getting some good rest will do me some good."
+}, {
+  charName: "Cleo",
+  txt: "Today’s been a rollercoaster of emotions, but thank YOU, the player, for tagging along \n with me through today."
+}, {
+  charName: "Cleo",
+  txt: "Always remember if you are experiencing anything overwhelming or feeling down that \n there are always people that you can reach out to for help and or resources that can help you \n get better! Never give up!"
+  // STORY END
+}, {
+  // choice5B
+  charName: "Cleo",
+  txt: "Honestly, I’m kind of in the mood to continue my book, it’s been at the back of my mind \n all day. A couple pages won’t hurt"
+},{
+  charName: " ",
+  txt: "*proceeds to read and finish said book for 2 hours*"
+}, {
+  charName: "Cleo",
+  txt: "Wow that was a great book, did not expect it to end that way. What time is it now \n anyways… 3 AM???? Oh no, I’m going to be so dead tomorrow for school, ugh I should have \n went to sleep. It’s fine I’ll just deal with it… "
+}, {
+  charName: "Cleo",
+  txt: "Let’s hope tomorrow goes better."
+  // STORY END
+}, {
+  // choice 3B
+  charName: "Sebastian",
+  txt: "Sweet, let's head over to my place then to get set up"
+}, {
+  charName: " ",
+  txt: "*the two of you head over to Sebastian's house for the sleepover*"
+}, {
+  charName: "Sebastian",
+  txt: "Hey mom, I'm home, and Cleo's here as well to sleep over"
+}, {
+  charName: "Sebastian's mom",
+  txt: "Welcome home sweetie, and hello Cleo you're welcome to stay for as long as you like \n it's just me and Sebastian here tonight!"
+}, {
+  charName: "Cleo",
+  txt: "Thank you ma'am!"
+}, {
+  charName: " ",
+  txt: "*the two of you go upstairs to Sebastian's room and hang out for the evening"
+}, {
+  charName: "Sebastian",
+  txt: "Hey Cleo, I forgot to ask did you complete the assignment that was due tonight?"
+}, {
+  charName: "Cleo",
+  txt: "Assignmet? What assignment?"
+}, {
+  charName: "Sebastian",
+  txt: "Our math one? It just hit midnight. Did you not do it...?"
+}, {
+  charName: "Cleo",
+  txt: "Oh my god no??? Ugh I was supposed to do it today, but got sidetracked."
+}, {
+  charName: "Sebastian",
+  txt: "Oh no, I'm sorry to hear that... maybe you can talk to the professor about it."
+}, {
+  charName: "Cleo",
+  txt: "Yea maybe... but it's fine... I think I'll just head to sleep."
+}, {
+  charName: "Sebastian",
+  txt: "Sounds good to me, sorry again for that."
+}, {
+  charName: "Cleo",
+  txt: "It's ok, thanks for your sympathy."
+  // STORY END
 }];
 
 // strings for the choice options
+
+// choice 1
 let choice1A = "Sleep in, you deserve it";
 let choice1B = "Wake up and take on the day";
+
+// choice 2
+let choice2A = "I was thinking of going home early to get some assignments done";
+let choice2B = "I was thinking, maybe we can hang out together now that class is done?";
+
+// choice 3
+let choice3A = "Go home, it’s late and you’re getting tired.";
+let choice3B = "Go to Sebastian’s house for a sleepover, embrace the fun.";
+
+// choice 4
+let choice4A = "Lie";
+let choice4B = "Tell the truth";
+
+// choice 5
+let choice5A = "Go to sleep early";
+let choice5B = "Stay up continuing to read your book";
 
 // image variables
 let bedroom;
@@ -106,6 +310,9 @@ let character2Surprised;
 let character2Smirk;
 let titleScreenImage;
 let school;
+
+// overlay images
+let badChoice;
 
 // variable for the endings (mental health meter)
 let mentalMeter = 0;
@@ -124,6 +331,7 @@ function preload() {
   character2Smirk = loadImage("assets/images/character2_smirk.png");
   titleScreenImage = loadImage("assets/images/title.jpg");
   school = loadImage("assets/images/school.jpg");
+  badChoice = loadImage("assets/images/bad_overlay_40.png");
 }
 
 
@@ -219,6 +427,13 @@ function images() {
   }
   if (scene == 7 || scene == 8 || scene == 9 || scene == 10 || scene == 14 || scene == 15 || scene == 16 || scene == 17 || scene == 18 || scene == 19 || scene == 20 || scene == 21 || scene == 22) {
     background(school);
+  }
+  if (scene == 4 || scene == 5 || scene == 6 || scene == 7 || scene == 8 || scene == 9 || scene == 10) {
+    push();
+    image(badChoice, 0, 0, 1000, 600);
+    tint(badChoice, 0, 0, 0, 125);
+    pop();
+    // tint(0, 0, 0, 20); does a super cool fade to black thing
   }
   if (scene == 1 || scene == 2 || scene == 3) {
     image(protagNormal, 320, 100, 340, 360);
@@ -363,11 +578,11 @@ function mousePressed() {
 
   if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 1) {
     scene = 3;
-    mentalMeter = 1;
+    mentalMeter = -1;
   }
 
   if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 1) {
     scene = 11;
-    mentalMeter = -1;
+    mentalMeter = 1;
   } 
 }
