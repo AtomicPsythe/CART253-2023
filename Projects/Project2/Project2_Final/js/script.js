@@ -278,7 +278,6 @@ let sceneDialogue = [{
 }];
 
 // strings for the choice options
-
 // choice 1
 let choice1A = "Sleep in, you deserve it";
 let choice1B = "Wake up and take on the day";
@@ -384,11 +383,14 @@ function draw() {
     } else if (state === `simulation`) {
       simulation();
     } 
-    // else if (state === "goodEnding") {
-    //   goodEnding();
-    // } else if (state === "badEnding") {
-    //   badEnding();
-    // }
+    else if (state === "goodEnding") {
+      goodEnding();
+    } else if (state === "badEnding") {
+      badEnding();
+    }
+    else if (state === "trueEnding") {
+      trueEnding();
+    }
 }
 
 // function that displays all of the elements on the initial title screen
@@ -458,7 +460,7 @@ function images() {
     background(sebHouse);
   }
   if (scene == 73 || scene == 74 || scene == 75 || scene == 76 || scene == 77 || scene == 78 || scene == 79 || scene == 80) {
-    background(sebRoom);
+    background(sebRoom);    // scene >=73 && scene <= 80 
   }
   
   // character spites + expressions
@@ -532,6 +534,39 @@ function mentalHealthMeter() {
     // goodEnding();
   }
 
+  // if two good choices are made
+  if (mentalMeter == 3) {
+    push();
+    fill(173, 255, 47);
+    rectMode(CORNER);
+    strokeWeight(2)
+    rect(20, 10, 310, 40);
+    pop();
+    // goodEnding();
+  }
+
+  // if two good choices are made
+  if (mentalMeter == 4) {
+    push();
+    fill(173, 255, 47);
+    rectMode(CORNER);
+    strokeWeight(2)
+    rect(20, 10, 330, 40);
+    pop();
+    // goodEnding();
+  }
+
+  // if two good choices are made
+  if (mentalMeter == 5) {
+    push();
+    fill(173, 255, 47);
+    rectMode(CORNER);
+    strokeWeight(2)
+    rect(20, 10, 350, 40);
+    pop();
+    // goodEnding();
+  }
+
   // if one bad choice is made
   if (mentalMeter == -1) {
     push();
@@ -550,6 +585,39 @@ function mentalHealthMeter() {
       rectMode(CORNER);
       strokeWeight(2)
       rect(20, 10, 210, 40);
+      pop();
+      // badEnding();
+    }
+
+    // if one bad choice is made
+    if (mentalMeter == -3) {
+      push();
+      fill(173, 255, 47);
+      rectMode(CORNER);
+      strokeWeight(2)
+      rect(20, 10, 190, 40);
+      pop();
+      // badEnding();
+    }
+
+    // if one bad choice is made
+    if (mentalMeter == -4) {
+      push();
+      fill(173, 255, 47);
+      rectMode(CORNER);
+      strokeWeight(2)
+      rect(20, 10, 170, 40);
+      pop();
+      // badEnding();
+    }
+
+    // if one bad choice is made
+    if (mentalMeter == -5) {
+      push();
+      fill(173, 255, 47);
+      rectMode(CORNER);
+      strokeWeight(2)
+      rect(20, 10, 150, 40);
       pop();
       // badEnding();
     }
@@ -685,41 +753,86 @@ function choiceOptions() {
 }
 
 function endings() {
-  if (scene == 62 || scene == 66 || scene == 80) { // good end
+  if (scene == 62 || scene == 66 || scene == 80 & mentalMeter >= 1) {
+    goodEnding();
     noLoop();
   }
-  // if (scene == 38) { // bad end
-  //   noLoop();
-  // }
+  else if (scene == 62 || scene == 66 || scene == 80 & mentalMeter <= -1) {
+    badEnding();
+    noLoop();
+  }
+  else if (scene == 62 || scene == 66 || scene == 80 & mentalMeter == 0) {
+    trueEnding();
+    noLoop();
+  }
 }
-// // function for the good ending (if the mental health meter is > 50%)
-// function goodEnding() {
-//   if (scene == 6) {
-//     noLoop();
-//   }
-// }
+// function for the good ending (if the mental health meter is > 50%)
+function goodEnding() {
+  background(0, 163, 108);
+  push();
+  fill(255);
+  stroke(0, 0, 139);
+  strokeWeight(5);
+  rect(230, 80, 540, 100);
+  pop();
+  push();
+  textSize(45);
+  fill(179, 98, 0);
+  textAlign(CENTER, CENTER);
+  text("GOOD ENDING", width/2, height/4.5);
+  pop();
+}
 
-// // function for the bad ending (if the mental health meter is < 50%)
-// function badEnding() {
-//   if (scene == 5) {
-//     noLoop();
-//   }
-// }
+// function for the bad ending (if the mental health meter is < 50%)
+function badEnding() {
+  background(255, 87, 51);
+  push();
+  fill(255);
+  stroke(0, 0, 139);
+  strokeWeight(5);
+  rect(230, 80, 540, 100);
+  pop();
+  push();
+  textSize(45);
+  fill(179, 98, 0);
+  textAlign(CENTER, CENTER);
+  text("BAD ENDING", width/2, height/4.5);
+  pop();
+}
+
+// function for the true ending (if the mental health meter is = 50%)
+function trueEnding() {
+  background(255, 195, 0);
+  push();
+  fill(255);
+  stroke(0, 0, 139);
+  strokeWeight(5);
+  rect(230, 80, 540, 100);
+  pop();
+  push();
+  textSize(45);
+  fill(179, 98, 0);
+  textAlign(CENTER, CENTER);
+  text("BAD ENDING", width/2, height/4.5);
+  pop();
+}
 
 function mousePressed() {
   // beginning
   if (mouseX >= 890 && mouseX <= 990 && mouseY >= 470 && mouseY <= 570 && scene !== 1 && scene !== 27 && scene !== 41 && scene !== 46 && scene !== 59) {
     scene += 1;
+    console.log(scene);
   }  
-
-  if ((mouseX > 890) && (mouseY < 470) && (mouseX < 990) && (mouseY > 570) && scene == 0)  {
-    scene += 1;
-  }
 
   // choice 1
   if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 1) {
     scene = 3;
     mentalMeter = -1;
+  }
+
+  // makes sure that upon clicking the bad choice option it does not play/display the good choice dialogue
+  if (mouseX >= 890 && mouseX <= 990 && mouseY >= 470 && mouseY <= 570 && scene == 10) {
+    scene = 23;
   }
 
   if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 1) {
@@ -728,17 +841,17 @@ function mousePressed() {
   }
 
   // choice 2
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 27 && mentalMeter == 1) {
+  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 27 && mentalMeter == 1) {
     scene = 28;
     mentalMeter = 2;
   }
 
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 27 && mentalMeter == -1) {
+  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 27 && mentalMeter == -1) {
     scene = 35;
     mentalMeter = 0;
   }
 
-  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 27 && mentalMeter == 1) {
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 27 && mentalMeter == 1) {
     scene = 28;
     mentalMeter = 0;
   } 
@@ -750,17 +863,17 @@ function mousePressed() {
 
   // choice 3
 
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 41 && mentalMeter == 1) {
+  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 41 && mentalMeter == 1) {
     scene = 42;
     mentalMeter = 2;
   }
 
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 41 && mentalMeter == -1) {
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 273 && mouseY <= 327 && scene == 41 && mentalMeter == -1) {
     scene = 67;
     mentalMeter = 0;
   }
 
-  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 41 && mentalMeter == 1) {
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 41 && mentalMeter == 1) {
     scene = 42;
     mentalMeter = 0;
   } 
@@ -782,7 +895,7 @@ function mousePressed() {
 
   // choice 4
 
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 46 && mentalMeter == 1) {
+  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 46 && mentalMeter == 1) {
     scene = 47;
     mentalMeter = 2;
   }
@@ -792,7 +905,7 @@ function mousePressed() {
     mentalMeter = 0;
   }
 
-  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 46 && mentalMeter == 1) {
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 46 && mentalMeter == 1) {
     scene = 47;
     mentalMeter = 0;
   } 
@@ -802,14 +915,14 @@ function mousePressed() {
     mentalMeter = -2;
   } 
 
-  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 46 && mentalMeter == 2) {
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 46 && mentalMeter == 2) {
     scene = 47;
-    mentalMeter = 0;
+    mentalMeter = 1;
   } 
 
   if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 46 && mentalMeter == -2) {
     scene = 53;
-    mentalMeter = -2;
+    mentalMeter = -1;
   } 
 
   if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 46 && mentalMeter == 3) {
@@ -834,7 +947,7 @@ function mousePressed() {
     mentalMeter = 0;
   }
 
-  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 59 && mentalMeter == 1) {
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 59 && mentalMeter == 1) {
     scene = 60;
     mentalMeter = 0;
   } 
@@ -846,12 +959,12 @@ function mousePressed() {
 
   if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 59 && mentalMeter == 2) {
     scene = 60;
-    mentalMeter = 0;
+    mentalMeter = 3;
   } 
 
   if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 59 && mentalMeter == -2) {
     scene = 63;
-    mentalMeter = -2;
+    mentalMeter = -3;
   } 
 
   if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 59 && mentalMeter == 3) {
