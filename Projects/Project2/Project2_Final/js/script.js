@@ -2,7 +2,7 @@
  * Project 2 - Final Project
  * Foti Aivaliklis
  * 
- * The following simulation is a mental health visual novel game prototype that tackles the early stages of setting up the base code for the game.
+ * The following simulation is a mental health visual novel game that tackles the early stages of setting up the base code for the game.
  * This includes creating the title screen with an interactable button, establishing how to advance from one scene to another with dialogue and character sprites present, 
  * displaying the increasing and decreasing mental health bar on the top left that will vary depending on the choices the player makes and having unique choice options 
  * displayed on the screen for the player to choose, which progresses into different story paths resulting into different endings. 
@@ -108,13 +108,13 @@ let sceneDialogue = [{
 }, {
   // choice2A
   charName: "Sebastian",
-  txt: " Mhm, that sounds like the smart thing to do, I assume then that you have a good amount of work to complete right?" // scene 28
+  txt: " Mhm, that sounds like the smart thing to do, I assume then that you have a good amount \n of work to complete right?" // scene 28
 }, {
   charName: "Cleo",
   txt: "Yea, missing classes a lot earlier this week doesn’t help with that either let’s just say that…" // scene 29
 }, {
   charName: "Sebastian",
-  txt: "I can only imagine. But, I won’t keep you hanging any longer, good luck with those assignments and \n hey if you’re ever feeling down or not at your peak, don’t hesitate to reach out to me. \n I wanna make sure you’re doing well." // scene 30
+  txt: "I can only imagine. But, I won’t keep you hanging any longer, good luck with those assignments \n and hey if you’re ever feeling down or not at your peak, don’t hesitate to reach out to me. \n I wanna make sure you’re doing well." // scene 30
 }, {
   charName: "Cleo",
   txt: "Thanks and will do, Sebastian, thank you for caring so much about me." // scene 31
@@ -310,6 +310,11 @@ let character2Surprised;
 let character2Smirk;
 let titleScreenImage;
 let school;
+let mall; 
+let sebHouse;
+let sebRoom;
+let bedroomNight;
+let cleoHouse;
 
 // overlay images
 let badChoice;
@@ -317,11 +322,15 @@ let badChoice;
 // variable for the endings (mental health meter)
 let mentalMeter = 0;
 
+// fade variable
+let fade = 0;
+let fadeAmount = 1;
+
 /**
  * Preload defines the assets' variables that will be used for the prototype (character images, backgrounds, UI assets)
 */
 function preload() {
-  bedroom = loadImage("assets/images/bedroom.png");
+  bedroom = loadImage("assets/images/bedroom.jpg");
   nextButton = loadImage("assets/images/next_button.jpg");
   protagNormal = loadImage("assets/images/protag_normal.png");
   protagHappy = loadImage("assets/images/protag_happy.png");
@@ -332,8 +341,12 @@ function preload() {
   titleScreenImage = loadImage("assets/images/title.jpg");
   school = loadImage("assets/images/school.jpg");
   badChoice = loadImage("assets/images/bad_overlay_40.png");
+  mall = loadImage("assets/images/mall.jpg");
+  sebHouse = loadImage("assets/images/seb_house.jpg");
+  sebRoom = loadImage("assets/images/seb_room.jpg");
+  bedroomNight = loadImage("assets/images/bedroom_night.jpg");
+  cleoHouse = loadImage("assets/images/cleo_house.jpg");
 }
-
 
 /**
  * Creates the canvas and calls to the button function where the initial start button is created
@@ -422,19 +435,33 @@ function simulation() {
 
 // displays all of the necessary images including the changing character sprites and backgrounds
 function images() {
+  // backgrounds
   if (scene == 0 || scene == 1 || scene == 2 || scene == 3 || scene == 4 || scene == 5 || scene ==  6 || scene ==  11 || scene ==  12 || scene ==  13) {
     background(bedroom);
   }
   if (scene == 7 || scene == 8 || scene == 9 || scene == 10 || scene == 14 || scene == 15 || scene == 16 || scene == 17 || scene == 18 || scene == 19 || scene == 20 || scene == 21 || scene == 22) {
     background(school);
   }
-  if (scene == 4 || scene == 5 || scene == 6 || scene == 7 || scene == 8 || scene == 9 || scene == 10) {
-    push();
-    image(badChoice, 0, 0, 1000, 600);
-    tint(badChoice, 0, 0, 0, 125);
-    pop();
-    // tint(0, 0, 0, 20); does a super cool fade to black thing
+  if (scene == 23 || scene == 24 || scene == 25 || scene == 26 || scene == 27 || scene == 28 || scene == 29 || scene == 30 || scene == 31 || scene == 32 || scene == 33 || scene == 34 || scene == 35 || scene == 36 || scene == 37 || scene == 38) {
+    background(school);
   }
+  if (scene == 39 || scene == 40 || scene == 41 || scene == 42 || scene == 43 || scene == 44 || scene == 67 || scene == 68) {
+    background(mall);
+  }
+  if (scene == 45 || scene == 46 || scene == 47 || scene == 48 || scene == 49 || scene == 50 || scene == 51 || scene == 52 || scene == 53 || scene == 54 || scene == 55 || scene == 56 || scene == 57 || scene == 58) {
+    background(cleoHouse);
+  }
+  if (scene == 59 || scene == 60 || scene == 61 || scene == 62 || scene == 63 || scene == 64 || scene == 65 || scene == 66) {
+    background(bedroomNight);
+  }
+  if (scene == 69 || scene == 70 || scene == 71 || scene == 72) {
+    background(sebHouse);
+  }
+  if (scene == 73 || scene == 74 || scene == 75 || scene == 76 || scene == 77 || scene == 78 || scene == 79 || scene == 80) {
+    background(sebRoom);
+  }
+  
+  // character spites + expressions
   if (scene == 1 || scene == 2 || scene == 3) {
     image(protagNormal, 320, 100, 340, 360);
   }
@@ -447,6 +474,20 @@ function images() {
   if (scene == 9 || scene == 10 || scene == 15 || scene == 16 || scene == 17 || scene == 18 || scene == 19 || scene == 20 || scene == 21 || scene == 22) {
     image(protagNormal, 150, 100, 340, 360);
     image(character2Normal, 500, 100, 340, 360);
+  }
+  if (scene == 24) {
+    image(protagNormal, 150, 100, 340, 360);
+  }
+  if (scene == 25 || scene == 26 || scene == 27 || scene == 28 || scene == 29 || scene == 30 || scene == 31 || scene == 32 || scene == 33 || scene == 34 || scene == 35 || scene == 36 || scene == 37 || scene == 38) {
+    image(protagNormal, 150, 100, 340, 360);
+    image(character2Normal, 500, 100, 340, 360);
+  }
+  if (scene == 4 || scene == 5 || scene == 6 || scene == 7 || scene == 8 || scene == 9 || scene == 10) {
+    push();
+    image(badChoice, 0, 0, 1000, 600);
+    tint(badChoice, 0, 0, 0, 125);
+    pop();
+    // tint(0, 0, 0, 20); does a super cool fade to black thing
   }
 }
 
@@ -480,6 +521,17 @@ function mentalHealthMeter() {
     // goodEnding();
   }
 
+  // if two good choices are made
+  if (mentalMeter == 2) {
+    push();
+    fill(173, 255, 47);
+    rectMode(CORNER);
+    strokeWeight(2)
+    rect(20, 10, 290, 40);
+    pop();
+    // goodEnding();
+  }
+
   // if one bad choice is made
   if (mentalMeter == -1) {
     push();
@@ -490,6 +542,17 @@ function mentalHealthMeter() {
     pop();
     // badEnding();
   }
+
+    // if one bad choice is made
+    if (mentalMeter == -2) {
+      push();
+      fill(173, 255, 47);
+      rectMode(CORNER);
+      strokeWeight(2)
+      rect(20, 10, 210, 40);
+      pop();
+      // badEnding();
+    }
 }
 
 // displays the speaking character's name, the character dialogue or narration, and the next button to progress further into the game
@@ -543,15 +606,91 @@ function choiceOptions() {
     text(choice1B, width/2, 305);
     pop();
   }
+  if (scene == 27) {
+    push();
+    fill(255, 255, 255, 180);
+    rectMode(CENTER);
+    strokeWeight(2);
+    rect(width/2, 170, 540, 55);
+    rect(width/2, 300, 600, 55);
+    pop();
+
+    // choice options themselves
+    push();
+    fill(0);
+    textAlign(CENTER);
+    textSize(18);
+    noStroke();
+    text(choice2A, width/2, 175);
+    text(choice2B, width/2, 305);
+    pop();
+  }
+  if (scene == 41) {
+    push();
+    fill(255, 255, 255, 180);
+    rectMode(CENTER);
+    strokeWeight(2);
+    rect(width/2, 170, 540, 55);
+    rect(width/2, 300, 600, 55);
+    pop();
+
+    // choice options themselves
+    push();
+    fill(0);
+    textAlign(CENTER);
+    textSize(18);
+    noStroke();
+    text(choice3A, width/2, 175);
+    text(choice3B, width/2, 305);
+    pop();
+  }
+  if (scene == 46) {
+    push();
+    fill(255, 255, 255, 180);
+    rectMode(CENTER);
+    strokeWeight(2);
+    rect(width/2, 170, 540, 55);
+    rect(width/2, 300, 600, 55);
+    pop();
+
+    // choice options themselves
+    push();
+    fill(0);
+    textAlign(CENTER);
+    textSize(18);
+    noStroke();
+    text(choice4A, width/2, 175);
+    text(choice4B, width/2, 305);
+    pop();
+  }
+  if (scene == 59) {
+    push();
+    fill(255, 255, 255, 180);
+    rectMode(CENTER);
+    strokeWeight(2);
+    rect(width/2, 170, 540, 55);
+    rect(width/2, 300, 600, 55);
+    pop();
+
+    // choice options themselves
+    push();
+    fill(0);
+    textAlign(CENTER);
+    textSize(18);
+    noStroke();
+    text(choice5A, width/2, 175);
+    text(choice5B, width/2, 305);
+    pop();
+  }
 }
 
 function endings() {
-  if (scene == 9) { // good end
+  if (scene == 62 || scene == 66 || scene == 80) { // good end
     noLoop();
   }
-  if (scene == 22) { // bad end
-    noLoop();
-  }
+  // if (scene == 38) { // bad end
+  //   noLoop();
+  // }
 }
 // // function for the good ending (if the mental health meter is > 50%)
 // function goodEnding() {
@@ -568,7 +707,8 @@ function endings() {
 // }
 
 function mousePressed() {
-  if (mouseX >= 890 && mouseX <= 990 && mouseY >= 470 && mouseY <= 570 && scene !== 1) {
+  // beginning
+  if (mouseX >= 890 && mouseX <= 990 && mouseY >= 470 && mouseY <= 570 && scene !== 1 && scene !== 27 && scene !== 41 && scene !== 46 && scene !== 59) {
     scene += 1;
   }  
 
@@ -576,6 +716,7 @@ function mousePressed() {
     scene += 1;
   }
 
+  // choice 1
   if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 1) {
     scene = 3;
     mentalMeter = -1;
@@ -584,5 +725,152 @@ function mousePressed() {
   if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 1) {
     scene = 11;
     mentalMeter = 1;
+  }
+
+  // choice 2
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 27 && mentalMeter == 1) {
+    scene = 28;
+    mentalMeter = 2;
+  }
+
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 27 && mentalMeter == -1) {
+    scene = 35;
+    mentalMeter = 0;
+  }
+
+  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 27 && mentalMeter == 1) {
+    scene = 28;
+    mentalMeter = 0;
+  } 
+
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 27 && mentalMeter == -1) {
+    scene = 35;
+    mentalMeter = -2;
+  } 
+
+  // choice 3
+
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 41 && mentalMeter == 1) {
+    scene = 42;
+    mentalMeter = 2;
+  }
+
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 41 && mentalMeter == -1) {
+    scene = 67;
+    mentalMeter = 0;
+  }
+
+  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 41 && mentalMeter == 1) {
+    scene = 42;
+    mentalMeter = 0;
+  } 
+
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 41 && mentalMeter == -1) {
+    scene = 67;
+    mentalMeter = -2;
+  } 
+
+  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 41 && mentalMeter == 2) {
+    scene = 42;
+    mentalMeter = 3;
+  } 
+
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 41 && mentalMeter == -2) {
+    scene = 67;
+    mentalMeter = -3;
+  } 
+
+  // choice 4
+
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 46 && mentalMeter == 1) {
+    scene = 47;
+    mentalMeter = 2;
+  }
+
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 46 && mentalMeter == -1) {
+    scene = 53;
+    mentalMeter = 0;
+  }
+
+  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 46 && mentalMeter == 1) {
+    scene = 47;
+    mentalMeter = 0;
+  } 
+
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 46 && mentalMeter == -1) {
+    scene = 53;
+    mentalMeter = -2;
+  } 
+
+  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 46 && mentalMeter == 2) {
+    scene = 47;
+    mentalMeter = 0;
+  } 
+
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 46 && mentalMeter == -2) {
+    scene = 53;
+    mentalMeter = -2;
+  } 
+
+  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 46 && mentalMeter == 3) {
+    scene = 47;
+    mentalMeter = 4;
+  } 
+
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 46 && mentalMeter == -3) {
+    scene = 53;
+    mentalMeter = -4;
+  } 
+
+  // choice 5
+
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 59 && mentalMeter == 1) {
+    scene = 60;
+    mentalMeter = 2;
+  }
+
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 59 && mentalMeter == -1) {
+    scene = 63;
+    mentalMeter = 0;
+  }
+
+  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 59 && mentalMeter == 1) {
+    scene = 60;
+    mentalMeter = 0;
+  } 
+
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 59 && mentalMeter == -1) {
+    scene = 63;
+    mentalMeter = -2;
+  } 
+
+  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 59 && mentalMeter == 2) {
+    scene = 60;
+    mentalMeter = 0;
+  } 
+
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 59 && mentalMeter == -2) {
+    scene = 63;
+    mentalMeter = -2;
+  } 
+
+  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 59 && mentalMeter == 3) {
+    scene = 60;
+    mentalMeter = 4;
+  } 
+
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 59 && mentalMeter == -3) {
+    scene = 63;
+    mentalMeter = -4;
+  } 
+
+  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 59 && mentalMeter == 4) {
+    scene = 60;
+    mentalMeter = 5;
+  } 
+
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 59 && mentalMeter == -4) {
+    scene = 63;
+    mentalMeter = -5;
   } 
 }
