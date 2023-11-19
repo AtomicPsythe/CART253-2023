@@ -28,10 +28,10 @@ let sceneDialogue = [{
   charName: "Cleo",
   txt: "Now the question is, should I be a good student and succumb to waking up early or just treat myself and sleep in a little bit more?" // scene 2
 }, {
+  // choice 1A
   charName: "Cleo",
   txt: "Meh, I’ll treat myself to a little bit of extra sleep… it shouldn’t be too bad." // scene 3
 }, {
-  // choice 1A
   charName: " ",
   txt: "*falls asleep for an hour*" // scene 4 
 }, {
