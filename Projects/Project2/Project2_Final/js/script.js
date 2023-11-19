@@ -123,7 +123,7 @@ let sceneDialogue = [{
   txt: "Of course Cleo, now go on, your homework awaits haha." // scene 32
 }, {
   charName: "Cleo",
-  txt: "Yes yes, I will professor Seb haha" // scene 33
+  txt: "Yes yes, I will professor Seb haha." // scene 33
 }, {
   charName: " ",
   txt: "*proceeds to go home*" // scene 34
@@ -255,7 +255,7 @@ let sceneDialogue = [{
   txt: "Hey Cleo, I forgot to ask did you complete the assignment that was due tonight?" // scene 73
 }, {
   charName: "Cleo",
-  txt: "Assignmet? What assignment?" // scene 74
+  txt: "Assignment? What assignment?" // scene 74
 }, {
   charName: "Sebastian",
   txt: "Our math one? It just hit midnight. Did you not do it...?" // scene 75
@@ -325,9 +325,7 @@ let mentalMeter = 0;
 let fade = 0;
 let fadeAmount = 1;
 
-/**
- * Preload defines the assets' variables that will be used for the prototype (character images, backgrounds, UI assets)
-*/
+// Preload defines the assets' variables that will be used for the prototype (character images, backgrounds, UI assets)
 function preload() {
   bedroom = loadImage("assets/images/bedroom.jpg");
   nextButton = loadImage("assets/images/next_button.jpg");
@@ -347,9 +345,7 @@ function preload() {
   cleoHouse = loadImage("assets/images/cleo_house.jpg");
 }
 
-/**
- * Creates the canvas and calls to the button function where the initial start button is created
-*/
+// Creates the canvas and calls to the button function where the initial start button is created
 function setup() {
   // creates the canvas
   createCanvas(1000, 600);
@@ -372,9 +368,7 @@ function reset() {
   startButton.hide();
 }
 
-/**
- * Checks for which state is active and calls to that state's respective function to display all of its elements
-*/
+// Checks for which state is active and calls to that state's respective function to display all of its elements
 function draw() {
   if (state === `title`) {
       title();
@@ -484,6 +478,35 @@ function images() {
     image(protagNormal, 150, 100, 340, 360);
     image(character2Normal, 500, 100, 340, 360);
   }
+  if (scene == 39 || scene == 40 || scene == 41 || scene == 43 || scene == 67 || scene == 69 || scene == 70) {
+    image(character2Smirk, 150, 100, 340, 360);
+  }
+  if (scene == 42) {
+    image(character2Normal, 150, 100, 340, 360);
+  }
+  if (scene == 40 || scene == 41 || scene == 42 || scene == 43 || scene == 71) {
+    image (protagHappy, 500, 100, 340, 360);
+  }
+  if (scene == 45 || scene == 46 || scene == 47 || scene == 49 || scene == 50 || scene == 53 || scene == 54 || scene == 55 || scene == 57 || scene == 73 || scene == 74 || scene == 75 || scene == 76 || scene == 77 || scene == 78 || scene == 79 || scene == 80) {
+    image(protagNormal, 150, 100, 340, 360);
+  }
+  if (scene == 48 || scene == 51) {
+    image(protagAngry, 150, 100, 340, 360);
+  }
+  if (scene == 56) {
+    image(protagHappy, 150, 100, 340, 360);
+  }
+  if (scene == 59 || scene == 60 || scene == 61 || scene == 62 || scene == 63 || scene == 65) {
+    image(protagHappy, 320, 100, 340, 360);
+  }
+  if (scene == 66) {
+    image(protagNormal, 320, 100, 340, 360);
+  }
+  if (scene == 76 || scene == 77 || scene == 78 || scene == 79 || scene == 80) {
+    image(protagAngry, 500, 100, 340, 360);
+  }
+
+  // overlay effects
   if (scene == 4 || scene == 5 || scene == 6 || scene == 7 || scene == 8 || scene == 9 || scene == 10) {
     push();
     image(badChoice, 0, 0, 1000, 600);
@@ -520,7 +543,6 @@ function mentalHealthMeter() {
     strokeWeight(2)
     rect(20, 10, 270, 40);
     pop();
-    // goodEnding();
   }
 
   // if two good choices are made
@@ -531,7 +553,6 @@ function mentalHealthMeter() {
     strokeWeight(2)
     rect(20, 10, 290, 40);
     pop();
-    // goodEnding();
   }
 
   // if two good choices are made
@@ -542,7 +563,6 @@ function mentalHealthMeter() {
     strokeWeight(2)
     rect(20, 10, 310, 40);
     pop();
-    // goodEnding();
   }
 
   // if two good choices are made
@@ -553,7 +573,6 @@ function mentalHealthMeter() {
     strokeWeight(2)
     rect(20, 10, 330, 40);
     pop();
-    // goodEnding();
   }
 
   // if two good choices are made
@@ -564,7 +583,6 @@ function mentalHealthMeter() {
     strokeWeight(2)
     rect(20, 10, 350, 40);
     pop();
-    // goodEnding();
   }
 
   // if one bad choice is made
@@ -575,7 +593,6 @@ function mentalHealthMeter() {
     strokeWeight(2)
     rect(20, 10, 230, 40);
     pop();
-    // badEnding();
   }
 
     // if one bad choice is made
@@ -586,7 +603,6 @@ function mentalHealthMeter() {
       strokeWeight(2)
       rect(20, 10, 210, 40);
       pop();
-      // badEnding();
     }
 
     // if one bad choice is made
@@ -597,7 +613,6 @@ function mentalHealthMeter() {
       strokeWeight(2)
       rect(20, 10, 190, 40);
       pop();
-      // badEnding();
     }
 
     // if one bad choice is made
@@ -608,7 +623,6 @@ function mentalHealthMeter() {
       strokeWeight(2)
       rect(20, 10, 170, 40);
       pop();
-      // badEnding();
     }
 
     // if one bad choice is made
@@ -619,7 +633,6 @@ function mentalHealthMeter() {
       strokeWeight(2)
       rect(20, 10, 150, 40);
       pop();
-      // badEnding();
     }
 }
 
@@ -648,7 +661,7 @@ function storyText() {
   noStroke();
   textWrap(WORD);
   text(sceneDialogue[scene].txt, 40, 460, 1125, 242);
-  text(sceneDialogue[scene].charName, 40, 397, 300);
+  text(sceneDialogue[scene].charName, 40, 400, 300);
   pop();
 }
 
@@ -862,7 +875,6 @@ function mousePressed() {
   } 
 
   // choice 3
-
   if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 41 && mentalMeter == 1) {
     scene = 42;
     mentalMeter = 2;
@@ -894,7 +906,6 @@ function mousePressed() {
   } 
 
   // choice 4
-
   if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 46 && mentalMeter == 1) {
     scene = 47;
     mentalMeter = 2;
@@ -936,7 +947,6 @@ function mousePressed() {
   } 
 
   // choice 5
-
   if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 59 && mentalMeter == 1) {
     scene = 60;
     mentalMeter = 2;
