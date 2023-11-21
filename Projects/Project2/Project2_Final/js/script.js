@@ -234,13 +234,13 @@ let sceneDialogue = [{
 }, {
   // choice 3B
   charName: "Sebastian",
-  txt: "Sweet, let's head over to my place then to get set up" // scene 67
+  txt: "Sweet, let's head over to my place then to get set up." // scene 67
 }, {
   charName: " ",
   txt: "*the two of you head over to Sebastian's house for the sleepover*" // scene 68
 }, {
   charName: "Sebastian",
-  txt: "Hey mom, I'm home, and Cleo's here as well to sleep over" // scene 69
+  txt: "Hey mom, I'm home, and Cleo's here as well to sleep over." // scene 69
 }, {
   charName: "Sebastian's mom",
   txt: "Welcome home sweetie, and hello Cleo you're welcome to stay for as long as you like \n it's just me and Sebastian here tonight!" // scene 70
@@ -249,7 +249,7 @@ let sceneDialogue = [{
   txt: "Thank you ma'am!" // scene 71
 }, {
   charName: " ",
-  txt: "*the two of you go upstairs to Sebastian's room and hang out for the evening" // scene 72
+  txt: "*the two of you go upstairs to Sebastian's room and hang out for the evening*" // scene 72
 }, {
   charName: "Sebastian",
   txt: "Hey Cleo, I forgot to ask did you complete the assignment that was due tonight?" // scene 73
@@ -481,13 +481,13 @@ function images() {
   if (scene == 39 || scene == 40 || scene == 41 || scene == 43 || scene == 67 || scene == 69 || scene == 70) {
     image(character2Smirk, 150, 100, 340, 360);
   }
-  if (scene == 42) {
+  if (scene == 42 || scene == 73 || scene == 74 || scene == 75 || scene == 76 || scene == 77 || scene == 78 || scene == 79 || scene == 80) {
     image(character2Normal, 150, 100, 340, 360);
   }
-  if (scene == 40 || scene == 41 || scene == 42 || scene == 43 || scene == 71) {
+  if (scene == 40 || scene == 41 || scene == 42 || scene == 43 || scene == 67 || scene == 71) {
     image (protagHappy, 500, 100, 340, 360);
   }
-  if (scene == 45 || scene == 46 || scene == 47 || scene == 49 || scene == 50 || scene == 53 || scene == 54 || scene == 55 || scene == 57 || scene == 73 || scene == 74 || scene == 75 || scene == 76 || scene == 77 || scene == 78 || scene == 79 || scene == 80) {
+  if (scene == 45 || scene == 46 || scene == 47 || scene == 49 || scene == 50 || scene == 53 || scene == 54 || scene == 55 || scene == 57) {
     image(protagNormal, 150, 100, 340, 360);
   }
   if (scene == 48 || scene == 51) {
@@ -502,7 +502,7 @@ function images() {
   if (scene == 66) {
     image(protagNormal, 320, 100, 340, 360);
   }
-  if (scene == 76 || scene == 77 || scene == 78 || scene == 79 || scene == 80) {
+  if (scene == 74 || scene == 76 || scene == 77 || scene == 78 || scene == 79 || scene == 80) {
     image(protagAngry, 500, 100, 340, 360);
   }
 
