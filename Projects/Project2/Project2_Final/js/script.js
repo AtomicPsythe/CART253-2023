@@ -18,7 +18,8 @@ let txt = " " // variable for the text (dialogue, narration)
 let startButton; // variable for the start button
 
 // variable and sets up the text being displayed on the screen for each scene
-let sceneDialogue = [{
+let sceneDialogue = [
+  {
   charName: "Alarm",
   txt: "Pzzzz... pzzzz... pzzzz... pzz..." // scene 0
 }, {
@@ -275,7 +276,8 @@ let sceneDialogue = [{
   charName: "Cleo",
   txt: "It's ok, thanks for your sympathy." // scene 80
   // STORY END
-}];
+}
+];
 
 // strings for the choice options
 // choice 1
@@ -660,6 +662,7 @@ function storyText() {
   textSize(20);
   noStroke();
   textWrap(WORD);
+  textWrap(WORD);
   text(sceneDialogue[scene].txt, 40, 460, 1125, 242);
   text(sceneDialogue[scene].charName, 40, 400, 300);
   pop();
@@ -830,7 +833,17 @@ function trueEnding() {
   pop();
 }
 
+function mentalMeterCounter() {
+  if (mouseX >= 890 && mouseX <= 990 && mouseY >= 470 && mouseY <= 570 && scene == 10) {
+    scene = 23;
+  }
+  //^^ do that for every good/bad choice to make it not play the other text 
+  //(put all of the negative ones here, keep all of the positive ones in mousePressed)
+}
+
 function mousePressed() {
+  mentalMeterCounter()
+
   // beginning
   if (mouseX >= 890 && mouseX <= 990 && mouseY >= 470 && mouseY <= 570 && scene !== 1 && scene !== 27 && scene !== 41 && scene !== 46 && scene !== 59) {
     scene += 1;
@@ -854,6 +867,7 @@ function mousePressed() {
   }
 
   // choice 2
+  // choice2a
   if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 27 && mentalMeter == 1) {
     scene = 28;
     mentalMeter = 2;
