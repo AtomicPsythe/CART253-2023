@@ -285,8 +285,8 @@ let choice1A = "Sleep in, you deserve it";
 let choice1B = "Wake up and take on the day";
 
 // choice 2
-let choice2A = "I was thinking of going home early to get some assignments done";
-let choice2B = "I was thinking, maybe we can hang out together now that class is done?";
+let choice2A = "I was thinking, maybe we can hang out together now that class is done?"; 
+let choice2B = "I was thinking of going home early to get some assignments done";
 
 // choice 3
 let choice3A = "Go home, it’s late and you’re getting tired.";
@@ -695,8 +695,8 @@ function choiceOptions() {
     fill(255, 255, 255, 180);
     rectMode(CENTER);
     strokeWeight(2);
-    rect(width/2, 170, 540, 55);
     rect(width/2, 300, 600, 55);
+    rect(width/2, 170, 540, 55);
     pop();
 
     // choice options themselves
@@ -705,8 +705,8 @@ function choiceOptions() {
     textAlign(CENTER);
     textSize(18);
     noStroke();
-    text(choice2A, width/2, 175);
-    text(choice2B, width/2, 305);
+    text(choice2B, width/2, 175);
+    text(choice2A, width/2, 305);
     pop();
   }
   if (scene == 41) {
@@ -834,8 +834,21 @@ function trueEnding() {
 }
 
 function mentalMeterCounter() {
+  // choice1A
   if (mouseX >= 890 && mouseX <= 990 && mouseY >= 470 && mouseY <= 570 && scene == 10) {
     scene = 23;
+  }
+  // choice1B
+  if (mouseX >= 890 && mouseX <= 990 && mouseY >= 470 && mouseY <= 570 && scene == 22) {
+    scene = 23;
+  }
+  // choice2A
+  if (mouseX >= 890 && mouseX <= 990 && mouseY >= 470 && mouseY <= 570 && scene == 34) {
+    scene = 35;
+  }
+  // choice2B
+  if (mouseX >= 890 && mouseX <= 990 && mouseY >= 470 && mouseY <= 570 && scene == 44) {
+    scene = 45;
   }
   //^^ do that for every good/bad choice to make it not play the other text 
   //(put all of the negative ones here, keep all of the positive ones in mousePressed)
@@ -867,25 +880,24 @@ function mousePressed() {
   }
 
   // choice 2
-  // choice2a
   if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 27 && mentalMeter == 1) {
-    scene = 28;
-    mentalMeter = 2;
+    scene = 35;
+    mentalMeter = 0;
   }
 
   if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 27 && mentalMeter == -1) {
-    scene = 35;
-    mentalMeter = 0;
+    scene = 28;
+    mentalMeter = -2;
   }
 
   if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 27 && mentalMeter == 1) {
-    scene = 28;
-    mentalMeter = 0;
+    scene = 35;
+    mentalMeter = 2;
   } 
 
   if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 27 && mentalMeter == -1) {
-    scene = 35;
-    mentalMeter = -2;
+    scene = 28;
+    mentalMeter = 0;
   } 
 
   // choice 3
