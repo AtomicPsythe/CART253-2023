@@ -695,8 +695,8 @@ function choiceOptions() {
     fill(255, 255, 255, 180);
     rectMode(CENTER);
     strokeWeight(2);
-    rect(width/2, 300, 600, 55);
     rect(width/2, 170, 540, 55);
+    rect(width/2, 300, 600, 55);
     pop();
 
     // choice options themselves
@@ -705,8 +705,8 @@ function choiceOptions() {
     textAlign(CENTER);
     textSize(18);
     noStroke();
-    text(choice2B, width/2, 175);
     text(choice2A, width/2, 305);
+    text(choice2B, width/2, 175);
     pop();
   }
   if (scene == 41) {
@@ -886,12 +886,12 @@ function mousePressed() {
   }
 
   if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 27 && mentalMeter == -1) {
-    scene = 28;
+    scene = 35;
     mentalMeter = -2;
   }
 
   if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 27 && mentalMeter == 1) {
-    scene = 35;
+    scene = 28;
     mentalMeter = 2;
   } 
 
@@ -911,9 +911,9 @@ function mousePressed() {
     mentalMeter = 0;
   }
 
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 41 && mentalMeter == 1) {
+  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 41 && mentalMeter == 0) {
     scene = 42;
-    mentalMeter = 0;
+    mentalMeter = 1;
   } 
 
   if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 41 && mentalMeter == -1) {
