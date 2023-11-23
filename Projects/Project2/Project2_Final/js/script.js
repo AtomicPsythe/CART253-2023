@@ -319,32 +319,52 @@ let cleoHouse;
 
 // overlay images
 let badChoice;
+let badChoice2;
+let badChoice3;
+let badChoice4;
 
 // variable for the endings (mental health meter)
 let mentalMeter = 0;
 
-// fade variable
-let fade = 0;
-let fadeAmount = 1;
+// music variables
+let titleTrack;
+let dayTrack;
+let nightTrack;
+let goodChoiceTrack;
+let badChoiceTrack;
 
 // Preload defines the assets' variables that will be used for the prototype (character images, backgrounds, UI assets)
 function preload() {
-  bedroom = loadImage("assets/images/bedroom.jpg");
+  // button
   nextButton = loadImage("assets/images/next_button.jpg");
+  // title screen image 
+  titleScreenImage = loadImage("assets/images/title.jpg");
+  // backgrounds
+  bedroom = loadImage("assets/images/bedroom.jpg");
+  school = loadImage("assets/images/school.jpg");
+  mall = loadImage("assets/images/mall.jpg");
+  sebHouse = loadImage("assets/images/seb_house.jpg");
+  sebRoom = loadImage("assets/images/seb_room.jpg");
+  bedroomNight = loadImage("assets/images/bedroom_night.jpg");
+  cleoHouse = loadImage("assets/images/cleo_house.jpg");
+  // character sprites
   protagNormal = loadImage("assets/images/protag_normal.png");
   protagHappy = loadImage("assets/images/protag_happy.png");
   protagAngry = loadImage("assets/images/protag_angry.png");
   character2Normal = loadImage("assets/images/character2_normal.png");
   character2Surprised = loadImage("assets/images/character2_surprised.png");
   character2Smirk = loadImage("assets/images/character2_smirk.png");
-  titleScreenImage = loadImage("assets/images/title.jpg");
-  school = loadImage("assets/images/school.jpg");
-  badChoice = loadImage("assets/images/bad_overlay_40.png");
-  mall = loadImage("assets/images/mall.jpg");
-  sebHouse = loadImage("assets/images/seb_house.jpg");
-  sebRoom = loadImage("assets/images/seb_room.jpg");
-  bedroomNight = loadImage("assets/images/bedroom_night.jpg");
-  cleoHouse = loadImage("assets/images/cleo_house.jpg");
+  // bad choice overlay
+  badChoice = loadImage("assets/images/bad_choice1.png");
+  badChoice2 = loadImage("assets/images/bad_choice2.png");
+  badChoice3 = loadImage("assets/images/bad_choice3.png");
+  badChoice4 = loadImage("assets/images/bad_choice4.png");
+  // music
+  titleTrack = loadSound("assets/sounds/menu.mp3");
+  dayTrack = loadSound("assets/sounds/daytime.mp3");
+  nightTrack = loadSound("assets/sounds/nighttime.mp3");
+  goodChoiceTrack = loadSound("assets/sounds/goodchoice.mp3");
+  badChoiceTrack = loadSound("assets/sounds/badchoice.mp3");
 }
 
 // Creates the canvas and calls to the button function where the initial start button is created
@@ -353,6 +373,9 @@ function setup() {
   createCanvas(1000, 600);
   // calls to the function that creates the start button
   button();
+  userStartAudio();
+  titleTrack.play();
+  titleTrack.loop();
 }
 
 // creates the start button on the title screen that the player presses to start the simulation
@@ -391,6 +414,8 @@ function draw() {
 
 // function that displays all of the elements on the initial title screen
 function title() {
+  // titleTrack.play();
+  // titleTrack.loop();
   background(titleScreenImage);
   // title 
   push();
@@ -426,6 +451,7 @@ function title() {
 function simulation() {
   images();
   mentalHealthMeter();
+  mentalMeterCounter();
   storyText();
   choiceOptions();
   endings();
@@ -512,7 +538,8 @@ function images() {
   if (scene == 4 || scene == 5 || scene == 6 || scene == 7 || scene == 8 || scene == 9 || scene == 10) {
     push();
     image(badChoice, 0, 0, 1000, 600);
-    tint(badChoice, 0, 0, 0, 125);
+    // filter(GRAY, 255, 127);
+    // tint(badChoice, 255, 127);
     pop();
     // tint(0, 0, 0, 20); does a super cool fade to black thing
   }
@@ -595,6 +622,9 @@ function mentalHealthMeter() {
     strokeWeight(2)
     rect(20, 10, 230, 40);
     pop();
+    push();
+    image(badChoice, 0, 0, 1000, 600);
+    pop();
   }
 
     // if one bad choice is made
@@ -604,6 +634,9 @@ function mentalHealthMeter() {
       rectMode(CORNER);
       strokeWeight(2)
       rect(20, 10, 210, 40);
+      pop();
+      push();
+      image(badChoice2, 0, 0, 1000, 600);
       pop();
     }
 
@@ -615,6 +648,9 @@ function mentalHealthMeter() {
       strokeWeight(2)
       rect(20, 10, 190, 40);
       pop();
+      push();
+      image(badChoice3, 0, 0, 1000, 600);
+      pop();
     }
 
     // if one bad choice is made
@@ -624,6 +660,9 @@ function mentalHealthMeter() {
       rectMode(CORNER);
       strokeWeight(2)
       rect(20, 10, 170, 40);
+      pop();
+      push();
+      image(badChoice4, 0, 0, 1000, 600);
       pop();
     }
 
@@ -797,6 +836,21 @@ function goodEnding() {
   textAlign(CENTER, CENTER);
   text("GOOD ENDING", width/2, height/4.5);
   pop();
+
+  push();
+  fill(255);
+  stroke(0, 0, 139);
+  strokeWeight(5);
+  rect(215, 260, 580, 250);
+  pop();
+  push();
+  noStroke();
+  textSize(20);
+  fill(179, 98, 0);
+  textAlign(CENTER, CENTER);
+  textSize(14);
+  text("Cleo continued her week by fixing her sleep schedule, being more open with how she has been \nfeeling with her friends and family, and has begun to catch-up on her on school responsibilities. Mental health is not something easy to overcome, so take the necessary \nsteps you need to tackle what is plaguing you. Whether it may be talking to a loved one, friend, \nor even teacher, distracting yourself with hobbies and activities, or by simply crying it out, there is light at the end of the tunnel my friend, \nand we will all make it out together <3.", width/2, height/1.35);
+  pop();
 }
 
 // function for the bad ending (if the mental health meter is < 50%)
@@ -844,17 +898,36 @@ function mentalMeterCounter() {
   }
   // choice2A
   if (mouseX >= 890 && mouseX <= 990 && mouseY >= 470 && mouseY <= 570 && scene == 34) {
-    scene = 35;
+    scene = 45;
   }
-  // choice2B
+  // choice2B + choice3a
   if (mouseX >= 890 && mouseX <= 990 && mouseY >= 470 && mouseY <= 570 && scene == 44) {
     scene = 45;
+  }
+  // choice3b
+
+  // choice4A
+  if (mouseX >= 890 && mouseX <= 990 && mouseY >= 470 && mouseY <= 570 && scene == 52) {
+    scene = 59;
+  }
+  // choice4b
+  if (mouseX >= 890 && mouseX <= 990 && mouseY >= 470 && mouseY <= 570 && scene == 58) {
+    scene = 59;
+  }
+  // choice5a
+  if (mouseX >= 890 && mouseX <= 990 && mouseY >= 470 && mouseY <= 570 && scene == 65) {
+    scene = 66;
   }
   //^^ do that for every good/bad choice to make it not play the other text 
   //(put all of the negative ones here, keep all of the positive ones in mousePressed)
 }
 
 function mousePressed() {
+  if (state === "simulation") {
+    titleTrack.stop();
+    dayTrack.play();
+    // dayTrack.loop();
+  }
   mentalMeterCounter()
 
   // beginning
