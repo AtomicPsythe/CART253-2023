@@ -374,7 +374,6 @@ function setup() {
   // calls to the function that creates the start button
   button();
   userStartAudio();
-  titleTrack.play();
   titleTrack.loop();
 }
 
@@ -388,9 +387,12 @@ function button() {
 
 // removes the button once it is clicked and transitions to the simulation state
 function reset() {
-  simulation();
   state = "simulation";
   startButton.hide();
+  titleTrack.stop();
+
+  dayTrack.loop();
+  dayTrack.setVolume(0.3);
 }
 
 // Checks for which state is active and calls to that state's respective function to display all of its elements
@@ -549,6 +551,10 @@ function mentalHealthMeter() {
     rectMode(CORNER);
     strokeWeight(2)
     rect(20, 10, 250, 40);
+    // first choice box
+    // rect(230, 140, 540, 60);
+    // second choice box
+    // rect(200, 270, 600, 60);
     pop();
   }
 
@@ -703,8 +709,8 @@ function choiceOptions() {
     fill(255, 255, 255, 180);
     rectMode(CENTER);
     strokeWeight(2);
-    rect(width/2, 170, 350, 55);
-    rect(width/2, 300, 350, 55);
+    rect(width/2, 170, 600, 55);
+    rect(width/2, 300, 600, 55);
     pop();
 
     // choice options themselves
@@ -722,7 +728,7 @@ function choiceOptions() {
     fill(255, 255, 255, 180);
     rectMode(CENTER);
     strokeWeight(2);
-    rect(width/2, 170, 540, 55);
+    rect(width/2, 170, 600, 55);
     rect(width/2, 300, 600, 55);
     pop();
 
@@ -732,8 +738,8 @@ function choiceOptions() {
     textAlign(CENTER);
     textSize(18);
     noStroke();
-    text(choice2A, width/2, 305);
-    text(choice2B, width/2, 175);
+    text(choice2A, width/2, 175);
+    text(choice2B, width/2, 305);
     pop();
   }
   if (scene == 41) {
@@ -741,7 +747,7 @@ function choiceOptions() {
     fill(255, 255, 255, 180);
     rectMode(CENTER);
     strokeWeight(2);
-    rect(width/2, 170, 540, 55);
+    rect(width/2, 170, 600, 55);
     rect(width/2, 300, 600, 55);
     pop();
 
@@ -751,8 +757,8 @@ function choiceOptions() {
     textAlign(CENTER);
     textSize(18);
     noStroke();
-    text(choice3A, width/2, 175);
-    text(choice3B, width/2, 305);
+    text(choice3B, width/2, 175);
+    text(choice3A, width/2, 305);
     pop();
   }
   if (scene == 46) {
@@ -760,7 +766,7 @@ function choiceOptions() {
     fill(255, 255, 255, 180);
     rectMode(CENTER);
     strokeWeight(2);
-    rect(width/2, 170, 540, 55);
+    rect(width/2, 170, 600, 55);
     rect(width/2, 300, 600, 55);
     pop();
 
@@ -779,7 +785,7 @@ function choiceOptions() {
     fill(255, 255, 255, 180);
     rectMode(CENTER);
     strokeWeight(2);
-    rect(width/2, 170, 540, 55);
+    rect(width/2, 170, 600, 55);
     rect(width/2, 300, 600, 55);
     pop();
 
@@ -804,76 +810,106 @@ function endings() {
     badEnding();
     noLoop();
   }
-  else if (scene == 62 || scene == 66 || scene == 80 & mentalMeter == 0) {
-    trueEnding();
-    noLoop();
-  }
+  // else if (scene == 62 || scene == 66 || scene == 80 & mentalMeter == 0) {
+  //   trueEnding();
+  //   noLoop();
+  // }
 }
 // function for the good ending (if the mental health meter is > 50%)
 function goodEnding() {
-  background(0, 163, 108);
+  background(titleScreenImage);
   push();
-  fill(255);
+  fill(255, 255, 255, 200);
   stroke(0, 0, 139);
   strokeWeight(5);
-  rect(230, 80, 540, 100);
+  rect(230, 80, 540, 100, 20);
   pop();
   push();
   textSize(45);
-  fill(179, 98, 0);
+  fill(139,0,139);
   textAlign(CENTER, CENTER);
   text("GOOD ENDING", width/2, height/4.5);
   pop();
 
   push();
-  fill(255);
+  fill(255, 255, 255, 200);
   stroke(0, 0, 139);
   strokeWeight(5);
-  rect(215, 260, 580, 250);
+  rect(215, 260, 580, 150, 20);
   pop();
   push();
   noStroke();
   textSize(20);
-  fill(179, 98, 0);
+  fill(139,0,139);
   textAlign(CENTER, CENTER);
   textSize(14);
-  text("Cleo continued her week by fixing her sleep schedule, being more open with how she has been \nfeeling with her friends and family, and has begun to catch-up on her on school responsibilities. Mental health is not something easy to overcome, so take the necessary \nsteps you need to tackle what is plaguing you. Whether it may be talking to a loved one, friend, \nor even teacher, distracting yourself with hobbies and activities, or by simply crying it out, there is light at the end of the tunnel my friend, \nand we will all make it out together <3.", width/2, height/1.35);
+  text("Cleo continued her week by fixing her sleep schedule, being more open with how she has \nbeen feeling with her friends and family, and has begun to catch-up on her on school \nresponsibilities. Mental health is not something easy to overcome, so take the \nnecessary steps you need to tackle what is plaguing you. Whether it may be talking to a \nloved one, friend, or even teacher, distracting yourself with hobbies and activities, or by \nsimply crying it out, there is light at the end of the tunnel my friend, \nand we will all make it out together <3.", width/1.98, height/1.8);
   pop();
 }
 
 // function for the bad ending (if the mental health meter is < 50%)
 function badEnding() {
-  background(255, 87, 51);
+  background(titleScreenImage);
   push();
-  fill(255);
+  fill(255, 255, 255, 200);
   stroke(0, 0, 139);
   strokeWeight(5);
-  rect(230, 80, 540, 100);
+  rect(230, 80, 540, 100, 20);
   pop();
   push();
   textSize(45);
-  fill(179, 98, 0);
+  fill(139,0,139);
   textAlign(CENTER, CENTER);
   text("BAD ENDING", width/2, height/4.5);
+  pop();
+
+  push();
+  fill(255, 255, 255, 200);
+  stroke(0, 0, 139);
+  strokeWeight(5);
+  rect(215, 260, 580, 150, 20);
+  pop();
+  push();
+  noStroke();
+  textSize(20);
+  fill(139,0,139);
+  textAlign(CENTER, CENTER);
+  textSize(14);
+  text("Unfortunately, as a result of her struggling mental health, Cleo’s sleep schedule worsened\n and she got in trouble by her mom for missing several classes and not being a more\n productive student. But she promises to improve… somehow. But do not forget, mental\n health is not something easy to overcome, so take the necessary steps you need to tackle\n what is plaguing you. Whether it may be talking to a loved one, friend, or even teacher,\n distracting yourself with hobbies and activities, or by simply crying it out, there is light\n at the end of the tunnel my friend, and we will all make it out together <3.", width/1.98, height/1.8);
   pop();
 }
 
 // function for the true ending (if the mental health meter is = 50%)
-function trueEnding() {
-  background(255, 195, 0);
-  push();
-  fill(255);
-  stroke(0, 0, 139);
-  strokeWeight(5);
-  rect(230, 80, 540, 100);
-  pop();
-  push();
-  textSize(45);
-  fill(179, 98, 0);
-  textAlign(CENTER, CENTER);
-  text("BAD ENDING", width/2, height/4.5);
-  pop();
-}
+// function trueEnding() {
+//   background(titleScreenImage);
+//   push();
+//   fill(255, 255, 255, 200);
+//   stroke(0, 0, 139);
+//   strokeWeight(5);
+//   rect(230, 80, 540, 100, 20);
+//   pop();
+//   push();
+//   textSize(45);
+//   fill(139,0,139);
+//   textAlign(CENTER, CENTER);
+//   text("TRUE ENDING", width/2, height/4.5);
+//   pop();
+
+//   push();
+//   fill(255, 255, 255, 200);
+//   stroke(0, 0, 139);
+//   strokeWeight(5);
+//   rect(215, 260, 580, 150, 20);
+//   pop();
+//   push();
+//   noStroke();
+//   textSize(20);
+//   fill(139,0,139);
+//   textAlign(CENTER, CENTER);
+//   textSize(14);
+//   text("While Cleo may not be the perfect person ever, she has her high and low moments, which either benefit her drastically, like\n going to sleep and waking up earlier, or set her very behind, like not completing and \nforgetting to hand in assignments on time. But again, she is only human and\n that is ok. As a result, mental health can be that way and it is not\n something easy to overcome, so take the necessary steps you need to\n tackle what is plaguing you. Whether it may be talking to\n a loved one, friend, or even teacher, distracting yourself with hobbies and\n activities, or by simply crying it out, there is light at the end of the\n tunnel my friend, and we will all make it out together <3.", width/1.98, height/1.8);
+//   pop();
+// }
 
 function mentalMeterCounter() {
   // choice1A
@@ -893,7 +929,9 @@ function mentalMeterCounter() {
     scene = 45;
   }
   // choice3b
-
+  if (mouseX >= 890 && mouseX <= 990 && mouseY >= 470 && mouseY <= 570 && scene == 44) {
+    scene = 67;
+  }
   // choice4A
   if (mouseX >= 890 && mouseX <= 990 && mouseY >= 470 && mouseY <= 570 && scene == 52) {
     scene = 59;
@@ -902,19 +940,9 @@ function mentalMeterCounter() {
   if (mouseX >= 890 && mouseX <= 990 && mouseY >= 470 && mouseY <= 570 && scene == 58) {
     scene = 59;
   }
-  // choice5a
-  if (mouseX >= 890 && mouseX <= 990 && mouseY >= 470 && mouseY <= 570 && scene == 65) {
-    scene = 66;
-  }
-  //^^ do that for every good/bad choice to make it not play the other text 
-  //(put all of the negative ones here, keep all of the positive ones in mousePressed)
 }
 
 function mousePressed() {
-  if (state === "simulation" && scene === 0) {
-    titleTrack.stop();
-    dayTrack.loop();
-  }
   mentalMeterCounter()
 
   // beginning
@@ -924,162 +952,303 @@ function mousePressed() {
   }  
 
   // choice 1
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 1) {
+  if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 1) {
     scene = 3;
     mentalMeter = -1;
+    badChoiceTrack.play();
   }
 
-  // makes sure that upon clicking the bad choice option it does not play/display the good choice dialogue
-  if (mouseX >= 890 && mouseX <= 990 && mouseY >= 470 && mouseY <= 570 && scene == 10) {
-    scene = 23;
-  }
-
-  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 1) {
+  if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 1) {
     scene = 11;
     mentalMeter = 1;
+    goodChoiceTrack.play();
   }
 
   // choice 2
-  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 27 && mentalMeter == 1) {
-    scene = 35;
-    mentalMeter = 0;
-  }
-
-  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 27 && mentalMeter == -1) {
-    scene = 35;
-    mentalMeter = -2;
-  }
-
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 27 && mentalMeter == 1) {
+  if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 27 && mentalMeter == 1) {
     scene = 28;
     mentalMeter = 2;
+    goodChoiceTrack.play();
+  }
+
+  if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 27 && mentalMeter == -1) {
+    scene = 35;
+    mentalMeter = -2;
+    badChoiceTrack.play();
+  }
+
+  if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 27 && mentalMeter == 1) {
+    scene = 35;
+    mentalMeter = 0;
+    badChoiceTrack.play();
   } 
 
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 27 && mentalMeter == -1) {
+  if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 27 && mentalMeter == -1) {
     scene = 28;
     mentalMeter = 0;
+    goodChoiceTrack.play();
   } 
 
   // choice 3
-  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 41 && mentalMeter == 1) {
-    scene = 42;
-    mentalMeter = 2;
-  }
-
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 273 && mouseY <= 327 && scene == 41 && mentalMeter == -1) {
+  if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 41 && mentalMeter == 0) {
     scene = 67;
-    mentalMeter = 0;
+    mentalMeter = -1;
+    badChoiceTrack.play();
   }
-
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 41 && mentalMeter == 0) {
+  
+  if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 41 && mentalMeter == 0) {
     scene = 42;
     mentalMeter = 1;
-  } 
+    goodChoiceTrack.play();
+  }
 
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 41 && mentalMeter == -1) {
+  if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 41 && mentalMeter == 1) {
+    scene = 42;
+    mentalMeter = 2;
+    goodChoiceTrack.play();
+  }
+
+  if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 41 && mentalMeter == 1) {
     scene = 67;
-    mentalMeter = -2;
-  } 
-
-  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 41 && mentalMeter == 2) {
+    mentalMeter = 0;
+    badChoiceTrack.play();
+  }
+  
+  if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 41 && mentalMeter == 2) {
     scene = 42;
     mentalMeter = 3;
-  } 
+    goodChoiceTrack.play();
+  }
 
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 41 && mentalMeter == -2) {
+  if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 41 && mentalMeter == 2) {
+    scene = 67;
+    mentalMeter = 1;
+    badChoiceTrack.play();
+  }
+
+  if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 41 && mentalMeter == -1) {
+    scene = 42;
+    mentalMeter = 0;
+    goodChoiceTrack.play();
+  }
+
+  if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 41 && mentalMeter == -1) {
+    scene = 67;
+    mentalMeter = -2;
+    badChoiceTrack.play();
+  }
+
+  if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 41 && mentalMeter == -2) {
+    scene = 42;
+    mentalMeter = -1;
+    goodChoiceTrack.play();
+  }
+
+  if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 41 && mentalMeter == -2) {
     scene = 67;
     mentalMeter = -3;
-  } 
-
+    badChoiceTrack.play();
+  }
   // choice 4
-  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 46 && mentalMeter == 1) {
+  if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 46 && mentalMeter == 0) {
     scene = 47;
+    mentalMeter = -1;
+    badChoiceTrack.play();
+  }
+
+  if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 46 && mentalMeter == 0) {
+    scene = 53;
+    mentalMeter = 1;
+    goodChoiceTrack.play();
+  } 
+
+  if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 46 && mentalMeter == 1) {
+    scene = 47;
+    mentalMeter = 0;
+    badChoiceTrack.play();
+  }
+
+  if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 46 && mentalMeter == 1) {
+    scene = 53;
     mentalMeter = 2;
-  }
-
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 46 && mentalMeter == -1) {
-    scene = 53;
-    mentalMeter = 0;
-  }
-
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 46 && mentalMeter == 1) {
-    scene = 47;
-    mentalMeter = 0;
+    goodChoiceTrack.play();
   } 
 
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 46 && mentalMeter == -1) {
-    scene = 53;
-    mentalMeter = -2;
-  } 
-
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 46 && mentalMeter == 2) {
+  if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 46 && mentalMeter == 2) {
     scene = 47;
     mentalMeter = 1;
+    badChoiceTrack.play();
+  }
+
+  if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 46 && mentalMeter == 2) {
+    scene = 53;
+    mentalMeter = 3;
+    goodChoiceTrack.play();
   } 
 
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 46 && mentalMeter == -2) {
+  if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 46 && mentalMeter == 3) {
+    scene = 47;
+    mentalMeter = 2;
+    badChoiceTrack.play();
+  }
+
+  if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 46 && mentalMeter == 3) {
+    scene = 53;
+    mentalMeter = 4;
+    goodChoiceTrack.play();
+  } 
+
+  if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 46 && mentalMeter == -1) {
+    scene = 47;
+    mentalMeter = -2;
+    badChoiceTrack.play();
+  }
+
+  if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 46 && mentalMeter == -1) {
+    scene = 53;
+    mentalMeter = 0;
+    goodChoiceTrack.play();
+  } 
+
+  if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 46 && mentalMeter == -2) {
+    scene = 47;
+    mentalMeter = -3;
+    badChoiceTrack.play();
+  }
+
+  if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 46 && mentalMeter == -2) {
     scene = 53;
     mentalMeter = -1;
+    goodChoiceTrack.play();
   } 
 
-  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 46 && mentalMeter == 3) {
+  if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 46 && mentalMeter == -3) {
     scene = 47;
-    mentalMeter = 4;
-  } 
-
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 46 && mentalMeter == -3) {
-    scene = 53;
     mentalMeter = -4;
+    badChoiceTrack.play();
+  }
+
+  if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 46 && mentalMeter == -3) {
+    scene = 53;
+    mentalMeter = -2;
+    goodChoiceTrack.play();
   } 
 
   // choice 5
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 59 && mentalMeter == 1) {
+  if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 59 && mentalMeter == 0) {
+    scene = 60;
+    mentalMeter = 1;
+    goodChoiceTrack.play();
+
+  }
+
+  if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 59 && mentalMeter == 0) {
+    scene = 63;
+    mentalMeter = -1;
+    badChoiceTrack.play();
+  } 
+
+  if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 59 && mentalMeter == 1) {
     scene = 60;
     mentalMeter = 2;
+    goodChoiceTrack.play();
+
   }
 
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 59 && mentalMeter == -1) {
+  if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 59 && mentalMeter == 1) {
     scene = 63;
     mentalMeter = 0;
-  }
-
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 59 && mentalMeter == 1) {
-    scene = 60;
-    mentalMeter = 0;
+    badChoiceTrack.play();
   } 
 
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 59 && mentalMeter == -1) {
-    scene = 63;
-    mentalMeter = -2;
-  } 
-
-  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 59 && mentalMeter == 2) {
+  if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 59 && mentalMeter == 2) {
     scene = 60;
     mentalMeter = 3;
-  } 
+    goodChoiceTrack.play();
 
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 59 && mentalMeter == -2) {
+  }
+
+  if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 59 && mentalMeter == 2) {
     scene = 63;
-    mentalMeter = -3;
-  } 
+    mentalMeter = 1;
+    badChoiceTrack.play();
+  }
 
-  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 59 && mentalMeter == 3) {
+  if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 59 && mentalMeter == 3) {
     scene = 60;
     mentalMeter = 4;
-  } 
+    goodChoiceTrack.play();
 
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 59 && mentalMeter == -3) {
+  }
+
+  if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 59 && mentalMeter == 3) {
     scene = 63;
-    mentalMeter = -4;
-  } 
+    mentalMeter = 2;
+    badChoiceTrack.play();
+  }
 
-  if (mouseX >= 390 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 59 && mentalMeter == 4) {
+  if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 59 && mentalMeter == 4) {
     scene = 60;
     mentalMeter = 5;
-  } 
+    goodChoiceTrack.play();
 
-  if (mouseX >= 340 && mouseX <= 740 && mouseY >= 170 && mouseY <= 200 && scene == 59 && mentalMeter == -4) {
+  }
+
+  if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 59 && mentalMeter == 4) {
     scene = 63;
+    mentalMeter = 3;
+    badChoiceTrack.play();
+  }
+
+  if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 59 && mentalMeter == -1) {
+    scene = 60;
+    mentalMeter = 0;
+    goodChoiceTrack.play();
+
+  }
+
+  if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 59 && mentalMeter == -1) {
+    scene = 63;
+    mentalMeter = -2;
+    badChoiceTrack.play();
+  }
+
+  if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 59 && mentalMeter == -2) {
+    scene = 60;
+    mentalMeter = -1;
+    goodChoiceTrack.play();
+
+  }
+
+  if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 59 && mentalMeter == -2) {
+    scene = 63;
+    mentalMeter = -3;
+    badChoiceTrack.play();
+  }
+
+  if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 59 && mentalMeter == -3) {
+    scene = 60;
+    mentalMeter = -4;
+    goodChoiceTrack.play();
+
+  }
+
+  if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 59 && mentalMeter == -3) {
+    scene = 63;
+    mentalMeter = -2;
+    badChoiceTrack.play();
+  }
+
+  if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 59 && mentalMeter == -4) {
+    scene = 60;
     mentalMeter = -5;
-  } 
+    goodChoiceTrack.play();
+
+  }
+
+  if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 59 && mentalMeter == -4) {
+    scene = 63;
+    mentalMeter = -3;
+    badChoiceTrack.play();
+  }
 }
