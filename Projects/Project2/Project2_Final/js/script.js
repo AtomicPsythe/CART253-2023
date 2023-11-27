@@ -338,7 +338,7 @@ function preload() {
   // button
   nextButton = loadImage("assets/images/next_button.jpg");
   // title screen image 
-  titleScreenImage = loadImage("assets/images/title.jpg");
+  titleScreenImage = loadImage("assets/images/title2.jpg");
   // backgrounds
   bedroom = loadImage("assets/images/bedroom.jpg");
   school = loadImage("assets/images/school.jpg");
@@ -414,33 +414,31 @@ function draw() {
 
 // function that displays all of the elements on the initial title screen
 function title() {
-  // titleTrack.play();
-  // titleTrack.loop();
   background(titleScreenImage);
   // title 
   push();
-  fill(255);
+  fill(255, 255, 255, 200);
   stroke(0, 0, 139);
   strokeWeight(5);
-  rect(230, 80, 540, 100);
+  rect(230, 80, 540, 100, 20);
   pop();
   push();
   textSize(45);
-  fill(179, 98, 0);
+  fill(139,0,139);
   textAlign(CENTER, CENTER);
-  text("Visual Novel Prototype", width/2, height/4.5);
+  text("Ataraxia's Longing", width/2, height/4.5);
   pop();
 
   // instructions
   push();
-  fill(255);
+  fill(255, 255, 255, 200);
   stroke(0, 0, 139);
   strokeWeight(5);
-  rect(215, 380, 580, 130);
+  rect(215, 380, 580, 130, 20);
   pop();
   push();
   textSize(20);
-  fill(179, 98, 0);
+  fill(139,0,139);
   textAlign(CENTER, CENTER);
   textSize(14);
   text("The following visual novel is a mental health simulator where the player progresses \n through their school day, but are presented with two choices during certain scenes that \n will change the course of the story. These choices will affect the mental health meter at the \n top right of the screen that presents the character's increasing or decreasing mental health \n based on the choices made by you the player. \n So have fun, enjoy the game, and choose wisely!", width/1.99, height/1.35);
@@ -532,16 +530,6 @@ function images() {
   }
   if (scene == 74 || scene == 76 || scene == 77 || scene == 78 || scene == 79 || scene == 80) {
     image(protagAngry, 500, 100, 340, 360);
-  }
-
-  // overlay effects
-  if (scene == 4 || scene == 5 || scene == 6 || scene == 7 || scene == 8 || scene == 9 || scene == 10) {
-    push();
-    image(badChoice, 0, 0, 1000, 600);
-    // filter(GRAY, 255, 127);
-    // tint(badChoice, 255, 127);
-    pop();
-    // tint(0, 0, 0, 20); does a super cool fade to black thing
   }
 }
 
@@ -923,10 +911,9 @@ function mentalMeterCounter() {
 }
 
 function mousePressed() {
-  if (state === "simulation") {
+  if (state === "simulation" && scene === 0) {
     titleTrack.stop();
-    dayTrack.play();
-    // dayTrack.loop();
+    dayTrack.loop();
   }
   mentalMeterCounter()
 
