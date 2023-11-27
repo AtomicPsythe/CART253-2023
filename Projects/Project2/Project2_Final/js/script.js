@@ -300,16 +300,24 @@ let choice4B = "Tell the truth";
 let choice5A = "Go to sleep early";
 let choice5B = "Stay up continuing to read your book";
 
-// image variables
-let bedroom;
+// character sprites
+let cleoNormal;
+let cleoHappy;
+let cleoAngry;
+let sebastianNormal;
+let sebastianSurprised;
+let sebastianSmirk;
+let teacherHappy;
+let teacherMad;
+let momHappy;
+let momMad;
+
+// button and title image
 let nextButton;
-let protagNormal;
-let protagHappy;
-let protagAngry;
-let character2Normal;
-let character2Surprised;
-let character2Smirk;
 let titleScreenImage;
+
+// background images
+let bedroom;
 let school;
 let mall; 
 let sebHouse;
@@ -348,12 +356,16 @@ function preload() {
   bedroomNight = loadImage("assets/images/bedroom_night.jpg");
   cleoHouse = loadImage("assets/images/cleo_house.jpg");
   // character sprites
-  protagNormal = loadImage("assets/images/protag_normal.png");
-  protagHappy = loadImage("assets/images/protag_happy.png");
-  protagAngry = loadImage("assets/images/protag_angry.png");
-  character2Normal = loadImage("assets/images/character2_normal.png");
-  character2Surprised = loadImage("assets/images/character2_surprised.png");
-  character2Smirk = loadImage("assets/images/character2_smirk.png");
+  cleoNormal = loadImage("assets/images/protag_normal.png");
+  cleoHappy = loadImage("assets/images/protag_happy.png");
+  cleoAngry = loadImage("assets/images/protag_angry.png");
+  sebastianNormal = loadImage("assets/images/character2_normal.png");
+  sebastianSurprised = loadImage("assets/images/character2_surprised.png");
+  sebastianSmirk = loadImage("assets/images/character2_smirk.png");
+  teacherHappy = loadImage("assets/images/teacher_happy.png");
+  teacherMad = loadImage("assets/images/teacher_mad.png");
+  momHappy = loadImage("assets/images/mom_happy.png");
+  momMad = loadImage("assets/images/mom_angry.png");
   // bad choice overlay
   badChoice = loadImage("assets/images/bad_choice1.png");
   badChoice2 = loadImage("assets/images/bad_choice2.png");
@@ -487,51 +499,65 @@ function images() {
   
   // character spites + expressions
   if (scene == 1 || scene == 2 || scene == 3) {
-    image(protagNormal, 320, 100, 340, 360);
+    image(cleoNormal, 320, 100, 340, 360);
   }
   if (scene == 11 || scene == 12) {
-    image(protagHappy, 320, 100, 340, 360);
+    image(cleoHappy, 320, 100, 340, 360);
   }
   if (scene == 5 || scene == 7) {
-    image(protagAngry, 320, 100, 340, 360);
+    image(cleoAngry, 320, 100, 340, 360);
   }
-  if (scene == 9 || scene == 10 || scene == 15 || scene == 16 || scene == 17 || scene == 18 || scene == 19 || scene == 20 || scene == 21 || scene == 22) {
-    image(protagNormal, 150, 100, 340, 360);
-    image(character2Normal, 500, 100, 340, 360);
+  if (scene == 8) {
+    image(teacherMad, 320, 100, 340, 360);
+  }
+  if (scene == 9 || scene == 10 || scene == 15 || scene == 16 || scene == 17 || scene == 18 || scene == 19) {
+    image(cleoNormal, 150, 100, 340, 360);
+    image(sebastianNormal, 500, 100, 340, 360);
+  }
+  if (scene == 20 || scene == 21 || scene == 22) {
+    image(cleoNormal, 80, 100, 340, 360);
+    image(teacherHappy, 320, 100, 340, 360);
+    image(sebastianNormal, 570, 100, 340, 360);
   }
   if (scene == 24) {
-    image(protagNormal, 150, 100, 340, 360);
+    image(cleoNormal, 150, 100, 340, 360);
   }
   if (scene == 25 || scene == 26 || scene == 27 || scene == 28 || scene == 29 || scene == 30 || scene == 31 || scene == 32 || scene == 33 || scene == 34 || scene == 35 || scene == 36 || scene == 37 || scene == 38) {
-    image(protagNormal, 150, 100, 340, 360);
-    image(character2Normal, 500, 100, 340, 360);
+    image(cleoNormal, 150, 100, 340, 360);
+    image(sebastianNormal, 500, 100, 340, 360);
   }
   if (scene == 39 || scene == 40 || scene == 41 || scene == 43 || scene == 67 || scene == 69 || scene == 70) {
-    image(character2Smirk, 150, 100, 340, 360);
+    image(sebastianSmirk, 150, 100, 340, 360);
   }
   if (scene == 42 || scene == 73 || scene == 74 || scene == 75 || scene == 76 || scene == 77 || scene == 78 || scene == 79 || scene == 80) {
-    image(character2Normal, 150, 100, 340, 360);
+    image(sebastianNormal, 150, 100, 340, 360);
   }
   if (scene == 40 || scene == 41 || scene == 42 || scene == 43 || scene == 67 || scene == 71) {
-    image (protagHappy, 500, 100, 340, 360);
+    image (cleoHappy, 500, 100, 340, 360);
   }
   if (scene == 45 || scene == 46 || scene == 47 || scene == 49 || scene == 50 || scene == 53 || scene == 54 || scene == 55 || scene == 57) {
-    image(protagNormal, 150, 100, 340, 360);
+    image(cleoNormal, 150, 100, 340, 360);
+  }
+  if (scene == 47 || scene == 48 || scene == 49 || scene == 50 || scene == 51) {
+    image(momMad, 500, 100, 340, 360);
+  }
+  if (scene == 46 || scene == 53 || scene == 54 || scene == 55 || scene == 56 || scene == 57) {
+    image(momHappy, 500, 100, 340, 360);
   }
   if (scene == 48 || scene == 51) {
-    image(protagAngry, 150, 100, 340, 360);
+    image(cleoAngry, 150, 100, 340, 360);
   }
   if (scene == 56) {
-    image(protagHappy, 150, 100, 340, 360);
+    image(cleoHappy, 150, 100, 340, 360);
   }
   if (scene == 59 || scene == 60 || scene == 61 || scene == 62 || scene == 63 || scene == 65) {
-    image(protagHappy, 320, 100, 340, 360);
+    image(cleoHappy, 320, 100, 340, 360);
   }
   if (scene == 66) {
-    image(protagNormal, 320, 100, 340, 360);
+    image(cleoNormal, 320, 100, 340, 360);
   }
   if (scene == 74 || scene == 76 || scene == 77 || scene == 78 || scene == 79 || scene == 80) {
-    image(protagAngry, 500, 100, 340, 360);
+    image(cleoAngry, 500, 100, 340, 360);
   }
 }
 
@@ -917,7 +943,7 @@ function mentalMeterCounter() {
     scene = 23;
   }
   // choice1B
-  if (mouseX >= 890 && mouseX <= 990 && mouseY >= 470 && mouseY <= 570 && scene == 22) {
+  if (mouseX >= 890 && mouseX <= 990 && mouseY >= 470 && mouseY <= 570 && scene == 23) {
     scene = 23;
   }
   // choice2A
