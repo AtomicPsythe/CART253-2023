@@ -411,14 +411,17 @@ function reset() {
 function draw() {
   if (state === `title`) {
       title();
-    } else if (state === `tutorial`) {
+    } 
+    else if (state === `tutorial`) {
       tutorial();
-    } else if (state === `simulation`) {
+    } 
+    else if (state === `simulation`) {
       simulation();
     } 
     else if (state === "goodEnding") {
       goodEnding();
-    } else if (state === "badEnding") {
+    } 
+    else if (state === "badEnding") {
       badEnding();
     }
     else if (state === "trueEnding") {
@@ -843,6 +846,8 @@ function endings() {
 }
 // function for the good ending (if the mental health meter is > 50%)
 function goodEnding() {
+  dayTrack.stop();
+  nightTrack.play();
   background(titleScreenImage);
   push();
   fill(255, 255, 255, 200);
@@ -875,6 +880,8 @@ function goodEnding() {
 
 // function for the bad ending (if the mental health meter is < 50%)
 function badEnding() {
+  dayTrack.stop();
+  nightTrack.play();
   background(titleScreenImage);
   push();
   fill(255, 255, 255, 200);
