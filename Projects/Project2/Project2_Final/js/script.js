@@ -387,6 +387,7 @@ function setup() {
   button();
   userStartAudio();
   titleTrack.loop();
+  titleTrack.setVolume(0.3);
 }
 
 // creates the start button on the title screen that the player presses to start the simulation
