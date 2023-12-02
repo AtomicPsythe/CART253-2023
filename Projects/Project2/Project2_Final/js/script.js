@@ -444,6 +444,7 @@ function title() {
   rect(230, 80, 540, 100, 20);
   pop();
   push();
+  noStroke();
   textSize(45);
   fill(139,0,139);
   textAlign(CENTER, CENTER);
@@ -458,6 +459,7 @@ function title() {
   rect(215, 380, 580, 130, 20);
   pop();
   push();
+  noStroke();
   textSize(20);
   fill(139,0,139);
   textAlign(CENTER, CENTER);
@@ -468,28 +470,55 @@ function title() {
 
 // the function that calls to all of the elements for the main game itself
 function simulation() {
-  menuButton();
   images();
   mentalHealthMeter();
   mentalMeterCounter();
   storyText();
   choiceOptions();
   endings();
+  menuButton();
 }
 
 function menu() {
+  // menu button
+  push();
+  fill(255);
+  rectMode(CORNER);
+  rect(835, 10, 150, 60);
+  noStroke();
+  fill(0);
+  textSize(30);
+  text("MENU", 865, 50);
+  pop();
+
+  // menu text box
   push();
   rectMode(CENTER);
-  rect(width / 2, height / 2, 500, 500);
+  rect(width/2, height/ 2, 500, 500, 60);
+  pop();
+
+  // yes button box
+  push();
+  fill(250);
+  rect(360, 430, 80, 40, 60);
+  pop();
+
+  // no button box
+  push();
+  fill(250);
+  rect(560, 430, 80, 40, 60);
   pop();
 
   push();
   fill(0);
   textSize(30);
   textAlign(CENTER);
-  text("Are you sure you want to go back\nto the main menu?\n(You'll lose all your current progress)", width / 2, 200);
-  text("YES", 500, 500);
-  text("NO", 750, 500);
+  noStroke();
+  text("Would you like to go back\nto the title screen?\nIf you do, you will lose all\n game progress up until this point.", width / 2, 200);
+  noStroke();
+  text("YES", 400, 460);
+  noStroke();
+  text("NO", 600, 460);
   pop();
 }
 
@@ -497,10 +526,11 @@ function menuButton() {
   push();
   fill(255);
   rectMode(CORNER);
-  rect(30, 30, 150, 60);
+  rect(835, 10, 150, 60);
+  noStroke();
   fill(0);
   textSize(30);
-  text("MENU", 60, 70);
+  text("MENU", 865, 50);
   pop();
 }
 
@@ -1010,14 +1040,21 @@ function mentalMeterCounter() {
 function mousePressed() {
   mentalMeterCounter();
 
+  rect(835, 10, 150, 60);
   // menu button
-  if (state === `simulation` && mouseX >= 30 && mouseY >= 30 && mouseX <= 180 && mouseY <= 90) {
+  if (state === `simulation` && mouseX >= 835 && mouseY >= 10 && mouseX <= 985 && mouseY <= 895) {
     state = `menu`;
   }
 
-  if (state === `menu` && mouseX >= 470 && mouseY >= 478 && mouseX <= 528 && mouseY <= 500) {
+  if (state === `menu` && mouseX >= 360 && mouseY >= 430 && mouseX <= 440 && mouseY <= 470) {
     state = `title`;
+    button();
     scene = 0;
+    console.log(stroke)
+  }
+
+  if (state === `menu` && mouseX >= 560 && mouseY >= 430 && mouseX <= 640 && mouseY <= 620) {
+    state = `simulation`;
   }
 
   // beginning
