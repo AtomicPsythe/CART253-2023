@@ -419,6 +419,9 @@ function draw() {
     else if (state === `simulation`) {
       simulation();
     } 
+    else if (state === `menu`) {
+      menu();
+    } 
     else if (state === "goodEnding") {
       goodEnding();
     } 
@@ -465,12 +468,40 @@ function title() {
 
 // the function that calls to all of the elements for the main game itself
 function simulation() {
+  menuButton();
   images();
   mentalHealthMeter();
   mentalMeterCounter();
   storyText();
   choiceOptions();
   endings();
+}
+
+function menu() {
+  push();
+  rectMode(CENTER);
+  rect(width / 2, height / 2, 500, 500);
+  pop();
+
+  push();
+  fill(0);
+  textSize(30);
+  textAlign(CENTER);
+  text("Are you sure you want to go back\nto the main menu?\n(You'll lose all your current progress)", width / 2, 200);
+  text("YES", 500, 500);
+  text("NO", 750, 500);
+  pop();
+}
+
+function menuButton() {
+  push();
+  fill(255);
+  rectMode(CORNER);
+  rect(30, 30, 150, 60);
+  fill(0);
+  textSize(30);
+  text("MENU", 60, 70);
+  pop();
 }
 
 // displays all of the necessary images including the changing character sprites and backgrounds
@@ -977,7 +1008,17 @@ function mentalMeterCounter() {
 }
 
 function mousePressed() {
-  mentalMeterCounter()
+  mentalMeterCounter();
+
+  // menu button
+  if (state === `simulation` && mouseX >= 30 && mouseY >= 30 && mouseX <= 180 && mouseY <= 90) {
+    state = `menu`;
+  }
+
+  if (state === `menu` && mouseX >= 470 && mouseY >= 478 && mouseX <= 528 && mouseY <= 500) {
+    state = `title`;
+    scene = 0;
+  }
 
   // beginning
   if (mouseX >= 890 && mouseX <= 990 && mouseY >= 470 && mouseY <= 570 && scene !== 1 && scene !== 27 && scene !== 41 && scene !== 46 && scene !== 59) {
