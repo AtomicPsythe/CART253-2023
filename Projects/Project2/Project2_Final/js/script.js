@@ -2,10 +2,10 @@
  * Project 2 - Final Project
  * Foti Aivaliklis
  * 
- * The following simulation is a mental health visual novel game that tackles the early stages of setting up the base code for the game.
- * This includes creating the title screen with an interactable button, establishing how to advance from one scene to another with dialogue and character sprites present, 
- * displaying the increasing and decreasing mental health bar on the top left that will vary depending on the choices the player makes and having unique choice options 
- * displayed on the screen for the player to choose, which progresses into different story paths resulting into different endings. 
+ * The following visual novel is a mental health simulator where the player progresses through their school day, 
+ * but are presented with two choices during certain scenes that will change the course of the story. These choices 
+ * will affect the mental health meter at the top right of the screen that presents the character's increasing or 
+ * decreasing mental health based on the choices made by you the player. So have fun, enjoy the game, and choose wisely!
  */
 
 "use strict";
