@@ -346,7 +346,7 @@ function preload() {
   // button
   nextButton = loadImage("assets/images/next_button.jpg");
   // title screen image 
-  titleScreenImage = loadImage("assets/images/title2.jpg");
+  titleScreenImage = loadImage("assets/images/title.jpg");
   // backgrounds
   bedroom = loadImage("assets/images/bedroom.jpg");
   school = loadImage("assets/images/school.jpg");
@@ -356,12 +356,12 @@ function preload() {
   bedroomNight = loadImage("assets/images/bedroom_night.jpg");
   cleoHouse = loadImage("assets/images/cleo_house.jpg");
   // character sprites
-  cleoNormal = loadImage("assets/images/protag_normal.png");
-  cleoHappy = loadImage("assets/images/protag_happy.png");
-  cleoAngry = loadImage("assets/images/protag_angry.png");
-  sebastianNormal = loadImage("assets/images/character2_normal.png");
-  sebastianSurprised = loadImage("assets/images/character2_surprised.png");
-  sebastianSmirk = loadImage("assets/images/character2_smirk.png");
+  cleoNormal = loadImage("assets/images/cleo_normal.png");
+  cleoHappy = loadImage("assets/images/cleo_happy.png");
+  cleoAngry = loadImage("assets/images/cleo_angry.png");
+  sebastianNormal = loadImage("assets/images/seb_normal.png");
+  sebastianSurprised = loadImage("assets/images/seb_surprised.png");
+  sebastianSmirk = loadImage("assets/images/seb_smirk.png");
   teacherHappy = loadImage("assets/images/teacher_happy.png");
   teacherMad = loadImage("assets/images/teacher_mad.png");
   momHappy = loadImage("assets/images/mom_happy.png");
@@ -387,7 +387,7 @@ function setup() {
   button();
   userStartAudio();
   titleTrack.loop();
-  titleTrack.setVolume(0.3);
+  titleTrack.setVolume(0.05);
 }
 
 // creates the start button on the title screen that the player presses to start the simulation
@@ -405,16 +405,13 @@ function reset() {
   titleTrack.stop();
 
   dayTrack.loop();
-  dayTrack.setVolume(0.3);
+  dayTrack.setVolume(0.05);
 }
 
 // Checks for which state is active and calls to that state's respective function to display all of its elements
 function draw() {
   if (state === `title`) {
       title();
-    } 
-    else if (state === `tutorial`) {
-      tutorial();
     } 
     else if (state === `simulation`) {
       simulation();
@@ -475,8 +472,8 @@ function simulation() {
   mentalMeterCounter();
   storyText();
   choiceOptions();
-  endings();
   menuButton();
+  endings();
 }
 
 function menu() {
@@ -642,10 +639,6 @@ function mentalHealthMeter() {
     rectMode(CORNER);
     strokeWeight(2)
     rect(20, 10, 250, 40);
-    // first choice box
-    // rect(230, 140, 540, 60);
-    // second choice box
-    // rect(200, 270, 600, 60);
     pop();
   }
 
@@ -893,23 +886,26 @@ function choiceOptions() {
 }
 
 function endings() {
-  if (scene == 62 || scene == 66 || scene == 80 & mentalMeter >= 1) {
+  if (scene == 62 || scene == 66 || scene == 80 && mentalMeter >= 1) {
     goodEnding();
     noLoop();
   }
-  else if (scene == 62 || scene == 66 || scene == 80 & mentalMeter <= -1) {
+  else if (scene == 62 || scene == 66 || scene == 80 && mentalMeter <= -1) {
     badEnding();
     noLoop();
   }
-  // else if (scene == 62 || scene == 66 || scene == 80 & mentalMeter == 0) {
-  //   trueEnding();
-  //   noLoop();
-  // }
+  else if (scene == 62 || scene == 66 || scene == 80 & mentalMeter == 0) {
+    trueEnding();
+    noLoop();
+  }
+
 }
 // function for the good ending (if the mental health meter is > 50%)
 function goodEnding() {
   dayTrack.stop();
   nightTrack.play();
+  nightTrack.setVolume(0.1);
+
   background(titleScreenImage);
   push();
   fill(255, 255, 255, 200);
@@ -944,6 +940,8 @@ function goodEnding() {
 function badEnding() {
   dayTrack.stop();
   nightTrack.play();
+  nightTrack.setVolume(0.1);
+
   background(titleScreenImage);
   push();
   fill(255, 255, 255, 200);
@@ -974,37 +972,37 @@ function badEnding() {
   pop();
 }
 
-// function for the true ending (if the mental health meter is = 50%)
-// function trueEnding() {
-//   background(titleScreenImage);
-//   push();
-//   fill(255, 255, 255, 200);
-//   stroke(0, 0, 139);
-//   strokeWeight(5);
-//   rect(230, 80, 540, 100, 20);
-//   pop();
-//   push();
-//   textSize(45);
-//   fill(139,0,139);
-//   textAlign(CENTER, CENTER);
-//   text("TRUE ENDING", width/2, height/4.5);
-//   pop();
+// for the true ending (if the mental health meter is = 50%)
+function trueEnding() {
+  background(titleScreenImage);
+  push();
+  fill(255, 255, 255, 200);
+  stroke(0, 0, 139);
+  strokeWeight(5);
+  rect(230, 80, 540, 100, 20);
+  pop();
+  push();
+  textSize(45);
+  fill(139,0,139);
+  textAlign(CENTER, CENTER);
+  text("TRUE ENDING", width/2, height/4.5);
+  pop();
 
-//   push();
-//   fill(255, 255, 255, 200);
-//   stroke(0, 0, 139);
-//   strokeWeight(5);
-//   rect(215, 260, 580, 150, 20);
-//   pop();
-//   push();
-//   noStroke();
-//   textSize(20);
-//   fill(139,0,139);
-//   textAlign(CENTER, CENTER);
-//   textSize(14);
-//   text("While Cleo may not be the perfect person ever, she has her high and low moments, which either benefit her drastically, like\n going to sleep and waking up earlier, or set her very behind, like not completing and \nforgetting to hand in assignments on time. But again, she is only human and\n that is ok. As a result, mental health can be that way and it is not\n something easy to overcome, so take the necessary steps you need to\n tackle what is plaguing you. Whether it may be talking to\n a loved one, friend, or even teacher, distracting yourself with hobbies and\n activities, or by simply crying it out, there is light at the end of the\n tunnel my friend, and we will all make it out together <3.", width/1.98, height/1.8);
-//   pop();
-// }
+  push();
+  fill(255, 255, 255, 200);
+  stroke(0, 0, 139);
+  strokeWeight(5);
+  rect(215, 260, 580, 150, 20);
+  pop();
+  push();
+  noStroke();
+  textSize(20);
+  fill(139,0,139);
+  textAlign(CENTER, CENTER);
+  textSize(14);
+  text("While Cleo may not be the perfect person ever, she has her high and low moments, which either benefit her drastically, like\n going to sleep and waking up earlier, or set her very behind, like not completing and \nforgetting to hand in assignments on time. But again, she is only human and\n that is ok. As a result, mental health can be that way and it is not\n something easy to overcome, so take the necessary steps you need to\n tackle what is plaguing you. Whether it may be talking to\n a loved one, friend, or even teacher, distracting yourself with hobbies and\n activities, or by simply crying it out, there is light at the end of the\n tunnel my friend, and we will all make it out together <3.", width/1.98, height/1.8);
+  pop();
+}
 
 function mentalMeterCounter() {
   // choice1A
@@ -1037,25 +1035,29 @@ function mentalMeterCounter() {
   }
 }
 
-function mousePressed() {
-  mentalMeterCounter();
-
-  rect(835, 10, 150, 60);
+function menuButtonPressed() {
   // menu button
-  if (state === `simulation` && mouseX >= 835 && mouseY >= 10 && mouseX <= 985 && mouseY <= 895) {
+  if (state === `simulation` && (mouseX >= 835) && (mouseY >= 10) && (mouseX <= 1000) && (mouseY <= 70)) {
     state = `menu`;
   }
-
-  if (state === `menu` && mouseX >= 360 && mouseY >= 430 && mouseX <= 440 && mouseY <= 470) {
+  
+  if (state === `menu` && (mouseX >= 360) && (mouseY >= 430) && (mouseX <= 440) && (mouseY <= 470)) {
     state = `title`;
+    dayTrack.stop();
+    titleTrack.loop();
+    titleTrack.setVolume(0.05);
     button();
     scene = 0;
-    console.log(stroke)
   }
-
-  if (state === `menu` && mouseX >= 560 && mouseY >= 430 && mouseX <= 640 && mouseY <= 620) {
+  
+  if (state === `menu` && (mouseX >= 560) && (mouseY >= 430) && (mouseX <= 640) && (mouseY <= 620)) {
     state = `simulation`;
   }
+}
+
+function mousePressed() {
+  mentalMeterCounter();
+  menuButtonPressed();
 
   // beginning
   if (mouseX >= 890 && mouseX <= 990 && mouseY >= 470 && mouseY <= 570 && scene !== 1 && scene !== 27 && scene !== 41 && scene !== 46 && scene !== 59) {
@@ -1068,12 +1070,14 @@ function mousePressed() {
     scene = 3;
     mentalMeter = -1;
     badChoiceTrack.play();
+    badChoiceTrack.setVolume(0.3);
   }
 
   if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 1) {
     scene = 11;
     mentalMeter = 1;
     goodChoiceTrack.play();
+    goodChoiceTrack.setVolume(0.1);
   }
 
   // choice 2
@@ -1081,24 +1085,28 @@ function mousePressed() {
     scene = 28;
     mentalMeter = 2;
     goodChoiceTrack.play();
+    goodChoiceTrack.setVolume(0.1);
   }
 
   if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 27 && mentalMeter == -1) {
     scene = 35;
     mentalMeter = -2;
     badChoiceTrack.play();
+    badChoiceTrack.setVolume(0.3);
   }
 
   if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 27 && mentalMeter == 1) {
     scene = 35;
     mentalMeter = 0;
     badChoiceTrack.play();
+    badChoiceTrack.setVolume(0.3);
   } 
 
   if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 27 && mentalMeter == -1) {
     scene = 28;
     mentalMeter = 0;
     goodChoiceTrack.play();
+    goodChoiceTrack.setVolume(0.1);
   } 
 
   // choice 3
@@ -1106,144 +1114,168 @@ function mousePressed() {
     scene = 67;
     mentalMeter = -1;
     badChoiceTrack.play();
+    badChoiceTrack.setVolume(0.3);
   }
   
   if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 41 && mentalMeter == 0) {
     scene = 42;
     mentalMeter = 1;
     goodChoiceTrack.play();
+    goodChoiceTrack.setVolume(0.1);
   }
 
   if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 41 && mentalMeter == 1) {
     scene = 42;
     mentalMeter = 2;
     goodChoiceTrack.play();
+    goodChoiceTrack.setVolume(0.1);
   }
 
   if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 41 && mentalMeter == 1) {
     scene = 67;
     mentalMeter = 0;
     badChoiceTrack.play();
+    badChoiceTrack.setVolume(0.3);
   }
   
   if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 41 && mentalMeter == 2) {
     scene = 42;
     mentalMeter = 3;
     goodChoiceTrack.play();
+    goodChoiceTrack.setVolume(0.1);
   }
 
   if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 41 && mentalMeter == 2) {
     scene = 67;
     mentalMeter = 1;
     badChoiceTrack.play();
+    badChoiceTrack.setVolume(0.3);
   }
 
   if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 41 && mentalMeter == -1) {
     scene = 42;
     mentalMeter = 0;
     goodChoiceTrack.play();
+    goodChoiceTrack.setVolume(0.1);
   }
 
   if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 41 && mentalMeter == -1) {
     scene = 67;
     mentalMeter = -2;
     badChoiceTrack.play();
+    badChoiceTrack.setVolume(0.3);
   }
 
   if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 41 && mentalMeter == -2) {
     scene = 42;
     mentalMeter = -1;
     goodChoiceTrack.play();
+    goodChoiceTrack.setVolume(0.1);
   }
 
   if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 41 && mentalMeter == -2) {
     scene = 67;
     mentalMeter = -3;
     badChoiceTrack.play();
+    badChoiceTrack.setVolume(0.3);
   }
   // choice 4
   if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 46 && mentalMeter == 0) {
     scene = 47;
     mentalMeter = -1;
     badChoiceTrack.play();
+    badChoiceTrack.setVolume(0.3);
   }
 
   if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 46 && mentalMeter == 0) {
     scene = 53;
     mentalMeter = 1;
     goodChoiceTrack.play();
+    goodChoiceTrack.setVolume(0.1);
   } 
 
   if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 46 && mentalMeter == 1) {
     scene = 47;
     mentalMeter = 0;
     badChoiceTrack.play();
+    badChoiceTrack.setVolume(0.3);
   }
 
   if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 46 && mentalMeter == 1) {
     scene = 53;
     mentalMeter = 2;
     goodChoiceTrack.play();
+    goodChoiceTrack.setVolume(0.1);
   } 
 
   if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 46 && mentalMeter == 2) {
     scene = 47;
     mentalMeter = 1;
     badChoiceTrack.play();
+    badChoiceTrack.setVolume(0.3);
   }
 
   if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 46 && mentalMeter == 2) {
     scene = 53;
     mentalMeter = 3;
     goodChoiceTrack.play();
+    goodChoiceTrack.setVolume(0.1);
   } 
 
   if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 46 && mentalMeter == 3) {
     scene = 47;
     mentalMeter = 2;
     badChoiceTrack.play();
+    badChoiceTrack.setVolume(0.3);
   }
 
   if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 46 && mentalMeter == 3) {
     scene = 53;
     mentalMeter = 4;
     goodChoiceTrack.play();
+    goodChoiceTrack.setVolume(0.1);
   } 
 
   if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 46 && mentalMeter == -1) {
     scene = 47;
     mentalMeter = -2;
     badChoiceTrack.play();
+    badChoiceTrack.setVolume(0.3);
   }
 
   if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 46 && mentalMeter == -1) {
     scene = 53;
     mentalMeter = 0;
     goodChoiceTrack.play();
+    goodChoiceTrack.setVolume(0.1);
   } 
 
   if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 46 && mentalMeter == -2) {
     scene = 47;
     mentalMeter = -3;
     badChoiceTrack.play();
+    badChoiceTrack.setVolume(0.3);
   }
 
   if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 46 && mentalMeter == -2) {
     scene = 53;
     mentalMeter = -1;
     goodChoiceTrack.play();
+    goodChoiceTrack.setVolume(0.1);
   } 
 
   if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 46 && mentalMeter == -3) {
     scene = 47;
     mentalMeter = -4;
     badChoiceTrack.play();
+    badChoiceTrack.setVolume(0.3);
   }
 
   if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 46 && mentalMeter == -3) {
     scene = 53;
     mentalMeter = -2;
     goodChoiceTrack.play();
+    goodChoiceTrack.setVolume(0.1);
   } 
 
   // choice 5
@@ -1251,116 +1283,125 @@ function mousePressed() {
     scene = 60;
     mentalMeter = 1;
     goodChoiceTrack.play();
-
+    goodChoiceTrack.setVolume(0.1);
   }
 
   if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 59 && mentalMeter == 0) {
     scene = 63;
     mentalMeter = -1;
     badChoiceTrack.play();
+    badChoiceTrack.setVolume(0.3);
   } 
 
   if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 59 && mentalMeter == 1) {
     scene = 60;
     mentalMeter = 2;
     goodChoiceTrack.play();
-
+    goodChoiceTrack.setVolume(0.1);
   }
 
   if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 59 && mentalMeter == 1) {
     scene = 63;
     mentalMeter = 0;
     badChoiceTrack.play();
+    badChoiceTrack.setVolume(0.3);
   } 
 
   if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 59 && mentalMeter == 2) {
     scene = 60;
     mentalMeter = 3;
     goodChoiceTrack.play();
-
+    goodChoiceTrack.setVolume(0.1);
   }
 
   if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 59 && mentalMeter == 2) {
     scene = 63;
     mentalMeter = 1;
     badChoiceTrack.play();
+    badChoiceTrack.setVolume(0.3);
   }
 
   if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 59 && mentalMeter == 3) {
     scene = 60;
     mentalMeter = 4;
     goodChoiceTrack.play();
-
+    goodChoiceTrack.setVolume(0.1);
   }
 
   if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 59 && mentalMeter == 3) {
     scene = 63;
     mentalMeter = 2;
     badChoiceTrack.play();
+    badChoiceTrack.setVolume(0.3);
   }
 
   if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 59 && mentalMeter == 4) {
     scene = 60;
     mentalMeter = 5;
     goodChoiceTrack.play();
-
+    goodChoiceTrack.setVolume(0.1);
   }
 
   if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 59 && mentalMeter == 4) {
     scene = 63;
     mentalMeter = 3;
     badChoiceTrack.play();
+    badChoiceTrack.setVolume(0.3);
   }
 
   if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 59 && mentalMeter == -1) {
     scene = 60;
     mentalMeter = 0;
     goodChoiceTrack.play();
-
+    goodChoiceTrack.setVolume(0.1);
   }
 
   if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 59 && mentalMeter == -1) {
     scene = 63;
     mentalMeter = -2;
     badChoiceTrack.play();
+    badChoiceTrack.setVolume(0.3);
   }
 
   if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 59 && mentalMeter == -2) {
     scene = 60;
     mentalMeter = -1;
     goodChoiceTrack.play();
-
+    goodChoiceTrack.setVolume(0.1);
   }
 
   if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 59 && mentalMeter == -2) {
     scene = 63;
     mentalMeter = -3;
     badChoiceTrack.play();
+    badChoiceTrack.setVolume(0.3);
   }
 
   if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 59 && mentalMeter == -3) {
     scene = 60;
     mentalMeter = -4;
     goodChoiceTrack.play();
-
+    goodChoiceTrack.setVolume(0.1);
   }
 
   if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 59 && mentalMeter == -3) {
     scene = 63;
     mentalMeter = -2;
     badChoiceTrack.play();
+    badChoiceTrack.setVolume(0.3);
   }
 
   if ((mouseX >= 230) && (mouseX <= 770) && (mouseY >= 140) && (mouseY <= 200) && scene == 59 && mentalMeter == -4) {
     scene = 60;
     mentalMeter = -5;
     goodChoiceTrack.play();
-
+    goodChoiceTrack.setVolume(0.1);
   }
 
   if ((mouseX >= 200) && (mouseX <= 800) && (mouseY >= 270) && (mouseY <= 330) && scene == 59 && mentalMeter == -4) {
     scene = 63;
     mentalMeter = -3;
     badChoiceTrack.play();
+    badChoiceTrack.setVolume(0.3);
   }
 }
