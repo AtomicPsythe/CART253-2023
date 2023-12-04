@@ -1,3 +1,3 @@
-# Template p5 project
+# Ataraxia's Longing
 
 Ataraxia’s Longing made by Foti Aivaliklis is a mental health visual novel where you play as Cleo and progress through a normal day of school and life but are prompted with choices throughout your day that will change the outcome of how it progresses. The decisions made by the player over the course of the game will affect Cleo’s mental health meter, either positively or negatively, which will have visual and auditory repercussions done through the use of multiple if/else statements and specific mouse placements. Said choices will direct the player towards different story paths and different endings. By having visual and auditory repercussions, such as a dark overlay and positive or negative sounds, the player will feel the gravity of their choices as the story advances, thus placing greater emphasis on making the correct choice. 
