@@ -2,10 +2,17 @@
  * Project 2 - Final Project
  * Foti Aivaliklis
  * 
- * The following visual novel is a mental health simulator where the player progresses through their school day, 
- * but are presented with two choices during certain scenes that will change the course of the story. These choices 
- * will affect the mental health meter at the top right of the screen that presents the character's increasing or 
+ * The following visual novel titled Ataraxia's Longing is a mental health simulator where the player progresses 
+ * through their school day, but are presented with two choices during certain scenes that will change the course of the story. 
+ * These choices will affect the mental health meter at the top right of the screen that presents the character's increasing or 
  * decreasing mental health based on the choices made by you the player. So have fun, enjoy the game, and choose wisely!
+ * 
+ * Code Citation: Foti Aivaliklis, Pippin Barr, Mathilde Davan, Scarlett Perez
+ * Character Assets Citation: @sutemo on itch.io (Cleo, Sebastian, Teacher, Mom)
+ * Background Assets Citation: Adobe Stock Images (classroom), @arsenixc on Artstation (cleoHouse), 
+ *                             EpisodeInteractiveForums (bedroom, bedroomNight, sebRoom, sebHouse), 
+ *                             AnimeLandscape (mall), @days_e on Instagram (title), Foti Aivaliklis (badChoice1, badChoice2, badChoice3, badChoice4)
+ * Sound Assets Citation: @Rest! or Ricardo Cuello on itch.io
  */
 
 "use strict";
@@ -556,7 +563,7 @@ function images() {
     background(sebHouse);
   }
   if (scene == 73 || scene == 74 || scene == 75 || scene == 76 || scene == 77 || scene == 78 || scene == 79 || scene == 80) {
-    background(sebRoom);    // scene >=73 && scene <= 80 
+    background(sebRoom);  
   }
   
   // character spites + expressions
@@ -898,7 +905,6 @@ function endings() {
     trueEnding();
     noLoop();
   }
-
 }
 // function for the good ending (if the mental health meter is > 50%)
 function goodEnding() {
