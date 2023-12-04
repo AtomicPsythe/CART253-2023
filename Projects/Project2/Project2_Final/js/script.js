@@ -483,6 +483,7 @@ function simulation() {
   endings();
 }
 
+// the function that creates the menu button and its pop up page (code done by Scarlett Perez but modified to fit my specific game)
 function menu() {
   // menu button
   push();
@@ -630,7 +631,7 @@ function images() {
   }
 }
 
-// creates and displays the mental health meter on the top left of the screen
+// creates and displays the mental health meter on the top left of the screen (code done by Scarlett Perez but modified to fit my specific game)
 function mentalHealthMeter() {
   // the mental health meter itself
   push();
@@ -780,7 +781,7 @@ function storyText() {
   // displays the arrow you click to continue in the story
   image(nextButton, 890, 470, 80, 110);
   
-  // displays the text and the speaking character's name
+  // displays the text and the speaking character's name (code done by Scarlett Perez but modified to fit my specific game)
   push();
   fill(0);
   textSize(20);
@@ -893,16 +894,19 @@ function choiceOptions() {
 }
 
 function endings() {
-  if (scene == 62 || scene == 66 || scene == 80 && mentalMeter >= 1) {
+  if ((scene == 62 || scene == 66 || scene == 80) && mentalMeter >= 1) {
     goodEnding();
+    titleButton();
     noLoop();
   }
-  else if (scene == 62 || scene == 66 || scene == 80 && mentalMeter <= -1) {
+  else if ((scene == 62 || scene == 66 || scene == 80) && mentalMeter <= -1) {
     badEnding();
+    titleButton();
     noLoop();
   }
-  else if (scene == 62 || scene == 66 || scene == 80 & mentalMeter == 0) {
+  else if ((scene == 62 || scene == 66 || scene == 80) & mentalMeter == 0) {
     trueEnding();
+    titleButton();
     noLoop();
   }
 }
@@ -998,7 +1002,7 @@ function trueEnding() {
   fill(255, 255, 255, 200);
   stroke(0, 0, 139);
   strokeWeight(5);
-  rect(215, 260, 580, 150, 20);
+  rect(215, 260, 580, 180, 20);
   pop();
   push();
   noStroke();
@@ -1006,7 +1010,7 @@ function trueEnding() {
   fill(139,0,139);
   textAlign(CENTER, CENTER);
   textSize(14);
-  text("While Cleo may not be the perfect person ever, she has her high and low moments, which either benefit her drastically, like\n going to sleep and waking up earlier, or set her very behind, like not completing and \nforgetting to hand in assignments on time. But again, she is only human and\n that is ok. As a result, mental health can be that way and it is not\n something easy to overcome, so take the necessary steps you need to\n tackle what is plaguing you. Whether it may be talking to\n a loved one, friend, or even teacher, distracting yourself with hobbies and\n activities, or by simply crying it out, there is light at the end of the\n tunnel my friend, and we will all make it out together <3.", width/1.98, height/1.8);
+  text("While Cleo may not be the perfect person ever, she has her high and low moments,\n which either benefit her drastically, like going to sleep\n and waking up earlier, or set her very behind, like not completing and forgetting to\n hand in assignments on time. But again, she is only human and that is ok. As a\n result, mental health can be that way and it is not something easy to overcome,\n so take the necessary steps you need to tackle what is plaguing you. Whether it may be\n talking to a loved one, friend, or even teacher, distracting\n yourself with hobbies and activities, or by simply crying it out,\n there is light at the end of the tunnel my friend, and we will all make it out together <3.", width/1.98, height/1.7);
   pop();
 }
 
@@ -1049,6 +1053,8 @@ function menuButtonPressed() {
   
   if (state === `menu` && (mouseX >= 360) && (mouseY >= 430) && (mouseX <= 440) && (mouseY <= 470)) {
     state = `title`;
+    mentalMeter = 0;
+    console.log(mentalMeter);
     dayTrack.stop();
     titleTrack.loop();
     titleTrack.setVolume(0.05);
