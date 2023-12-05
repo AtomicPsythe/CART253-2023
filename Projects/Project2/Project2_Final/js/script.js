@@ -896,17 +896,14 @@ function choiceOptions() {
 function endings() {
   if ((scene == 62 || scene == 66 || scene == 80) && mentalMeter >= 1) {
     goodEnding();
-    titleButton();
     noLoop();
   }
   else if ((scene == 62 || scene == 66 || scene == 80) && mentalMeter <= -1) {
     badEnding();
-    titleButton();
     noLoop();
   }
   else if ((scene == 62 || scene == 66 || scene == 80) & mentalMeter == 0) {
     trueEnding();
-    titleButton();
     noLoop();
   }
 }
